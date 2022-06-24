@@ -2,33 +2,31 @@ class Solution {
 public:
     
     
-    int helper(int n , vector<int> &dp){
-         int n1, n2, sum = 0;
- 
-    // Base cases
-    if (n == 1 || n == 0)
-        return 1;
- 
-    if(dp[n] != -1){
-        return dp[n];
-    }
-    // Find the nth Catalan number
-    for (int i = 1; i <= n; i++) {
- 
-        // Recursive calls
-        n1 = helper(i - 1,dp);
-        n2 = helper(n - i,dp);
-        sum += n1 * n2;
-    }
- 
-    // Return the nth Catalan number
-    return dp[n] =  sum;
-
-    }
+   
     int numTrees(int n) {
            
-       vector<int> dp(n+1,-1);
-        return helper(n,dp);
+       vector<int> dp(n+1,0);
+        
+        dp[1] = 1;
+        dp[0] = 1;
+        int n1,n2;
+        int sum;
+       
+        for(int ind = 2 ; ind <= n ; ind++){
+            
+             for (int i = 1; i <= ind; i++) {
+ 
+                    // Recursive calls
+                    n1 = dp[i - 1];
+                    n2 = dp[ind - i];
+                    dp[ind] += n1 * n2;
+                }
+
+                // Return the nth Catalan number
+                 
+            
+        }
+        return dp[n];
         
     }
 };
