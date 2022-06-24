@@ -11,26 +11,30 @@
  */
 class Solution {
 public:
-    int ans;
+    
     int counter = 0;
-    void ansLao(TreeNode* root , int k){
+    
+    void f(TreeNode* root , int &ans , int k){
         
-        if(root == NULL || k < 0){
+        if(root == NULL){
             return;
         }
         
-        ansLao(root->left , k);
+        f(root->left , ans , k);
+        
         counter++;
         if(counter == k){
             ans = root->val;
+            return;
         }
-        ansLao(root->right , k);
         
+        f(root->right , ans , k);
         
     }
     int kthSmallest(TreeNode* root, int k) {
         
-        ansLao(root , k);
+        int ans;
+        f(root , ans , k);
         return ans;
     }
 };
