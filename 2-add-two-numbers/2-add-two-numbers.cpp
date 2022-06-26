@@ -10,25 +10,7 @@
  */
 class Solution {
 public:
-    
-    ListNode* reverseList(ListNode* head) {
-        
-        if(head == NULL || head->next == NULL){
-            return head;
-        }
-        
-        ListNode* prevPtr = NULL;
-        ListNode* currPtr = head;
-        
-        while(currPtr!=NULL){
-            ListNode* nextPtr = currPtr->next;
-            currPtr->next = prevPtr;
-            prevPtr = currPtr;
-            currPtr = nextPtr;
-        }
-        
-        return prevPtr;
-    }
+
     ListNode* addTwoNumbers(ListNode* h1, ListNode* h2) {
         
              if(h1 == NULL && h2 == NULL){
@@ -39,8 +21,7 @@ public:
             return h1 == NULL ? h2 : h1;
         }
         
-        // h1 = reverseList(h1);
-        // h2 = reverseList(h2);
+       
         
         ListNode* h = new ListNode(0);
         ListNode* t = h;
