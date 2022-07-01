@@ -34,18 +34,16 @@ class Solution
         // Your code here
         sort(arr , arr + n , cmp);
         double profit = 0.0;
-        int currWeight = 0;
         
         for(int i = 0 ; i < n ; i++){
             
-            if(currWeight +arr[i].weight <= w){
-                profit += arr[i].value;
-                currWeight += arr[i].weight;
+            if(arr[i].weight <= w){
+                profit += double(arr[i].value);
+                w -= arr[i].weight;
             }
             
             else{
-                int rem = w - currWeight;
-                profit _+== ((double)rem/(double)arr[i].weight)*arr[i].value;
+                profit += ((double)w/(double)arr[i].weight)*arr[i].value;
                 break;
             }
         }
