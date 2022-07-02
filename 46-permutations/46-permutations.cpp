@@ -1,33 +1,34 @@
 class Solution {
 public:
+     vector<vector<int>> ans;
     
-    void f(vector<vector<int>> & ans , vector<int> helper , vector<int> freq , vector<int>& nums){
+    void f(int ind , vector<int> &nums , vector<int> helper , vector<int>& freq){
         
         if(helper.size() == nums.size()){
             ans.push_back(helper);
             return;
         }
-        
+       
         for(int i = 0 ; i < nums.size() ; i++){
             
-            if(freq[i] != 1){
-                helper.push_back(nums[i]);
-                freq[i] = 1;
-                f(ans,helper,freq,nums);
-                freq[i] = 0;
-                helper.pop_back();
+            if(freq[i] != -1){
+            helper.push_back(nums[i]);
+            freq[i] = -1;
+            f(i+1 , nums , helper , freq);
+            helper.pop_back();
+            freq[i] = 0;
             }
         }
+        
     }
     vector<vector<int>> permute(vector<int>& nums) {
         
-        vector<vector<int>> ans;
         vector<int> helper;
-        
         vector<int> freq(nums.size(),0);
-        
-        f(ans , helper, freq , nums);
+        f(0 , nums , helper , freq);
         
         return ans;
+        
+        
     }
 };
