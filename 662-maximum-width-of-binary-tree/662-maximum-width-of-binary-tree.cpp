@@ -16,44 +16,51 @@ public:
         if(root == NULL){
             return 0;
         }
-        queue<pair<TreeNode*,long long int>> q;
+        
+        queue<pair<TreeNode* ,long long int>> q;
         q.push({root , 0});
         
-        long long int first;
-        long long int last;
+        long long int left;
+        long long int right;
+            
         
-        long long int ans = 0;
+        long long int width = 0;
+        
         while(!q.empty()){
             
             long long int size = q.size();
-            long long int toSubtract = q.front().second;
-            
+            long long int startIndex = q.front().second;
+         
             for(int i = 0 ; i < size ; i++){
                 
-                long long int currInd = q.front().second - toSubtract;
-                TreeNode* front = q.front().first;
+                auto front = q.front();
                 q.pop();
                 
+                TreeNode* node = front.first;
+                long long int line = front.second - startIndex;
+                
                 if(i == 0){
-                    first = currInd;
+                    left = line;
                 }
                 
                 if(i == size-1){
-                    last = currInd;
+                    right = line;
                 }
                 
-                if(front->left){
-                    q.push({front->left , 2*currInd + 1});
+                width = max(width , right-left+1);
+                
+                if(node->left){
+                    q.push({node->left , 2*line+1});
                 }
                 
-                if(front->right){
-                    q.push({front->right , 2*currInd + 2});
+                if(node->right){
+                    q.push({node->right , 2*line+2});
                 }
-                
-                ans = max(ans , last - first +1);
             }
+            
         }
         
-        return ans;
+        return width;
+        
     }
 };
