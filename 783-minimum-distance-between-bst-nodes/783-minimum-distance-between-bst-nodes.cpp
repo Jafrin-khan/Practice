@@ -11,31 +11,25 @@
  */
 class Solution {
 public:
-    
-    void store(TreeNode* root , vector<int>& v){
+    int temp = INT_MAX;
+    void store(TreeNode* root , int& ans){
         
         if(root == NULL){
             return;
         }
         
-        store(root->left , v);
-        v.push_back(root->val);
-        store(root->right , v);
+        store(root->left , ans);
+        ans = min(ans , abs(root->val-temp));
+        temp = root->val;
+        store(root->right , ans);
     }
     int minDiffInBST(TreeNode* root) {
         
         vector<int> v;
-        
-        store(root , v);
-        
         int ans = INT_MAX;
         
-        for(int i = 1 ; i < v.size() ; i++){
-            ans = min(ans,abs(v[i] - v[i-1]));
-        }
-        
+        store(root , ans);
         return ans;
-        
-        
+      
     }
 };
