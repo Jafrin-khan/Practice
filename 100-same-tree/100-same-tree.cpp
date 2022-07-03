@@ -17,7 +17,7 @@ public:
             return true;
         }
         
-        if(p == NULL || q == NULL){
+         if(p == NULL || q == NULL){
             return false;
         }
         
@@ -25,6 +25,7 @@ public:
             return false;
         }
         
-        return isSameTree( p->left,  q->left) && isSameTree( p->right,  q->right);
+        return isSameTree(p->left , q->left) && isSameTree(p->right , q->right);
+        
     }
 };
