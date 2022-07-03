@@ -27,8 +27,30 @@ public:
     
     int coinChange(vector<int>& coins, int amount) {
              
-             vector<vector<int>> dp(coins.size(),vector<int>(amount+1,-1));
-             int ans= f(coins.size()-1 , coins , amount , dp);
+             vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,0));
+             int n = coins.size();
+            
+             for(int i = 0 ; i <= amount ; i++){
+                  if(i % coins[0] == 0){
+                  dp[0][i] = i/coins[0];
+              }
+            else{
+                     dp[0][i] = 1e9;
+                 }
+             }
+            
+             for(int ind = 1 ; ind < n ; ind++){
+                 for(int i = 0 ; i <= amount ; i++){
+                      int notPick = 0 + dp[ind-1][i];
+                      int pick = 1e9;
+                      if(i >= coins[ind]){
+                      pick = 1 + dp[ind][i - coins[ind]];
+                      }
+                      dp[ind][i] = min(pick,notPick);
+                 }
+             }
+        
+             int ans= dp[coins.size()-1][amount];
              if(ans == 1e9){
                  return -1;
              }
