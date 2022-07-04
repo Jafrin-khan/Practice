@@ -13,30 +13,34 @@ class Solution {
 public:
     
     TreeNode* f(TreeNode* root){
-          if(root == NULL || (root->left == NULL && root->right == NULL)){
+        
+        if(root == NULL){
             return root;
         }
-            
-        TreeNode* left = f(root->left);
-        TreeNode* right = f(root->right);
         
-        root->right = left;
+        TreeNode* leftPart = f(root->left);
+        TreeNode* rightPart = f(root->right);
+        
+        TreeNode* temp = NULL;
+        if(root->right){
+            temp = root->right;
+        }
+        
+        root->right = root->left;
+        root->left = NULL;
         
         TreeNode* traverse = root;
-        while(traverse->right != NULL){
+        while(traverse->right){
             traverse = traverse->right;
         }
         
-       traverse->right = right;
-       root->left = NULL;
+        traverse->right = temp;
         
         return root;
+        
     }
     void flatten(TreeNode* root) {
         
-     f(root);
-        
-        
-        
+        f(root);
     }
 };
