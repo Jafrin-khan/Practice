@@ -3,19 +3,19 @@ public:
     
     int f(int i , int j , string s1 , string s2 ,  vector<vector<int>>& dp){
         
-        if(i < 0){
-            return j+1;
+        if(i < 1){
+            return j;
         }
         
-        if(j < 0){
-            return i+1;
+        if(j < 1){
+            return i;
         }
         
         if(dp[i][j] != -1){
             return dp[i][j];
         }
         
-        if(s1[i] == s2[j]){
+        if(s1[i-1] == s2[j-1]){
             return f(i-1 , j-1 , s1 , s2 , dp);
         }
         
@@ -36,8 +36,8 @@ public:
         int m = s1.size();
         int n = s2.size();
         
-        vector<vector<int>> dp(m,vector<int>(n,-1));
-        return f(m-1 , n-1 , s1 , s2, dp);
+        vector<vector<int>> dp(m+1,vector<int>(n+1,-1));
+        return f(m , n , s1 , s2, dp);
         
     }
 };
