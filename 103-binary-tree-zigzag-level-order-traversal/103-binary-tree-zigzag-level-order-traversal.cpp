@@ -12,60 +12,58 @@
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        
         vector<vector<int>> ans;
-        
         if(root == NULL){
             return ans;
         }
-        
         stack<TreeNode*> LR;
         stack<TreeNode*> RL;
         
+        
+        
         LR.push(root);
-      
         
         while(!LR.empty() || !RL.empty()){
             
             vector<int> v;
-            
             if(RL.empty()){
                 
                 while(!LR.empty()){
-                    TreeNode* front = LR.top();
-                    LR.pop();
-                    v.push_back(front->val);
-                    
-                    if(front->left){
-                        RL.push(front->left);
-                    }
-                    
-                    if(front->right){
-                        RL.push(front->right);
-                    }
+                TreeNode* node = LR.top();
+                LR.pop();
+                v.push_back(node->val);
+                  
+                if(node->left){
+                    RL.push(node->left);
+                }
+                if(node->right){
+                    RL.push(node->right);
+                }
+              
                 }
             }
             
             else{
                 
                 while(!RL.empty()){
-                    TreeNode* front = RL.top();
-                    RL.pop();
-                    v.push_back(front->val);
-                    
-                    if(front->right){
-                        LR.push(front->right);
-                    }
-                    
-                    if(front->left){
-                        LR.push(front->left);
-                    }
+                TreeNode* node = RL.top();
+                RL.pop();
+                v.push_back(node->val);
+               
+                if(node->right){
+                    LR.push(node->right);
                 }
-                
-            }
+                    
+                     
+                 if(node->left){
+                    LR.push(node->left);
+                }
+            }}
             
             ans.push_back(v);
         }
+        
         return ans;
+        
     }
 };
