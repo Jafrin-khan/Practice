@@ -12,19 +12,23 @@
 class Solution {
 public:
     
-    bool check(TreeNode* left , TreeNode* right){
+    bool f(TreeNode* root1 , TreeNode* root2){
         
-       
-          if(left == NULL || right == NULL){
-              return left == right;
-          }
+        if(root1 == NULL && root2 == NULL){
+            return true;
+        }
         
-          if(left->val != right->val){
-              return false;
-          }
+        if(root1 == NULL || root2 == NULL){
+            return false;
+        }
         
-         return check(left->left , right->right) && check(left->right , right->left);
-          
+        if(root1->val != root2->val){
+            return false;
+        }
+        
+        return f(root1->left , root2->right) && f(root1->right , root2->left);
+        
+        
     }
     bool isSymmetric(TreeNode* root) {
         
@@ -32,7 +36,6 @@ public:
             return true;
         }
         
-        return check(root->left,root->right);
-        
+        return f(root->left , root->right);
     }
 };
