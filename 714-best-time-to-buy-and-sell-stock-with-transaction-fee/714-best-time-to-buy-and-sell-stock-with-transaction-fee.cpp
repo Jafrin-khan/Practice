@@ -1,29 +1,31 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& prices, int fee) {
+    
+    int f(int ind , int buy , vector<int>& prices , int n , int profit , vector<vector<int>>& dp ,int fee){
         
-        int profit = 0;
-        int n = prices.size();
-        
-        vector<vector<int>> dp(n+1,vector<int>(2,0));
-        
-        dp[n][0] = 0;
-        dp[n][1] = 0;
-        
-        for(int ind = n-1 ; ind >= 0 ; ind--){
-            for(int buy = 0 ; buy <2 ; buy++){
-                 if(buy){
-            profit = max(-prices[ind] + dp[ind+1][0], 0 + dp[ind+1][1]);
+        if(ind == n){
+            return 0;
         }
         
+        if(dp[ind][buy] != -1){
+            return dp[ind][buy];
+        }
+        
+        if(buy){
+              //take or not_take
+              dp[ind][buy] = max(-prices[ind]-fee + f(ind+1,0,prices,n,profit,dp,fee),0 +f(ind+1,1,prices,n,profit,dp,fee ));
+        }
+                            
         else{
-             profit = max(prices[ind]-fee + dp[ind+1][1], 0 + dp[ind+1][0]);
-        }
-                dp[ind][buy] = profit;
-            }
+           dp[ind][buy] =  max(prices[ind] + f(ind+1,1,prices,n,profit,dp,fee) , 0 + f(ind+1,0,prices,n,profit,dp,fee));
         }
         
-        return dp[0][1];
+        return dp[ind][buy];
+    }
+    int maxProfit(vector<int>& prices, int fee) {
+        int n = prices.size();
+        vector<vector<int>> dp(n,vector<int>(2,-1));
+        return f(0,1,prices,prices.size(),0,dp,fee);
         
     }
 };
