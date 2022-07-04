@@ -12,24 +12,28 @@
 class Solution {
 public:
     
-    TreeNode* helper(vector<int>& nums , int s , int e){
+    TreeNode* helper(int start , int end , vector<int>& nums){
         
-       if(s > e){
-           return NULL;
-       }
+        if(start > end){
+            return NULL;
+        }
         
-       int mid = (s+e)/2;
-        TreeNode* root = new TreeNode(nums[mid]);
-        root->left = helper(nums , s , mid-1);
-        root->right = helper(nums , mid+1 , e);
+        int mid = (start+end)/2;
+        TreeNode* newNode = new TreeNode(nums[mid]);
         
-        return root;
+        newNode->left = helper(start , mid-1 , nums);
+        newNode->right = helper(mid+1 , end , nums);
         
+        return newNode;
     }
     
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         
-        return helper(nums , 0 , nums.size()-1);
+        if(nums.size() == 0){
+            return NULL;
+        }
+    
+        return helper(0 , nums.size()-1 , nums);
         
     }
 };
