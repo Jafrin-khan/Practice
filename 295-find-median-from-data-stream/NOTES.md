@@ -1,5 +1,5 @@
 priority_queue<int> mx;
-priority_queue<int,vector<int>,greater<int>> mn;
+priority_queue<int , vector<int> , greater<int>> mn;
 MedianFinder() {
 }
 void addNum(int num) {
@@ -14,10 +14,11 @@ mn.pop();
 double findMedian() {
 double ans;
 if((mn.size() + mx.size())%2){
-ans = mx.top();
+ans =  mx.top();
 }
 else{
-ans = (mx.top()+mn.top());
+ans = mx.top() + mn.top();
 ans/=2;
 }
 return ans;
+}
