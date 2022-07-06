@@ -6,33 +6,27 @@ public:
         
         for(int i = 0 ; i < s.size() ; i++){
             
-            string temp = "";
-            
-            while(i < s.size() && s[i] != ' '){
-                temp+=s[i++];
+            string t = "";
+            while(i < s.size() && s[i]!=' '){
+                t += s[i++];
             }
             
-            if(temp.size() != 0){
-                st.push(temp);
+            if(!t.empty()){
+            st.push(t);
             }
         }
         
         string ans = "";
-        
-        while(!st.empty()){
-            ans+=st.top();
+        if(!st.empty()){
+            ans += st.top();
             st.pop();
-            if(st.size() == 0){
-                break;
-            }
-            
-            else{
-                ans += " ";
-            }
+        }
+        while(!st.empty()){
+            ans+= " " + st.top();
+            st.pop();
         }
         
         return ans;
-        
         
     }
 };
