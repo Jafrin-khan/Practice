@@ -1,8 +1,8 @@
 class Solution {
 public:
     
-    static bool cmp(string &s1 , string &s2){
-        return s1.size() < s2.size();
+    static bool cmp(string &a , string &b){
+        return a.size() < b.size();
     }
     
     bool toCompare(string &s1 , string &s2){
@@ -17,7 +17,7 @@ public:
         int p1 = 0;
         int p2 = 0;
         
-        while(p1 < n ){
+        while(p1 < n){
             
             if(s1[p1] == s2[p2]){
                 p1++;
@@ -29,34 +29,38 @@ public:
             }
         }
         
-       if(p1 == s1.size() && p2 == s2.size()){
-           return true;
-       }
+        if(p1 == n && p2 == m){
+            return true;
+        }
         
         return false;
     }
-    int longestStrChain(vector<string>& word) {
-        
-        int n = word.size();
-        sort(word.begin() , word.end() , cmp);
-        
+    int longestStrChain(vector<string>& words) {
+      
+        int n = words.size();
         vector<int> dp(n,1);
+        
+        sort(words.begin() , words.end() , cmp);
         int maxi = 1;
         
-        for(int i = 0 ; i < n ; i++){
+        for(int ind = 0 ; ind < n ; ind++){
             
-            
-            for(int prev = 0 ; prev < i ; prev++){
+            for(int prev_ind = 0 ; prev_ind < ind ; prev_ind++){
                 
-            if(toCompare(word[i],word[prev]) && dp[i] < dp[prev] + 1){
-                dp[i] = dp[prev] + 1;
-            }
-        }
-            if(dp[i] > maxi){
-                maxi = dp[i];
+                if(toCompare(words[ind] , words[prev_ind]) && (dp[ind] < dp[prev_ind]+1) ){
+                    dp[ind] = dp[prev_ind] + 1;
+                  
+                }
+                
+                if(dp[ind] > maxi){
+                    maxi = dp[ind];
+                }
+                
             }
         }
         
-        return maxi;
+        return maxi;   
+        
+        
     }
 };
