@@ -15,16 +15,18 @@ public:
     stack<TreeNode*> st;
     
     BSTIterator(TreeNode* root) {
-        pushAllLeft(root);
+        pushLeft(root);
     }
     
     int next() {
-        TreeNode* top = st.top();
+        
+        TreeNode* topElem =  st.top();
         st.pop();
+        if(topElem->right){
+            pushLeft(topElem->right);
+        }
         
-        pushAllLeft(top->right);
-        
-        return top->val;
+        return topElem->val;
         
     }
     
@@ -32,10 +34,15 @@ public:
         return !st.empty();
     }
     
-    void pushAllLeft(TreeNode* root){
+    void pushLeft(TreeNode* root){
         
-        while(root != NULL){
-            st.push(root);
+        if(root == NULL){
+            return;
+        }
+        
+        st.push(root);
+        while(root->left){
+            st.push(root->left);
             root = root->left;
         }
     }
