@@ -12,11 +12,13 @@ public:
         mp['C'] = 100;
         mp['D'] = 500;
         mp['M'] = 1000;
-          int ans = mp[s[n]];
-         
-        for(int i = n; i > 0 ; i--){
+        
+        int ans = 0;
+        
+        ans +=  mp[s[n]];
+        for(int i = n ; i > 0 ; i--){
             
-            if(mp[s[i]] > mp[s[i-1]]){
+            if(mp[s[i-1]] < mp[s[i]]){
                 ans -= mp[s[i-1]];
             }
             
@@ -24,7 +26,7 @@ public:
                 ans += mp[s[i-1]];
             }
         }
-     
+        
         return ans;
         
     }
