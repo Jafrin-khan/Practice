@@ -24,11 +24,10 @@ class Solution{
         
         while(right < n){
          
-            if(mp[nums[left]] == 1){
+            mp[nums[left]]--;
+         
+            if(mp[nums[left]]== 0){
                 mp.erase(nums[left]);
-            }
-            else{
-                 mp[nums[left]]--;
             }
             mp[nums[right]]++;
             
