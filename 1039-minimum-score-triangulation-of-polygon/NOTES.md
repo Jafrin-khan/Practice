@@ -1,19 +1,18 @@
-int f(int i , int j , vector<int>& values , vector<vector<int>>& dp){
-if(i == j){
-return 0;
+int n = nums.size();
+vector<vector<int>> dp(n, vector<int>(n,0));
+for(int i = 1 ; i < n ; i++){
+dp[i][i] = 0;
 }
-if(dp[i][j] != -1){
-return dp[i][j];
-}
+for(int i = n-1 ; i >= 1 ; i--){
+for(int j = i+1 ; j < n ; j++){
 int mini = 1e9;
-for(int k = i ; k < j ; k++){
-int steps = values[i-1]*values[k]*values[j] + f(i , k , values , dp) + f(k+1 , j , values , dp);
+int steps;
+int k;
+for(k = i ; k < j ; k++){
+steps = nums[i-1]*nums[k]*nums[j] + f(i,k,nums , dp) + f(k+1,j,nums , dp);
 mini = min(mini , steps);
 }
-return dp[i][j] = mini;
+dp[i][j] = mini;
 }
-int minScoreTriangulation(vector<int>& values) {
-int n = values.size();
-vector<vector<int>> dp(n , vector<int>(n,-1));
-return f(1 , n-1 , values , dp);
 }
+return dp[1][n-1];
