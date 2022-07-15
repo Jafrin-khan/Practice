@@ -8,15 +8,14 @@ public:
     
     int next(int price) {
         
-        int ans = 1;
+        int cnt = 1;
         while(!st.empty() && st.top().first <= price){
-            ans += st.top().second;
+            cnt += st.top().second;
             st.pop();
         }
+        st.push({price , cnt});
         
-        st.push({price,ans});
-        
-        return ans;
+        return cnt;
     }
 };
 
@@ -25,4 +24,3 @@ public:
  * StockSpanner* obj = new StockSpanner();
  * int param_1 = obj->next(price);
  */
-
