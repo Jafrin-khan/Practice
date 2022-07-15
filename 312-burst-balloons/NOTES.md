@@ -1,17 +1,24 @@
 class Solution {
 public:
-int f(vector<int> &arr, int i, int j) {
-if (j - i + 1 <= 2) return 0;
-int money = INT_MIN;
-for (int k = i + 1; k < j; k++) {
-int curMoney = (arr[i] * arr[k] * arr[j]) + f(arr, i, k) + f(arr, k, j);
-money = max(money, curMoney);
+int f(int i , int j , vector<int>& nums,vector<vector<int>>& dp){
+if(i > j){
+return 0;
 }
-return money;
+if(dp[i][j] != -1){
+return dp[i][j];
+}
+int maxi = INT_MIN;
+for(int k = i ; k <= j ; k++){
+int cost = nums[i-1]*nums[k]*nums[j+1] + f(i,k-1,nums,dp) + f(k+1,j,nums,dp);
+maxi = max(maxi,cost);
+}
+return dp[i][j] = maxi;
 }
 int maxCoins(vector<int>& nums) {
+int n = nums.size();
 nums.push_back(1);
-nums.insert(nums.begin(), 1);
-return f(nums, 0, nums.size() - 1);
+nums.insert(nums.begin(),1);
+vector<vector<int>> dp(n+1 , vector<int>(n+1,-1));
+return f(1 , n, nums,dp);
 }
 };
