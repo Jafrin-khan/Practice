@@ -1,43 +1,36 @@
 class Solution {
 public:
     
-    bool dfsSearch(vector<vector<char>>& board, string& word ,int i , int j , int n){
-        
-        if(n == word.size()){
+    bool f(int i , int j ,vector<vector<char>>& board , string word, int ind){
+        int n = board.size();
+        int m = board[0].size();
+         if(ind == word.size()){
             return true;
         }
         
-        if(i < 0 || i >= board.size() || j < 0 || j >= board[0].size() || board[i][j] != word[n]){
+        if(i < 0 || j < 0 || i >= n || j >= m || board[i][j] != word[ind]){
             return false;
         }
         
-        board[i][j] = '0';
-        bool down =  dfsSearch(board,word,i+1,j,n+1); 
-        bool up = dfsSearch(board,word,i-1,j,n+1);
-        bool left = dfsSearch(board,word,i,j-1,n+1);
-        bool right = dfsSearch(board,word,i,j+1,n+1);
-        
-        bool ans = up || left || right || down;
-        board[i][j] = word[n];
-        
+       
+       board[i][j] = '$';
+        bool ans =  f(i+1 , j , board , word , ind+1) || f(i , j+1 , board , word , ind+1)
+                    || f(i-1 , j , board , word , ind+1) || f(i , j-1 , board , word , ind+1);
+       board[i][j] = word[ind];
+       
         return ans;
-        
         
     }
     bool exist(vector<vector<char>>& board, string word) {
         
-        if(word.size() == 0){
-            return false;
-        }
+        int ind = 0;
         
-        int n = board.size();
-        int m = board[0].size();
-        
-        for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < m ; j++){
-                if(board[i][j] == word[0] && dfsSearch(board,word,i,j,0)){
-                    return true;
+        for(int i = 0 ; i < board.size() ; i++){
+            for(int j = 0 ; j < board[0].size() ; j++){
+                if(board[i][j] == word[0] && f(i , j , board , word , 0)){
+                    return true ;
                 }
+                
             }
         }
         
