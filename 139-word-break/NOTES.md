@@ -10,7 +10,7 @@ for(int i=1; i<s.length(); i++)
 string left = s.substr(0, i); // check for each substring of s
 if(find(d.begin(), d.end(), left) != d.end() && wordBreak(s.substr(i), d))
 { // if that left exists in d, than check for remaining part of s via recursion
-return m[s] = true; // if both part return true , store it in map and return true
+return m[left] = true; // if both part return true , store it in map and return true
 }
 }
 return m[s] = false; // else just store false for that s in map and return false
