@@ -1,15 +1,16 @@
 class Solution {
 public:
     
-    int getSquare(int n){
+    int f(int num){
         
-        int square = 0;
-        while(n!=0){
-            square += (n%10)*(n%10);
-            n/=10;
+        int ans = 0;
+        while(num != 0){
+            ans += (num%10 )* (num%10);
+            num/=10;
         }
         
-        return square;
+        return ans;
+       
     }
     bool isHappy(int n) {
         
@@ -17,15 +18,15 @@ public:
         
         while(mp.find(n) == mp.end()){
             
-            int elem = getSquare(n);
+            int elem = f(n);
             mp[n] = elem;
-            n = mp[n];
+            n = elem;
             
             if(n == 1){
                 return true;
             }
-        
         }
+       
         return false;
     }
 };
