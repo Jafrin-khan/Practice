@@ -12,34 +12,36 @@
 class Solution {
 public:
     
-    bool check(TreeNode* root, TreeNode* subRoot){
+    bool f(TreeNode* root, TreeNode* subRoot){
         
-        if(root == NULL && subRoot == NULL){
+         if(root == NULL && subRoot == NULL){
             return true;
         }
         
-        if(root == NULL || subRoot == NULL){
+         if(root == NULL || subRoot == NULL){
             return false;
         }
         
-        if(root->val == subRoot->val){
-            return check(root->left,subRoot->left) && check(root->right,subRoot->right);
+        if(root->val != subRoot->val){
+            return false;
         }
         
-        return false;
+        return f(root->left , subRoot->left) && f(root->right , subRoot->right);
+        
     }
+    
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         
-        if(root == NULL){
-            return false;
-        }
+       if(root == NULL){
+           return false;
+       }
         
         bool k = false;
         if(root->val == subRoot->val){
-            k = check(root,subRoot);
+           k =  f(root , subRoot);
         }
         
-        return k || isSubtree(root->left,subRoot) || isSubtree(root->right,subRoot);
+       return k || isSubtree(root->left , subRoot) ||  isSubtree(root->right , subRoot);
         
     }
 };
