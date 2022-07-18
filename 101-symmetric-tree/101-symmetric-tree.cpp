@@ -27,15 +27,15 @@ public:
         }
         
         return f(root1->left , root2->right) && f(root1->right , root2->left);
-        
-        
+
     }
+        
     bool isSymmetric(TreeNode* root) {
         
-        if(root == NULL){
+        if(root == NULL || (root->left == NULL && root->right == NULL)){
             return true;
         }
-        
         return f(root->left , root->right);
+        
     }
 };
