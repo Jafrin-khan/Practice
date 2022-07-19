@@ -1,27 +1,35 @@
 class Solution {
 public:
-   
-     void findans(set<long int> &ugly,long int num)
-    {  // int max value is 2147483647
-        if(num>2147483647) return;
-        if(ugly.find(num)!=ugly.end()) return; //   memoization
-        ugly.insert(num);
-        findans(ugly,num*2);
-        findans(ugly,num*3);
-        findans(ugly,num*5);
+    
+    void f(set<long int>& st , long int n){
+        
+        if(n > INT_MAX){
+            return;
+        }
+        
+     
+        if(st.find(n) != st.end()){
+            return;
+        }
+           st.insert(n);
+        f(st , n*2);
+        f(st , n*3);
+        f(st , n*5);
+        
         return;
     }
-    
     int nthUglyNumber(int n) {
-       set<long int> ugly;
-        findans(ugly,1);
-    
-        int i=0;
-        for(auto it:ugly)
-        {
+        
+        set<long int> st;
+        f(st , 1);
+        
+        int i = 0;
+        for(auto it : st){
             i++;
             if(i==n) return it;
         }
+        
         return i;
+        
     }
 };
