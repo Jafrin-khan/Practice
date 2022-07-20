@@ -36,7 +36,7 @@ public:
         ListNode* prev = head;
         ListNode* nxt = head->next;
         ListNode* lp = head;
-        ListNode* rp = head;
+    
         
         int l = left - 1;
         int r = right - 1;
@@ -47,7 +47,6 @@ public:
         }
         
         while(r--){
-            rp = rp->next;
             nxt = nxt->next;
         }
         
