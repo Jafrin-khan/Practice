@@ -52,16 +52,18 @@ public:
         
         //for unqual length linked list
         
-        if(l1 != NULL)
+        while(l1 != NULL)
         {
             curr -> next = l1;
             l1 = l1->next;
+            curr = curr->next;
         }
         
-        if(l2 != NULL)
+        while(l2 != NULL)
         {
             curr -> next = l2;
             l2 = l2 ->next;
+            curr = curr->next;
         }
         
         return ptr->next;
