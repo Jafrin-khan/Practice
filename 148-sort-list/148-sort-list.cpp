@@ -1,71 +1,82 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
+    
+    
     ListNode* sortList(ListNode* head) {
-        //If List Contain a Single or 0 Node
-        if(head == NULL || head ->next == NULL)
+        
+        if(head == NULL || head->next == NULL){
             return head;
+        }
         
+        ListNode* temp = NULL;
+        ListNode* slow = head;
+        ListNode* fast = head;
         
-        ListNode *temp = NULL;
-        ListNode *slow = head;
-        ListNode *fast = head;
-        
-        // 2 pointer appraoach / turtle-hare Algorithm (Finding the middle element)
-        while(fast !=  NULL && fast -> next != NULL)
-        {
+        while(fast != NULL && fast->next != NULL){
             temp = slow;
-            slow = slow->next;          //slow increment by 1
-            fast = fast ->next ->next;  //fast incremented by 2
-            
-        }   
-        temp -> next = NULL;            //end of first left half
+            slow = slow->next;
+            fast = fast->next->next;
+        }
         
-        ListNode* l1 = sortList(head);    //left half recursive call
-        ListNode* l2 = sortList(slow);    //right half recursive call
+        temp->next = NULL;
         
-        return mergelist(l1, l2);         //mergelist Function call
-            
+        ListNode* l1 = sortList(head);
+        ListNode* l2 = sortList(slow);
+        
+        return merge(l1 , l2);
+        
     }
     
-    //MergeSort Function O(n*logn)
-    ListNode* mergelist(ListNode *l1, ListNode *l2)
-    {
-        ListNode *ptr = new ListNode(0);
-        ListNode *curr = ptr;
+    ListNode* merge(ListNode* h1 , ListNode* h2){
         
-        while(l1 != NULL && l2 != NULL)
-        {
-            if(l1->val <= l2->val)
-            {
-                curr -> next = l1;
-                l1 = l1 -> next;
+        ListNode* t1 = h1;
+        ListNode* t2 = h2;
+        
+        ListNode* ans = new ListNode(0);
+        ListNode* ansT = ans;
+        
+        while(t1 != NULL && t2 != NULL){
+            
+            if(t1->val <= t2->val){
+                ansT->next = t1;
+                t1 = t1->next;
             }
-            else
-            {
-                curr -> next = l2;
-                l2 = l2 -> next;
+            
+            else{
+                ansT->next = t2;
+                t2 = t2->next;
             }
-        
-        curr = curr ->next;
-        
+            
+            ansT = ansT->next;
         }
         
-        //for unqual length linked list
         
-        while(l1 != NULL)
-        {
-            curr -> next = l1;
-            l1 = l1->next;
-            curr = curr->next;
+        while(t1 != NULL){
+            ansT->next = t1;
+            t1 = t1->next;
+            ansT = ansT->next;
         }
         
-        while(l2 != NULL)
-        {
-            curr -> next = l2;
-            l2 = l2 ->next;
-            curr = curr->next;
+         while(t2 != NULL){
+            ansT->next = t2;
+            t2 = t2->next;
+            ansT = ansT->next;
         }
         
-        return ptr->next;
+                
+         return ans->next;
+        
     }
+    
+    
 };
