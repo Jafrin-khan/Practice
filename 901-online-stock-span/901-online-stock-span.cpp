@@ -11,11 +11,14 @@ public:
         int cnt = 1;
         while(!st.empty() && st.top().first <= price){
             cnt += st.top().second;
+            
             st.pop();
         }
+        
         st.push({price , cnt});
         
         return cnt;
+        
     }
 };
 
