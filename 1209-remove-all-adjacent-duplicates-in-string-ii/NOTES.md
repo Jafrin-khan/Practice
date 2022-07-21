@@ -1,32 +1,27 @@
-string removeDuplicates(string s, int k) {
-stack<pair<char,int>>st;
-int n=s.size();
-for(int i=0;i<n;i++)
-{
-if(st.empty())
-{
+stack<pair<char,int>> st;
+for(int i = 0 ; i < s.length() ; i++){
+if(st.empty()){
 st.push({s[i],1});
 continue;
 }
-if(st.top().first==s[i])
-{
-if(st.top().second==k-1)st.pop();
-else
-{
+if(st.top().first == s[i]){
+if(st.top().second == k-1){
+st.pop();
+}
+else{
 st.top().second++;
 }
 }
-else
-{
+else{
 st.push({s[i],1});
 }
 }
-string ans="";
-while(!st.empty())
-{
-for(int i=0;i<st.top().second;i++)
-{
-ans+=st.top().first;
+string ans = "";
+while(!st.empty()){
+int i = 0;
+while(i < st.top().second){
+ans += st.top().first;
+i++;
 }
 st.pop();
 }
