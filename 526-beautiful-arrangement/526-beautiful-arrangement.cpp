@@ -2,6 +2,9 @@ class Solution {
 public:
     //https://www.youtube.com/watch?v=xf8qAkqDr8Y
     
+    //TC = O(k) where k are the no. of permutations
+    //Sc = O(n)
+    
     int ans = 0;
     
     void dfs(vector<int> nums , int start , int end){
