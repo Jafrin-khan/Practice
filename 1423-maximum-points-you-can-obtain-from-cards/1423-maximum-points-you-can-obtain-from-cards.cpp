@@ -2,32 +2,33 @@ class Solution {
 public:
     int maxScore(vector<int>& nums, int k) {
         
+        int ans = 0;
         int n = nums.size();
-        int totSum = 0;
         
+        int totSum = 0;
+        int leftOverSum = 0;
         for(int i = 0 ; i < n ; i++){
+            
+            if(i < (n-k)){
+                leftOverSum+=nums[i];
+            }
             totSum += nums[i];
         }
         
+        
         int left = 0;
         int right = n - k;
-        int window = 0;
-        //assuming that the cards are taken from the back side of the deck;
-        //window stores the items which are not taken
-        for(int i = 0 ; i < right ; i++){
-            window+=nums[i];
-        }
-        
-        int maxCardSum = totSum - window;
-        
+        ans = totSum - leftOverSum;
         while(right < n){
             
-            window -= nums[left++];
-            window += nums[right++];
+            leftOverSum -= nums[left++];
+            leftOverSum += nums[right++];
             
-            maxCardSum = max(maxCardSum , totSum - window);
+            ans = max(ans,totSum - leftOverSum);
+            
         }
         
-        return maxCardSum;
+        return ans;
+        
     }
 };
