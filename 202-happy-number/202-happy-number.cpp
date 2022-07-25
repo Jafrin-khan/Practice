@@ -1,24 +1,27 @@
 class Solution {
 public:
     
-    int f(int num){
+    int get(int num){
         
         int ans = 0;
-        while(num != 0){
-            ans += (num%10 )* (num%10);
-            num/=10;
-        }
+        int n = num;
         
+        while(n!=0){
+            ans += (n%10)*(n%10);
+            n/=10;
+        }
         return ans;
-       
+        
     }
+    
     bool isHappy(int n) {
+        
         
         unordered_map<int,int> mp;
         
         while(mp.find(n) == mp.end()){
             
-            int elem = f(n);
+            int elem = get(n);
             mp[n] = elem;
             n = elem;
             
@@ -26,7 +29,8 @@ public:
                 return true;
             }
         }
-       
+        
         return false;
+        
     }
 };
