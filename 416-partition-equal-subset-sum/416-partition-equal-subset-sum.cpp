@@ -1,46 +1,64 @@
 class Solution {
 public:
     
-        bool f(int ind , int target , int n , vector<int>& arr ,  vector<vector<int>>& dp){
+    bool f(int ind, int k , vector<int>& nums , vector<vector<int>>& dp){
         
-        if(target == 0){
+        if(k == 0){
             return true;
         }
         
         if(ind == 0){
+           return nums[0] == k; 
+        }
+        
+        if(dp[ind][k] != -1){
+            return dp[ind][k];
+        }
+            
+        
+        bool notTake = f(ind - 1 , k , nums , dp);
+        bool take = false;
+        if(k >= nums[ind]){
+            take = f(ind-1 , k - nums[ind] , nums , dp);
+        }
+        
+        return dp[ind][k] = take || notTake;    
+    }
+    
+    bool canPartition(vector<int>& nums) {
+        
+        int totSum = 0;
+        int n = nums.size();
+        
+        for(int i = 0 ; i < n ; i++){
+            totSum += nums[i];
+        }
+        
+        if(totSum%2 != 0){
             return false;
         }
         
-        if(dp[ind][target] != -1){
-            return dp[ind][target];
-        }
+        int sum = totSum/2;
+        vector<vector<int>> dp(n , vector<int>(sum+1,0));
         
-        bool notPick = f(ind - 1 , target , n , arr , dp);
-        bool pick = false;
-        if(arr[ind] <= target){
-            pick = f(ind - 1 , target - arr[ind] , n , arr , dp);
+        for(int ind = 0 ; ind < n ; ind++){
+            dp[ind][0] = 1;
         }
-        
-        return dp[ind][target] = pick || notPick;
+           if(nums[0] <= (sum)){
+            dp[0][nums[0]] = 1;
+        }
+        for(int ind = 1 ; ind < n ; ind++){
+            for(int k = 1 ; k <= sum ; k++){
+
+                bool notTake = dp[ind - 1][k];
+                bool take = false;
+                if(k >= nums[ind]){
+                    take = dp[ind-1][k - nums[ind]];
+                }
+
+                dp[ind][k] = take || notTake;  
+            }
+        }
+        return dp[n-1][sum];
     }
-    bool canPartition(vector<int>& arr) {
-        
-         int target = 0;
-         int n = arr.size();
-        
-        for(int i = 0 ; i < n ; i++){
-            target += arr[i];
-        }
-        
-        if(target%2 != 0){
-            return 0;
-        }
-        
-        target /= 2;
-        
-        vector<vector<int>> dp(n , vector<int>(target+1,-1));
-        return f(n-1 , target , n , arr , dp);
-    }
-        
-    
 };
