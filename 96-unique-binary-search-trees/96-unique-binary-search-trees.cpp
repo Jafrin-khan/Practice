@@ -1,32 +1,29 @@
 class Solution {
 public:
     
-    
-   
-    int numTrees(int n) {
-           
-       vector<int> dp(n+1,0);
+    int f(int n , vector<int>& dp){
         
-        dp[1] = 1;
-        dp[0] = 1;
-        int n1,n2;
-        int sum;
-       
-        for(int ind = 2 ; ind <= n ; ind++){
-            
-             for (int i = 1; i <= ind; i++) {
- 
-                    // Recursive calls
-                    n1 = dp[i - 1];
-                    n2 = dp[ind - i];
-                    dp[ind] += n1 * n2;
-                }
-
-                // Return the nth Catalan number
-                 
-            
+        if(n == 1 || n == 0){
+            return 1;
         }
-        return dp[n];
         
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        int sum = 0;
+        
+        for(int i = 1;i <= n ; i++){
+            int n1 = f(i-1 , dp);
+            int n2 = f(n-i , dp);
+            
+            sum += n1*n2;
+        }
+        
+        return dp[n] = sum;
+    }
+    int numTrees(int n) {
+        
+        vector<int> dp(n+1, -1);
+        return f(n , dp);
     }
 };
