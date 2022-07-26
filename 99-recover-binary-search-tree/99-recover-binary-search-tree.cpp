@@ -12,42 +12,39 @@
 class Solution {
 public:
     int i = 0;
-     vector<int> v;
-    void storeInorder(TreeNode* root){
+    void store(TreeNode* root , vector<int>& v){
         
         if(root == NULL){
             return;
         }
         
-        storeInorder(root->left);
+        store(root->left , v);
         v.push_back(root->val);
-        storeInorder(root->right);
+        store(root->right , v);
+    }
+    
+    void change(TreeNode* root , vector<int>& v){
+         if(root == NULL){
+            return;
+        }
+        
+        change(root->left , v);
+        if(v[i] != root->val){
+            root->val = v[i];
+        }
+        i++;
+        change(root->right , v);
         
     }
     
-    void helper(TreeNode* root){
-        
-        if(root == NULL){
-            return;
-        }
-        
-        helper(root->left);
-        if(v[i]!=root->val)
-        {
-            swap(v[i],root->val);
-        }
-        i++;
-        helper(root->right);
-        
-    }
     void recoverTree(TreeNode* root) {
         
-      
-        storeInorder(root);
-        sort(v.begin(),v.end());
+        vector<int> v;
+        store(root , v);
         
-        helper(root);
+        sort(v.begin() , v.end());
         
-       
+        change(root , v);
+
     }
 };
