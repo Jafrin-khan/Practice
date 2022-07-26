@@ -12,35 +12,32 @@
 class Solution {
 public:
     
-    int count = 0;
-    void f(TreeNode* root,long long sum , int targetSum){
+    int cnt = 0;
+    void f(TreeNode* root, int targetSum ,long sum){
         
         if(root == NULL){
-            return;
+          return;
         }
         
         sum += root->val;
-        
         if(sum == targetSum){
-            count++;
+            cnt++;
         }
         
-        f(root->left , sum , targetSum);
-        f(root->right , sum , targetSum);
+       f(root->left , targetSum , sum);
+       f(root->right , targetSum , sum);
         
     }
-    
     int pathSum(TreeNode* root, int targetSum) {
         
         if(root == NULL){
             return 0;
         }
-        
-        int sum = 0;
-        f(root , sum , targetSum);
+
+        f(root , targetSum , 0);
         pathSum(root->left , targetSum);
         pathSum(root->right , targetSum);
         
-        return count;
+        return cnt;
     }
 };
