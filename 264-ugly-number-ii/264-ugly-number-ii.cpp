@@ -1,35 +1,37 @@
 class Solution {
 public:
     
-    void f(set<long int>& st , long int n){
+    void f(long int i , set<long int>& st){
         
-        if(n > INT_MAX){
+        if(i > INT_MAX){
             return;
         }
         
-     
-        if(st.find(n) != st.end()){
+        if(st.find(i) != st.end()){
             return;
         }
-           st.insert(n);
-        f(st , n*2);
-        f(st , n*3);
-        f(st , n*5);
+        st.insert(i);
         
+        f(i*2 , st);
+        f(i*3 , st);
+        f(i*5 , st);
         return;
+        
     }
     int nthUglyNumber(int n) {
         
         set<long int> st;
-        f(st , 1);
+        f(1 , st);
         
         int i = 0;
-        for(auto it : st){
-            i++;
-            if(i==n) return it;
+        int ans;
+        
+        for(auto x : st){
+            if(++i == n){
+                return x;
+            }
+
         }
-        
         return i;
-        
     }
 };
