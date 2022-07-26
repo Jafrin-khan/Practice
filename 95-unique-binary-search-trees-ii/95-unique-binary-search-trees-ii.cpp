@@ -28,6 +28,9 @@ public:
             
             for(auto x : left){
                 for(auto y : right){
+                    
+                    //each x contains the whole left tree
+                    //each y '' '' '' right tree
                     TreeNode* node = new TreeNode(i);
                     node->left = x;
                     node->right = y;
