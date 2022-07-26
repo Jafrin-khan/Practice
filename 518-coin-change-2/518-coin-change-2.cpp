@@ -1,40 +1,34 @@
 class Solution {
 public:
-    int change(int amt, vector<int>& coins) {
-        
-         int n = coins.size();
-        vector<vector<int>> dp(n , vector<int>(amt+1 , 0));
-        
-         for(int i = 0 ; i <= amt ; i++){
-            if(i%coins[0] == 0){
-                dp[0][i] = 1;
-            }
-             
-            else{
-                dp[0][i] = 0;
-            }
-        }
-        
-        for(int ind = 1 ; ind < n ; ind++){
-            for(int j = 0 ; j <= amt ; j++){
-                  
-            int notTake = dp[ind - 1][j];
-            int take = 0;
-
-            if(coins[ind] <= j){
-                take = dp[ind][j - coins[ind]]; 
-            }
-
-            dp[ind][j] = take + notTake;
-            
-            }
-        }
-        
-        int ans =  dp[n - 1][amt];
+    
+    int f(int ind , int amt ,  vector<int>& coins , vector<vector<int>>& dp){
         
     
-        return ans;
+        if(ind == 0){
+            if(amt%coins[ind] == 0){
+                return 1;
+            }
+            
+            return 0;
+        }
         
+        if(dp[ind][amt] != -1){
+            return dp[ind][amt];
+        }
         
+        int notTake = f(ind -1 , amt , coins , dp);
+        int take = 0;
+        if(amt >= coins[ind]){
+            take = f(ind , amt - coins[ind] , coins , dp);
+        }
+        
+        return dp[ind][amt] = take + notTake;
+    }
+    int change(int amt, vector<int>& coins) {
+        
+        int n = coins.size();
+        vector<vector<int>> dp(n , vector<int>(amt + 1 , -1));
+        
+        return f(n-1 , amt , coins , dp);
     }
 };
