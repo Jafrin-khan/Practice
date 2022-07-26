@@ -15,7 +15,7 @@ public:
         f(i*2 , st);
         f(i*3 , st);
         f(i*5 , st);
-        return;
+    
         
     }
     int nthUglyNumber(int n) {
