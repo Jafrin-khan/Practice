@@ -11,111 +11,99 @@
 class Solution {
 public:
     
-   ListNode* reverse(ListNode* head){
-           
-       ListNode* current = head;
-       ListNode* previous = NULL;
+    ListNode* reverse(ListNode* head){
         
-        while(current){
-            ListNode* temp = current->next;
-            current->next = previous;
-            previous = current;
-            current = temp;
+        if(head == NULL || head->next == NULL){
+            return head;
         }
         
-        return previous; 
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        
+        while(curr != NULL){
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+            
+        }
+        
+        return prev;
     }
     
-    int getLen(ListNode* head){
+    
+    ListNode* alternate(ListNode* h1 , ListNode* h2){
         
-        ListNode* temp = head;
-        int l = 0;
-        
-        while(temp != NULL){
-            temp = temp->next;
-            l++;
+        if(h1 == NULL && h2 == NULL){
+            return NULL;
         }
         
-        return l;
+        if(h1 == NULL){
+            return h2;
+        }
+        
+        if(h2 == NULL){
+            return h1;
+        }
+        
+        ListNode* t1 = h1;
+        ListNode* t2 = h2;
+        
+        ListNode* ans = new ListNode(0);
+        ListNode* toReturn = ans;
+        
+        int flag = 1;
+        while(h1 != NULL && h2 != NULL){
+            
+            if(flag){
+                ans->next = h1;
+                h1 = h1->next;
+                flag = 0;
+            }
+            
+            else{
+                ans->next = h2;
+                h2 = h2->next;
+                flag = 1;
+            }
+            
+            ans = ans->next;
+            
+        }
+        
+        if(h2){
+            ans->next = h2;
+            ans = ans->next;
+        }
+        
+        return toReturn->next;
     }
+    
     
     void reorderList(ListNode* head) {
         
-         if(head == NULL || head->next == NULL){
+        if(head == NULL || head->next == NULL){
             return;
         }
-
-        int len = getLen(head);
-        int mid = len/2;
-       
-        mid--;
         
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* temp;
         
-        ListNode* temp = head;
-        int i = 0;
-        while(i < mid){
-            temp = temp->next;
-            i++;
+        while(fast != NULL && fast->next != NULL){
+            temp = slow;
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        //separating the two lists
-        ListNode* secondHalf = reverse(temp->next);
         temp->next = NULL;
+        slow = reverse(slow);
         
-        ListNode* t1 = head;
-        ListNode* t2 = secondHalf;
+        ListNode* ans = alternate(head , slow);
         
-        ListNode* test = t2;
+        head = ans;
         
-         
-//             while(test != NULL){
-//                 cout<<test->val<<endl;
-            
-//                 test = test->next;
-               
-            
-//             }
-            
         
-       if(len%2 == 0){
-          while(t1 != NULL && t2 != NULL){
-            
-            ListNode* v1 = t1->next;
-            ListNode* v2 = t2->next;
-            
-            t1->next = t2;
-            t2->next = v1;
-            
-            t1 = v1;
-            t2 = v2;
-            
-        }
-        }
-       
-        else{
-            
-            while(t1->next != NULL && t2->next != NULL){
-            
-            ListNode* v1 = t1->next;
-            ListNode* v2 = t2->next;
-            
-            t1->next = t2;
-            t2->next = v1;
-            
-            t1 = v1;
-            t2 = v2;
-            } 
-            
-            while(t2 != NULL){
-         
-                t1->next = t2;
-                t2 = t2->next;
-               
-                t1 = t1->next;
-            }
-       
-            
-        }
         
     }
 };
