@@ -5,13 +5,20 @@ public:
         int start = 0;
         int end = 0;
         
-        while( end < nums.size()){
+        int n = nums.size();
+        
+        while(start <= end && end < n){
+            
             if(nums[end] != 0){
-                swap(nums[start++] , nums[end]);
+                swap(nums[start++] , nums[end++]);
             }
             
-            end++;
+            else{
+                end++;
+            }
         }
+        
+    
         
     }
 };
