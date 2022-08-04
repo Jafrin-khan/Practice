@@ -2,33 +2,41 @@ class Solution {
 public:
     int maxScore(vector<int>& nums, int k) {
         
-        int ans = 0;
         int n = nums.size();
         
-        int totSum = 0;
-        int leftOverSum = 0;
+        int bound = n - k;
+        int toDel = 0;
+        
+        int tot = 0;
+        
         for(int i = 0 ; i < n ; i++){
             
-            if(i < (n-k)){
-                leftOverSum+=nums[i];
+            if(i < bound){
+                toDel += nums[i];
             }
-            totSum += nums[i];
+            tot += nums[i];
+            
         }
         
+        int score = tot-toDel;
+        
+        int ans = score;
         
         int left = 0;
-        int right = n - k;
-        ans = totSum - leftOverSum;
+        int right = n-k;
+        
         while(right < n){
             
-            leftOverSum -= nums[left++];
-            leftOverSum += nums[right++];
+            score += nums[left++];
+            score -= nums[right++];
             
-            ans = max(ans,totSum - leftOverSum);
+            ans = max(ans , score);
+            
             
         }
         
         return ans;
+        
         
     }
 };
