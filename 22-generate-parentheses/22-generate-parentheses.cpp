@@ -1,9 +1,7 @@
 class Solution {
 public:
     
-    vector<string> ans;
-    
-    void f(int open , int close , string s){
+    void f(int open , int close , vector<string>& ans , string s){
         
         if(open == 0 && close == 0){
             ans.push_back(s);
@@ -11,19 +9,22 @@ public:
         }
         
         if(open){
-            f(open-1 , close , s + '(');
+            f(open - 1 , close , ans , s + '(');
         }
         
         if(close > open){
-            f(open , close-1 , s + ')');
+            f(open , close-1 , ans , s + ')');
         }
         
         
     }
     vector<string> generateParenthesis(int n) {
         
-        f(n , n , "");
+        vector<string> ans;
+        
+        f(n , n , ans , "");
         
         return ans;
+        
     }
 };
