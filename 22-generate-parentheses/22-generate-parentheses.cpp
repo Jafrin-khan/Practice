@@ -7,6 +7,8 @@ public:
             ans.push_back(s);
             return;
         }
+        //stored in the form of characters
+        
         
         if(open){
             f(open - 1 , close , ans , s + '(');
