@@ -1,44 +1,47 @@
 class Solution {
 public:
-    
-    bool validPalindrome(string s) {
+    bool validPalindrome(string str) {
         
-        int s1 = 0;
-        int e1 = s.size()-1;
+        int s = 0;
+        int e = str.size()-1;
         
         int t = 0;
         
-        while(s1 < e1){
+        while(s <= e){
             
-            if(s[s1] == s[e1]){
-                s1++;
-                e1--;
+            if(str[s] == str[e]){
+                s++;
+                e--;
             }
             
             else{
+                s++;
                 t++;
-                s1++;
             }
+            
         }
         
         if(t <= 1){
             return true;
         }
         
-        s1 = 0;
-        e1 = s.size()-1;
+        s = 0;
+        e = str.size()-1;
         t = 0;
-          while(s1 < e1){
+        
+        
+         while(s <= e){
             
-            if(s[s1] == s[e1]){
-                s1++;
-                e1--;
+            if(str[s] == str[e]){
+                s++;
+                e--;
             }
             
             else{
+                e--;
                 t++;
-                e1--;
             }
+            
         }
         
         if(t <= 1){
@@ -46,5 +49,7 @@ public:
         }
         
         return false;
+        
+        
     }
 };
