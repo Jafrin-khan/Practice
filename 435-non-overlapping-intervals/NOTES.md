@@ -4,7 +4,7 @@ int cnt = 0;
 for(int i = 1 ; i < intervals.size() ; i++){
 if(intervals[i][0] < mini){
 cnt++;
-mini = min(intervals[i][1],mini);
+mini = min(mini , intervals[i][1]);
 continue;
 }
 mini = intervals[i][1];
