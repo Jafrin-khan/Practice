@@ -21,10 +21,10 @@ public:
             
         
             
-        if(i < n){
+
             b = intervals[i][1];
             i++;
-        }
+        
             
             
         }
