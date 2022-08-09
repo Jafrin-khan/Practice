@@ -1,47 +1,53 @@
 class Solution {
 public:
     
-    //https://www.youtube.com/watch?v=emF5eAYR3Nk
-    
-    //refer this vid : //https://www.youtube.com/watch?v=emF5eAYR3Nk
-    
-    void dfs(int node , set<int>& st ,map<int,vector<int>>& mp , vector<int>& ans){
-        
-        if(st.find(node) != st.end()){
-            return;
-        }
+    void dfs(int node , set<int>& vis ,vector<int>& ans , unordered_map<int , vector<int>>& adj){
         
         ans.push_back(node);
-        st.insert(node);
-        
-        for(auto x : mp[node]){
-            dfs(x , st , mp,ans);
+          vis.insert(node);
+        for(auto it : adj[node]){
+            if(!vis.count(it)){
+              
+                dfs(it , vis , ans , adj);
+            }
         }
     }
-  
-    vector<int> restoreArray(vector<vector<int>>& A) {
+    vector<int> restoreArray(vector<vector<int>>& nums) {
         
-       map<int,vector<int>> mp;
+        unordered_map<int , vector<int>> adj;
+       
         
-       for(auto x : A){
-           mp[x[0]].push_back(x[1]);
-           mp[x[1]].push_back(x[0]);
-       }
+        for(auto x : nums){
+            adj[x[0]].push_back(x[1]);
+            adj[x[1]].push_back(x[0]);
+        }
         
-      
-        set<int> visited;
-        vector<int> ans;
+        int f;
+        int n = adj.size();
         
-        
-        int head;
-        for(auto x : mp){
-            if(x.second.size() == 1){
-                head = x.first;
+        for(auto it : adj){
+            
+            if(it.second.size() == 1){
+                f = it.first;
+                break;
             }
         }
         
-        dfs(head , visited , mp , ans);
+        vector<int> ans;
+        set<int> vis;
+        
+        ans.push_back(f);
+        vis.insert(f);
+        
+        for(auto it : adj[f]){
+            
+            if(!vis.count(it)){
+            dfs(it , vis , ans , adj);
+            }
+        }
         
         return ans;
+        
+        
     }
 };
