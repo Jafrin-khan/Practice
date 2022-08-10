@@ -1,33 +1,37 @@
 class Solution {
 public:
     
-    void f(int ind , vector<int>& nums , set<vector<int>> &ans , vector<int>helper){
+    set<vector<int>> st;
+    void f(int ind , vector<int>& nums ,  vector<int> helper){
         
         if(ind == nums.size()){
-            sort(helper.begin(),helper.end());
-            ans.insert(helper);
+            sort(helper.begin() , helper.end());
+            st.insert(helper);
             return;
         }
         
-        //notpick
-        f(ind+1 , nums , ans , helper);
-        //pick
+       //not taken
+        f(ind + 1 , nums , helper);
+        
+        //taken
         helper.push_back(nums[ind]);
-        f(ind+1 , nums , ans , helper);
+        f(ind + 1 , nums , helper);
         helper.pop_back();
+        
     }
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+    vector<vector<int>> subsetsWithDup(vector<int>& nums){
         
         vector<vector<int>> ans;
-        set<vector<int>> st;
         vector<int> helper;
         
-        f(0 , nums , st , helper);
-        
-        for(auto x : st){
-            ans.push_back(x);
+        f(0 , nums , helper); 
+        for(auto it : st){
+            ans.push_back(it);
         }
         
         return ans;
+        
+        
+        
     }
 };
