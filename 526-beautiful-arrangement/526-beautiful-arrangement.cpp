@@ -1,35 +1,34 @@
 class Solution {
 public:
-    //https://www.youtube.com/watch?v=xf8qAkqDr8Y
     
-    //TC = O(k) where k are the no. of permutations
-    //Sc = O(n)
+    int cnt = 0;
     
-    int ans = 0;
-    
-    void dfs(vector<int> nums , int start , int end){
+    void helper(vector<int>& arr , int j){
         
-        if(start > end){
-            ans++;
-            return;
+        if(j == arr.size()){
+            cnt++;
+         
         }
         
-        for(int i = 1 ; i <= end ; i++){
-            if(nums[i] == 0 && (start%i == 0 || i%start == 0)){
-                nums[i] = start;
-                dfs(nums , start+1 , end);
-                nums[i] = 0;
+        for(int i = j ; i < arr.size() ; i++){
+            
+            swap(arr[i] , arr[j]);
+            if(arr[j]%(j+1) == 0 || ((j+1)%(arr[j])==0)){
+                helper(arr , j+1);
             }
+            swap(arr[i],arr[j]);
         }
     }
-    
-    
     int countArrangement(int n) {
         
-        vector<int> nums(n+1 , 0);
-        dfs(nums , 1 , n);
+        vector<int> arr(n);
         
-        return ans;
+        for(int i = 0 ; i < n ; i++){
+            arr[i] = i+1;
+        }
+        
+        helper(arr , 0);
+        return cnt;
         
     }
 };
