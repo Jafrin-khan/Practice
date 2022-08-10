@@ -1,43 +1,39 @@
 class Solution {
 public:
-      
-    void f(set<vector<int>> & ans , vector<int> helper , vector<int> freq , vector<int>& nums){
+    set<vector<int>> st;
+    void f(vector<int>& vis , vector<int> helper , vector<int>& nums){
         
         if(helper.size() == nums.size()){
-            ans.insert(helper);
+            st.insert(helper);
             return;
         }
         
         for(int i = 0 ; i < nums.size() ; i++){
             
-            if(freq[i] != 1){
+            if(!vis[i]){
+                
+                vis[i] = 1;
                 helper.push_back(nums[i]);
-                freq[i] = 1;
-                f(ans,helper,freq,nums);
-                freq[i] = 0;
+                f(vis , helper , nums);
                 helper.pop_back();
+                vis[i] = 0;
             }
         }
+        
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         
-       set<vector<int>> ans;
+        vector<vector<int>> ans;
+        vector<int> vis(nums.size(),0);
         vector<int> helper;
         
-        vector<int> freq(nums.size(),0);
+        f(vis , helper , nums);
         
-      
-        vector<vector<int>> FAns;
-       
-        f(ans,helper,freq , nums);
-        
-        for(auto x : ans){
-            FAns.push_back(x);
+        for(auto x : st){
+            ans.push_back(x);
         }
         
-        return FAns;
-        
-        
+        return ans;
         
     }
 };
