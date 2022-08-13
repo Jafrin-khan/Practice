@@ -1,5 +1,18 @@
 class Solution {
 public:
+    
+    int getGCD(int a , int b){
+        
+        if(a == 0){
+            return b;
+        }
+        
+        if(b == 0){
+            return a;
+        }
+        
+        return getGCD(b,a%b );
+    }
     int findGCD(vector<int>& nums) {
         
         int smallest = nums[0];
@@ -10,7 +23,7 @@ public:
             largest = max(largest , nums[i]);
         }
         
-        int GCD = __gcd(smallest , largest);
+        int GCD = getGCD(smallest , largest);
         
         return GCD;
         
