@@ -14,11 +14,10 @@ mn.pop();
 double findMedian() {
 double ans;
 if((mn.size() + mx.size())%2){
-ans =  mx.top();
+ans = mx.top();
 }
 else{
 ans = mx.top() + mn.top();
 ans/=2;
 }
 return ans;
-}
