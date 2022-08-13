@@ -12,13 +12,13 @@
 class Solution {
 public:
     
-    bool isEqual(TreeNode* root1 , TreeNode* root2){
+    bool f(TreeNode* root1 , TreeNode* root2){
         
         if(root1 == NULL && root2 == NULL){
             return true;
         }
         
-        if(root1 == NULL || root2 == NULL){
+        if((root1 == NULL || root2 == NULL)){
             return false;
         }
         
@@ -26,21 +26,24 @@ public:
             return false;
         }
         
-        return isEqual(root1->left , root2->left) && isEqual(root1->right , root2->right);
-      
-     
+        return f(root1->left , root2->left) && f(root1->right , root2->right);
+        
     }
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        
+        if(subRoot == NULL){
+            return true;
+        }
         
         if(root == NULL){
             return false;
         }
         
-        if((root->val == subRoot->val) && isEqual(root , subRoot)){
+        if(root->val == subRoot->val && f(root , subRoot)){
             return true;
         }
         
-        return isSubtree(root->left , subRoot) ||  isSubtree(root->right , subRoot);
+        return isSubtree(root->left , subRoot) || isSubtree(root->right , subRoot);
         
     }
 };
