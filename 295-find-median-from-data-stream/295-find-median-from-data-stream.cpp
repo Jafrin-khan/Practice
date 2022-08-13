@@ -9,6 +9,7 @@ public:
     }
     
     void addNum(int num) {
+        
         mx.push(num);
         mn.push(mx.top());
         mx.pop();
@@ -17,23 +18,23 @@ public:
             mx.push(mn.top());
             mn.pop();
         }
-        
     }
     
     double findMedian() {
         
         double ans;
         
-        if((mn.size() + mx.size())%2){
-            ans =  mx.top();
+        if((mn.size() + mx.size())%2 == 1){
+            ans = mx.top();
         }
         
         else{
-            ans = mx.top() + mn.top();
+            ans = (mn.top() + mx.top());
             ans/=2;
         }
         
         return ans;
+        
     }
 };
 
