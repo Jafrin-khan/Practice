@@ -1,15 +1,26 @@
 class Solution {
 public:
-    string gcdOfStrings(string str1, string str2) {
+    
+    int gcd(int a , int b){
         
-         int n1 = str1.size(), n2 = str2.size();
-    
-    int GCD = __gcd(n1,n2);
+        if(a == 0){
+            return b;
+        }
         
-        cout<<GCD<<endl;
-    
-    
-    return str1+str2 == str2+str1 ? str1.substr(0, GCD) : "";
+        if(b == 0){
+            return a;
+        }
+        
+        return gcd(b , a%b);
+    }
+    string gcdOfStrings(string s1, string s2) {
+        
+     int n = s1.size();
+     int m = s2.size();
+        
+     int GCD = gcd(n , m);
+        
+     return s1 + s2 == s2 + s1 ? s1.substr(0 , GCD) : "";
         
     }
 };
