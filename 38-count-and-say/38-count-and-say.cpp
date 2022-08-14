@@ -1,39 +1,33 @@
 class Solution {
 public:
-    string countAndSay(int n) {
+    
+    string f(string s){
         
-        if(n == 1){
-            return "1";
-        }
+        int i = 0;
+        string ans = "";
         
-        if(n == 2){
-            return "11";
-        }
-        
-        string s = "11";
-        
-        for(int i = 3 ; i <= n ; i++){
+        while(i < s.size()){
             
-            string t = "";
-            int cnt = 1;
-            s += '$';
-            
-            for(int j = 1 ; j < s.size() ; j++){
-                
-                if(s[j-1] != s[j]){
-                    t += to_string(cnt);
-                    t += s[j-1];
-                    cnt = 1;
-                }
-                
-                else{
-                    cnt++;
-                }
+            int cnt = 0;
+            char ch = s[i];
+            while(i < s.size() && s[i] == ch){
+                cnt++;
+                i++;
             }
             
-            s = t;
+            ans += to_string(cnt) + ch;
         }
         
-        return s;
+        return ans;
+    }
+    string countAndSay(int n) {
+        
+        string ans = "1";
+        for(int i = 2 ; i <= n ; i++){
+           ans = f(ans);
+        }
+        
+        return ans;
+        
     }
 };
