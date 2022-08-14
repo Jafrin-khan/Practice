@@ -1,52 +1,56 @@
 class Solution {
 public:
+    
     string longestPalindrome(string s) {
         
+        int n = s.size();
         int start = 0;
         int end = 1;
-        
-        int l;
-        int h;
-        
-        //odd len
-        for(int i = 0 ; i < s.size() ; i++){
+ 
             
-             l = i-1;
-             h = i+1;
-            
-            while(l >= 0 && h < s.size() && s[l] == s[h]){
+            for(int i = 0; i < n ; i++){
                 
-                if((h-l+1) > end){
+                int l = i-1;
+                int r = i+1;
+                
+                while(l >= 0 && r < n && s[l] == s[r]){
+                    
+                    if(r-l+1 > end){
                     start = l;
-                    end = h-l+1;
+                    end = r-l+1; 
+                    }  
+                    l--;
+                    r++;
+                }
+            }
+        
+        
+        
+            
+            for(int i = 0 ; i < n ; i++){
+                
+                int l = i-1;
+                int r = i;
+                
+                while(l >= 0 && r < n && s[l] == s[r]){
+                    
+                    if(r-l+1 > end){
+                    start = l;
+                    end = r-l+1;
+                    }
+                    l--;
+                    r++;
                 }
                 
-                l--;
-                h++;
-            }
-        }
-        
-        //even len
-        for(int i = 0 ; i < s.size() ; i++){
-            l = i-1;
-            h = i;
-            
-            while(l >= 0 && h < s.size() && s[l]== s[h]){
-                if(h-l+1 > end){
-                    start = l;
-                    end = h-l+1;
-                }
                 
-                l--;
-                h++;
             }
-        }
+        
         
         string ans = "";
-        int len = start + end;
+        int len = end;
         
-        for(int i = start ; i < len ; i++){
-            ans += s[i];
+        for(int i = 1 ; i <= end ; i++){
+            ans += s[start++];
         }
         
         return ans;
