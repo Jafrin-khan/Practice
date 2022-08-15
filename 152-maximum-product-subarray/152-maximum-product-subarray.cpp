@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-      int help(vector<int>&a,int n,int com,unordered_map<int,int>dp[]){
+    int help(vector<int>&a,int n,int com,unordered_map<int,int>dp[]){
         if(n<0){
             return com;
         }
@@ -16,8 +16,7 @@ public:
         return val;
        
     }
-    
-public:
+
     int maxProduct(vector<int>& nums) {
         
         int computed=nums[nums.size()-1]; 
@@ -26,5 +25,4 @@ public:
         int res=help(nums,nums.size()-2,nums[nums.size()-1],dp);
          return res;
     }
-   
 };
