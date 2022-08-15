@@ -47,7 +47,7 @@
 class LFUCache {
 public:
     
-    //lru jaise key value pairs stored
+    //lru jaise
     map<int, Node*> keyNode;
     
     //int --> freq and List-->individual list of each frequency
@@ -103,10 +103,12 @@ public:
     
     void put(int key, int value) {
         
+        //a check if max size of cache is zero then we cant put anything to it hence simply return
         if(maxSizeCache == 0){
             return;
         }
         
+        //node to be put is already present the we just have to update its value and freq
         if(keyNode.find(key) != keyNode.end()){
             Node* node = keyNode[key];
             node->value = value;
