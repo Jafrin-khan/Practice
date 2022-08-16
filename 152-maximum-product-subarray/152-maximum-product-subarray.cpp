@@ -9,8 +9,8 @@ public:
         
          if(dp[n].find(com)!=dp[n].end())return dp[n][com];
         
-        int notTake = f(n-1 , com*nums[n] , nums , dp);
-        int take = f(n-1 , nums[n] , nums , dp);
+        int notTake = f(n-1 , nums[n] , nums , dp);
+        int take = f(n-1 , com*nums[n] , nums , dp);
         
         int ans = max({take , notTake , com});
         
