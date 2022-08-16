@@ -1,28 +1,28 @@
 class Solution {
 public:
     
-    int help(vector<int>&a,int n,int com,unordered_map<int,int>dp[]){
-        if(n<0){
+    int f(int n , int com , vector<int>& nums , unordered_map<int,int>dp[]){
+        
+        if(n < 0){
             return com;
         }
-     
+        
          if(dp[n].find(com)!=dp[n].end())return dp[n][com];
         
-        int n1=help(a,n-1,com*a[n],dp);
-        int n2=help(a,n-1,a[n],dp);
+        int notTake = f(n-1 , com*nums[n] , nums , dp);
+        int take = f(n-1 , nums[n] , nums , dp);
         
-        int val= max(n1,max(com,n2));
-        dp[n][com]=val;
-        return val;
-       
+        int ans = max({take , notTake , com});
+        
+        return dp[n][com] = ans;
     }
-
     int maxProduct(vector<int>& nums) {
         
-        int computed=nums[nums.size()-1]; 
-       
-        unordered_map<int,int>dp[nums.size()];
-        int res=help(nums,nums.size()-2,nums[nums.size()-1],dp);
-         return res;
+        int n = nums.size();
+       unordered_map<int,int>dp[n];
+        
+        return f(n-2 , nums[n-1] , nums , dp);
+        
+        
     }
 };
