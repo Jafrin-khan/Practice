@@ -9,7 +9,7 @@ int val= max(n1,max(com,n2));
 dp[n][com]=val;
 return val;
 }
-public:
+​
 int maxProduct(vector<int>& nums) {
 int computed=nums[nums.size()-1];
 unordered_map<int,int>dp[nums.size()];
