@@ -1,28 +1,25 @@
 class Solution {
 public:
     
-    int f(int n , int com , vector<int>& nums , unordered_map<int,int>dp[]){
+    int f(int ind , int prod , vector<int>& nums , unordered_map<int,int> dp[]){
         
-        if(n < 0){
-            return com;
+        if(ind < 0){
+            return prod;
         }
         
-         if(dp[n].find(com)!=dp[n].end())return dp[n][com];
+        if(dp[ind].find(prod) != dp[ind].end()){
+            return dp[ind][prod];
+        }
+        int notTaken = f(ind-1 , nums[ind] , nums , dp);
+        int taken = f(ind - 1 , nums[ind]*prod , nums , dp);
         
-        int notTake = f(n-1 , nums[n] , nums , dp);
-        int take = f(n-1 , com*nums[n] , nums , dp);
-        
-        int ans = max({take , notTake , com});
-        
-        return dp[n][com] = ans;
+        return dp[ind][prod] = max({prod , notTaken , taken});
     }
     int maxProduct(vector<int>& nums) {
         
         int n = nums.size();
-       unordered_map<int,int>dp[n];
-        
+        unordered_map<int,int> dp[n];
         return f(n-2 , nums[n-1] , nums , dp);
-        
         
     }
 };
