@@ -1,30 +1,31 @@
 class Solution {
 public:
     
-    void f(int i , int j ,int prevCol , int color , vector<vector<int>>& image){
+    int dx[4] = {0 , 0 , -1 , 1};
+    int dy[4] = {-1 , 1 , 0 , 0};
         
+    void dfs(int row , int col , int color,vector<vector<int>>& image ,int newColor){
+        
+        image[row][col] = newColor;
         int n = image.size();
-        int m = image[0].size(); 
-        
-        if(i < 0 || j < 0 || i >= n || j >= m || image[i][j] != prevCol){
-            return;
+        int m = image[0].size();
+        for(int i = 0 ; i < 4 ; i++){
+            int nr = row + dx[i];
+            int nc = col + dy[i];
+            
+            if(nr >= 0 && nr < n && nc >= 0 && nc < m && image[nr][nc] == color){
+                dfs(nr , nc , color , image , newColor);
+            }
         }
         
-        image[i][j] = color;
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+       
+       if(image[sr][sc] != newColor){ 
+       dfs(sr , sc , image[sr][sc] , image , newColor);
+       }
+       return image;
         
-        f(i+1 , j , prevCol , color , image);
-        f(i , j+1 , prevCol , color , image);
-        f(i-1 , j , prevCol , color , image);
-        f(i , j-1 , prevCol , color , image);
         
     }
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-         
-        if(image[sr][sc] != color){
-            f(sr , sc , image[sr][sc] , color , image);
-        }
-        
-        return image;
-        
-    }
-}; 
+};
