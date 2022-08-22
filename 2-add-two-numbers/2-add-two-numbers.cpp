@@ -10,72 +10,45 @@
  */
 class Solution {
 public:
-
-    ListNode* addTwoNumbers(ListNode* h1, ListNode* h2) {
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-             if(h1 == NULL && h2 == NULL){
-            return NULL;
-        }
+        ListNode* newHead = new ListNode(0);
+        ListNode* newTail = newHead;
+        int c = 0;
+        int sum;
+        while(l1 != NULL || l2 != NULL){
+             sum = 0;
         
-        if(h1 == NULL || h2 == NULL){
-            return h1 == NULL ? h2 : h1;
-        }
-        
-       
-        
-        ListNode* h = new ListNode(0);
-        ListNode* t = h;
-        
-        int carry = 0;
-        int ans = 0;
-        
-        while(h1 != NULL && h2 != NULL){
+            if(l1){
+                sum += l1->val;
+                
+                l1 = l1->next;
+            }
             
-            ans = (h1->val + h2->val) + carry;
-            carry = ans/10;
-            ans = ans%10;
+            if(l2){
+                sum += l2->val;
+               
+                l2 = l2->next;
+            }
+             
+             sum += c;
+             c = sum/10;
+             sum = sum%10;
+                
             
-            ListNode* node = new ListNode(ans);
-            t->next = node;
-            t = t->next;
-            
-            h1 = h1->next;
-            h2 = h2->next;
-        }
-        
-        while(h1 != NULL){
-            ans = h1->val + + carry;
-            carry = ans/10;
-            ans = ans%10;
-            
-            ListNode* node = new ListNode(ans);
-            t->next = node;
-            t = t->next;
-            
-            h1 = h1->next;
+            ListNode* tail = new ListNode(sum);
+            newTail->next = tail;
+            newTail = newTail->next;
             
         }
         
-        while(h2 != NULL){
-            ans = h2->val + + carry;
-            carry = ans/10;
-            ans = ans%10;
-            
-            ListNode* node = new ListNode(ans);
-            t->next = node;
-            t = t->next;
-            
-            h2 = h2->next;
-            
+        if(c){
+            ListNode* tail = new ListNode(c);
+            newTail->next = tail;
+            newTail = newTail->next;
         }
         
-        if(carry){
-            ListNode* node = new ListNode(carry);
-            t->next = node;
-            t = t->next;
-        }
-        
-        return h->next;;
+        return newHead->next;
         
     }
 };
