@@ -12,41 +12,38 @@
 class Solution {
 public:
     
-    int getIndex(vector<int>& inorder , int value , int start , int end ){
+    TreeNode* f(vector<int>& preorder, vector<int>& inorder ,int& preInd , int start , int end){
         
-        for(int i = start ; i <= end ; i++){
-            if(inorder[i] == value){
-                return i;
-            }
-        }
-        
-        return -1;
-    }
-    
-    TreeNode* build(vector<int>& preorder, vector<int>& inorder ,int& prefixInd, int start , int end){
-        
-     
         if(start > end){
             return NULL;
         }
-       
-        TreeNode* root = new TreeNode(preorder[prefixInd]);
-        prefixInd++;
-         
+        int first = preorder[preInd];
+        preInd++;
+        TreeNode* node = new TreeNode(first);
+        
         if(start == end){
-            return root;
+            return node;
         }
         
-        int ind = getIndex(inorder , root->val , start , end);
+        int ind;
+        for(int i = start ; i <= end ; i++){
+            
+            if(inorder[i] == first){
+                ind = i;
+                break;
+            }
+        }
         
-        root->left = build(preorder , inorder,prefixInd , start , ind-1);
-        root->right = build(preorder , inorder ,prefixInd , ind + 1 , end);
+        node->left = f(preorder , inorder , preInd , start , ind-1);
+        node->right = f(preorder , inorder , preInd , ind+1 , end);
         
-        return root;
+        return node;
     }
+    
+    
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         
-        int prefixIndex = 0;
-        return build(preorder , inorder , prefixIndex, 0 , inorder.size()-1);
+        int preInd = 0;
+        return f(preorder , inorder , preInd , 0 , inorder.size()-1);
     }
 };
