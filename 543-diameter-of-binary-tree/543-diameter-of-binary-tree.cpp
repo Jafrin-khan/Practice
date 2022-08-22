@@ -18,24 +18,27 @@ public:
             return 0;
         }
         
-        return max(h(root->left) , h(root->right)) + 1;
+        int lh = h(root->left);
+        int rh = h(root->right);
+        
+        return max(lh,rh) + 1;
     }
     
-    int helper(TreeNode* root){
+    int d(TreeNode* root){
         
         if(root == NULL){
             return 0;
         }
         
-        int lh = h(root->left);
-        int rh = h(root->right);
+        int ld = d(root->left);
+        int rd = d(root->right);
         
-        int currDia = lh + rh;
-        return max(currDia , max(helper(root->left) , helper(root->right)));
-                   
+        return max({ld , rd , h(root->left) + h(root->right)});
+        
     }
     int diameterOfBinaryTree(TreeNode* root) {
         
-        return helper(root);
+        return d(root);
+        
     }
 };
