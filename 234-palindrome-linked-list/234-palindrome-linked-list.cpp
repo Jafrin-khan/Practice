@@ -10,32 +10,69 @@
  */
 class Solution {
 public:
+    
+    int getLen(ListNode* head){
+        
+        int l = 0;
+        while(head != NULL){
+            l++;
+            head = head->next;
+        }
+        return l;
+    }
+    
+    ListNode* reverse(ListNode* head){
+        
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        
+        while(curr != NULL){
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        
+        return prev;
+        
+    }
+    
     bool isPalindrome(ListNode* head) {
         
-        if(head == NULL && head->next == NULL){
+        if(head == NULL || head->next == NULL){
             return true;
         }
         
-        stack<int> st;
+        int len = getLen(head);
+        
+        int k = len/2;
+        k--;
         
         ListNode* temp = head;
-        
-        while(temp != NULL){
-            st.push(temp->val);
+        while(k--){
             temp = temp->next;
         }
         
-        temp = head;
-        while(!st.empty()){
-            if(temp->val != st.top()){
+        ListNode* secondHalf = temp->next;
+        temp->next = NULL;
+        
+        secondHalf = reverse(secondHalf);
+        
+        ListNode* t1 = head;
+        ListNode* t2 = secondHalf;
+        
+        while(t1 != NULL && t2 != NULL){
+            
+            if(t1->val != t2->val){
                 return false;
             }
-            
-            st.pop();
-            temp = temp->next;
+     
+            t1 = t1->next;
+            t2 = t2->next;
         }
         
         return true;
+        
         
     }
 };
