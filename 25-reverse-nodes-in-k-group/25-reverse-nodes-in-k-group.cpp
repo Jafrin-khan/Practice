@@ -11,49 +11,64 @@
 class Solution {
 public:
     
-      ListNode* getReverse(ListNode* head) {
+    ListNode* reverse(ListNode* head){
         
-        if(head == NULL || head->next == NULL){
+        if(head == NULL){
             return head;
         }
         
-        ListNode* prevPtr = NULL;
-        ListNode* currPtr = head;
+        ListNode* prev = NULL;
+        ListNode* curr = head;
         
-        while(currPtr!=NULL){
-            ListNode* nextPtr = currPtr->next;
-            currPtr->next = prevPtr;
-            prevPtr = currPtr;
-            currPtr = nextPtr;
+        while(curr != NULL){
+            
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
         }
         
-        return prevPtr;
+        return prev;
     }
+    
+    int getLen(ListNode* head){
+        
+        int l = 0;
+        while(head != NULL){
+            head = head->next;
+            l++;
+        }
+        return l;
+    }
+    
     ListNode* reverseKGroup(ListNode* head, int k) {
         
-        if(head == NULL || head->next == NULL){
+        if(head == NULL || getLen(head) < k){
             return head;
         }
         
-        ListNode* temp = head;
-        int l = k-1;
-        
-        while(l--){
-            temp = temp->next;
-            if(temp == NULL){
-                return head;
-            }
+        if(getLen(head) == k){
+            return reverse(head);
         }
         
-        ListNode* n = temp->next;
+        int n = k-1;
+        
+        ListNode* temp = head;
+        
+        while(n--){
+            temp = temp->next;
+        }
+        
+        ListNode* nextNode = temp->next;
         temp->next = NULL;
         
         ListNode* tail = head;
-        ListNode* newHead = getReverse(head);
+        ListNode* newHead = reverse(head);
+        ListNode* restList = reverseKGroup(nextNode, k);
         
-        ListNode* node = reverseKGroup(n,  k);
-        tail->next = node;
+        tail->next = restList;
         
         return newHead;
+        
     }
 };
