@@ -1,7 +1,7 @@
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
- *     int val;
+ *     int val; || (root->left == NULL && root->right == NULL)
  *     TreeNode *left;
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
@@ -12,58 +12,61 @@
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> ans;
+         vector<vector<int>> ans;
+        
+        
         if(root == NULL){
             return ans;
         }
-        stack<TreeNode*> LR;
-        stack<TreeNode*> RL;
         
+       
         
+        stack<TreeNode*> lr;
+        stack<TreeNode*> rl;
         
-        LR.push(root);
-        
-        while(!LR.empty() || !RL.empty()){
-            
+        lr.push(root);
+        while(!lr.empty() || !rl.empty()){
+               
             vector<int> v;
-            if(RL.empty()){
+            if(!lr.empty()){
                 
-                while(!LR.empty()){
-                TreeNode* node = LR.top();
-                LR.pop();
-                v.push_back(node->val);
-                  
-                if(node->left){
-                    RL.push(node->left);
+                while(!lr.empty()){
+                TreeNode* front = lr.top();
+                lr.pop();
+                
+                v.push_back(front->val);
+                
+                if(front->left){
+                    rl.push(front->left);
                 }
-                if(node->right){
-                    RL.push(node->right);
-                }
-              
-                }
-            }
+                
+                if(front->right){
+                    rl.push(front->right);
+                }  
+            }}
             
             else{
                 
-                while(!RL.empty()){
-                TreeNode* node = RL.top();
-                RL.pop();
-                v.push_back(node->val);
-               
-                if(node->right){
-                    LR.push(node->right);
+                while(!rl.empty()){
+                 TreeNode* front = rl.top();
+                rl.pop();
+                
+                v.push_back(front->val);
+                
+                if(front->right){
+                    lr.push(front->right);
                 }
-                    
-                     
-                 if(node->left){
-                    LR.push(node->left);
-                }
-            }}
-            
+                
+                if(front->left){
+                    lr.push(front->left);
+                }  
+                
+            }
+            }  
             ans.push_back(v);
         }
         
         return ans;
-        
+         
     }
 };
