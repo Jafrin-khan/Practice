@@ -2,59 +2,51 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
+        vector<vector<int>> ans;
+        set<vector<int>> st;
         sort(nums.begin() , nums.end());
         
-        vector<vector<int>> ans;
-        int n = nums.size();
-        
-        unordered_map<int,int> mp;
-        
-        for(int i = 0 ; i < n ; i++){
+        for(int i = 0 ; i < nums.size() ; i++){
             
             if(i > 0 && nums[i] == nums[i-1]){
                 continue;
             }
             
-            int curr = nums[i];
-            int left = i+1;
-            int right = n-1;
+            int low = i+1;
+            int high = nums.size()-1;
             
-            int toFind = 0 - curr;
+            int toFind = 0 - nums[i];
             
-            while(left < right){
-        
-                if(nums[left] + nums[right] == toFind){
-                    vector<int> v;
-                    v.push_back(curr);
-                    v.push_back(nums[left] );
-                    v.push_back(nums[right]);
-                    
-                    ans.push_back(v);
-                    
-                    while(left < right && nums[left] == nums[left+1]){
-                        left++;
-                    }
-                    
-                    while(left < right && nums[right] == nums[right-1]){
-                        right--;
-                    }
-                    
-                   left++;
-                   right--;
+            while(low < high){
                 
+                if(nums[low] + nums[high] == toFind){
+                    
+                    vector<int> v;
+                    v.push_back(nums[i]);
+                    v.push_back(nums[low]);
+                    v.push_back(nums[high]);
+                   
+                    
+                    st.insert(v);
+                    low++;
+                    high--;
+                    
+                    
                 }
                 
-                else if(nums[left] + nums[right]  > toFind){
-                    right--;
+                else if(nums[low] + nums[high] < toFind){
+                    low++;
                 }
                 
                 else{
-                    left++;
+                    high--;
                 }
-                
-                
             }
-           
+        
+        }
+        
+        for(auto x : st){
+            ans.push_back(x);
         }
         
         return ans;
