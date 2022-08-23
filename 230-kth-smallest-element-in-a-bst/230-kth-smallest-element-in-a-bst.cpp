@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    void f(TreeNode* root , priority_queue<int>& pq , int k){
+    void traverse(TreeNode* root , int k , priority_queue<int> &pq){
         
         if(root == NULL){
             return;
@@ -23,15 +23,16 @@ public:
             pq.pop();
         }
         
-        f(root->left , pq , k);
-        f(root->right , pq , k);
-        
+        traverse(root->left , k , pq);
+        traverse(root->right , k , pq);    
     }
+    
     int kthSmallest(TreeNode* root, int k) {
         
         priority_queue<int> pq;
-        f(root , pq , k);
+        traverse(root , k , pq);
         
         return pq.top();
+        
     }
 };
