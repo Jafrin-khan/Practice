@@ -11,19 +11,28 @@
  */
 class Solution {
 public:
-    TreeNode* searchBST(TreeNode* root, int val) {
+    
+    TreeNode* subTree(TreeNode* root , int data){
         
         if(root == NULL){
-            return NULL;
-        }
-        
-        if(root->val == val){
             return root;
         }
         
-        TreeNode* left = searchBST(root->left,val);
-        TreeNode* right = searchBST(root->right,val);
+        if(root->val == data){
+            return root;
+        }
         
-        return left == NULL ? right : left;
+        root->left = subTree(root->left , data) ;
+        root->right = subTree(root->right , data);
+        
+        return root->left == NULL ? root->right : root->left;
+        
+    }
+    TreeNode* searchBST(TreeNode* root, int val) {
+        
+        return subTree(root , val);
+        
+        
+        
     }
 };
