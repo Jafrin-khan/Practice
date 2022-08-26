@@ -1,43 +1,47 @@
 class Solution {
 public:
     
-       bool dfs(vector<vector<int>>& graph, vector<bool>& visited, vector<bool> path, int node)
-    {
-        visited[node] = true;
-        path[node] = true;
-        bool t = false;
-        for(auto nbr: graph[node])
-        {
-            if (path[nbr] == true)
-                return true;
+    bool isCycle(int node , int prev , vector<int>& vis , vector<int> adj[] , vector<int>& dfsVis){
+        
+        vis[node] = 1;
+        dfsVis[node] = 1;
+        
+        for(auto it : adj[node]){
             
-            if (!visited[nbr])
-            {
-                t = dfs(graph, visited, path, nbr);
-                if (t)
-                    return true;
+            if(!vis[it] && isCycle(it , node , vis , adj , dfsVis)){
+                return true;
+            }
+            
+            else if(dfsVis[it] == 1){
+                return true;
             }
         }
+        
+        dfsVis[node] = 0;
+        
         return false;
     }
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites)
-    {
-        //construct the graph 
-        //Adjacency List 
-        vector<vector<int>> graph(numCourses);
+    bool canFinish(int v, vector<vector<int>>& nums) {
         
-        for(auto pre: prerequisites)
-            graph[pre[1]].push_back(pre[0]);
+        vector<int> adj[v];
+        vector<int> dfsVis(v , 0);
+        vector<int> vis(v,0);
         
-        vector<bool> visited(numCourses, false);
-        vector<bool> path(numCourses, false);
-        //call dfs and check for cycles
-        for(int i = 0 ; i < numCourses ; i++)
-        {
-            if (!visited[i] && dfs(graph, visited, path, i))
-                return false;
+        for(int i = 0 ; i < nums.size() ; i++){
+            int u = nums[i][0];
+            int v = nums[i][1];
+            
+            adj[u].push_back(v);
+        }
+        
+        for(int i = 0 ; i < v ; i++){
+            
+            if(!vis[i] && isCycle(i ,-1, vis , adj , dfsVis)){
+               return false;
+            }
         }
         
         return true;
+        
     }
 };
