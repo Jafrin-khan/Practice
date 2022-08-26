@@ -1,35 +1,31 @@
 class Solution {
 public:
     
-    void f(int i , int j , vector<vector<int>>& image, int color , int newColor){
+      int dx[4] = {0 , 0 , -1 , 1};
+    int dy[4] = {-1 , 1 , 0 , 0};
         
+    void dfs(int row , int col , int color,vector<vector<int>>& image ,int newColor){
+        
+        image[row][col] = newColor;
         int n = image.size();
         int m = image[0].size();
-        
-        if(i < 0 || j < 0 || i >= n || j >= m || image[i][j] != color){
-            return;
+        for(int i = 0 ; i < 4 ; i++){
+            int nr = row + dx[i];
+            int nc = col + dy[i];
+            
+            if(nr >= 0 && nr < n && nc >= 0 && nc < m && image[nr][nc] == color){
+                dfs(nr , nc , color , image , newColor);
+            }
         }
         
-        image[i][j] = newColor;
-        
-        f(i+1 , j , image , color , newColor);
-        f(i , j+1 , image , color , newColor);
-        f(i-1 , j , image , color , newColor);
-        f(i , j-1 , image , color , newColor);
-        
     }
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+       
+       if(image[sr][sc] != newColor){ 
+       dfs(sr , sc , image[sr][sc] , image , newColor);
+       }
+       return image;
         
-        int n = image.size();
-        int m = image[0].size();
-        
-        if(image[sr][sc] == color){
-              return image;
-          }
-        
-        f(sr , sc , image , image[sr][sc] , color);
-        
-        return image;
         
     }
 };
