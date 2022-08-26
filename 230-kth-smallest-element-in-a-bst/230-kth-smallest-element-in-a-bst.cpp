@@ -12,27 +12,34 @@
 class Solution {
 public:
     
-    void traverse(TreeNode* root , int k , priority_queue<int> &pq){
+    int ans;
+    void inOrder(TreeNode* root, int k , int &cnt){
         
         if(root == NULL){
             return;
         }
         
-        pq.push(root->val);
-        if(pq.size() > k){
-            pq.pop();
+        if(cnt > k){
+            return;
         }
-        
-        traverse(root->left , k , pq);
-        traverse(root->right , k , pq);    
-    }
+       
+        inOrder(root->left , k , cnt);
+        cnt++;
+         
+        if(k == cnt){
+            ans = root->val;
     
+        }
+        inOrder(root->right , k, cnt);
+  
+        
+    }
     int kthSmallest(TreeNode* root, int k) {
         
-        priority_queue<int> pq;
-        traverse(root , k , pq);
+        int cnt = 0;
+        inOrder(root , k , cnt);
         
-        return pq.top();
+        return ans;
         
     }
 };
