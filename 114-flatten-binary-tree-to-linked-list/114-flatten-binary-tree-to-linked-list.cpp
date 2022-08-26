@@ -14,14 +14,15 @@ public:
     
     TreeNode* f(TreeNode* root){
         
-        if(root == NULL || (root->left == NULL && root->right == NULL)){
+        if(root == NULL|| (root->left == NULL && root->right == NULL)){
             return root;
         }
+        
         root->left = f(root->left);
         root->right = f(root->right);
         
-        
         TreeNode* temp = NULL;
+        
         if(root->right){
             temp = root->right;
         }
@@ -29,27 +30,27 @@ public:
         if(root->left){
             root->right = root->left;
             
-            if(temp){
-                TreeNode* traverse = root->right;
-                
-                while(traverse->right != NULL){
-                    traverse = traverse->right;
-                }
-                
-                traverse->right = temp;
+             if(temp){
+            
+            TreeNode* traverse = root->right;
+            while(traverse->right != NULL){
+                traverse = traverse->right;
             }
+            
+            traverse->right = temp;
+        }
+         
         }
         
-    
+     
         
-        root->left = NULL;
+           root->left = NULL;
         
         return root;
-        
-        
     }
     void flatten(TreeNode* root) {
         
         f(root);
+        
     }
 };
