@@ -1,41 +1,40 @@
 class Solution {
 public:
     
-    set<vector<int>> st;
-    
+    vector<vector<int>> ans;
     void f(int ind , vector<int>& nums, int target , vector<int> helper){
         
-         if(target == 0){
-                sort(helper.begin() , helper.end());
-                st.insert(helper);
-            }
+        
+        if(target == 0){
+            ans.push_back(helper);
+            return;
+        }
         
         for(int i = ind ; i < nums.size() ; i++){
             
-            if(i > ind && nums[i] == nums[i-1]){
+            if(i != ind && nums[i] == nums[i-1]){
                 continue;
             }
             
-             if(nums[i] > target){
+            if(target >= nums[i]){
+            helper.push_back(nums[i]);
+            f(i + 1 , nums , target - nums[i] , helper);
+            helper.pop_back();
+            }
+            
+            else{
                 break;
             }
-            helper.push_back(nums[i]);
-            f(i + 1 , nums , target-nums[i] , helper);
-            helper.pop_back();
         }
     }
     vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
         
-        vector<vector<int>> ans;
-        sort(nums.begin(),nums.end());
         vector<int> helper;
-        
+        sort(nums.begin() , nums.end());
         f(0 , nums , target , helper);
         
-        for(auto x : st){
-            ans.push_back(x);
-        }
-        
         return ans;
+        
+        
     }
 };
