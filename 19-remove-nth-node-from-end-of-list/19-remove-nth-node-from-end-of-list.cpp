@@ -11,50 +11,56 @@
 class Solution {
 public:
     
-    int getLen(ListNode* head){
+    int len(ListNode* h){
         
         int l = 0;
-        while(head != NULL){
-            head = head->next;
+        while(h != NULL){
+            h = h->next;
             l++;
         }
-        
         return l;
+        
     }
-   
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* removeNthFromEnd(ListNode* h, int n) {
         
-        if(head == NULL){
-            return head;
+        if(h == NULL){
+            return h;
         }
         
-        if(head->next == NULL && n == 1){
-            return NULL;
+        int l = len(h);
+        ListNode* t = h;
+        
+        if(n == 1){
+            
+            if(t->next == NULL){
+                return NULL;
+            }
+            
+            while(t->next && t->next->next != NULL){
+                t = t->next;
+            }
+            
+            t->next = NULL;
+            return h;
         }
         
-        int len = getLen(head);
-        int point = len-n;
         
-        if(point == 0){
-            return head->next;
+        if(n == l){
+            return h->next;
         }
         
-        point-=1;
+        int toTraverse = l - n - 1;
+        t = h;
         
-        ListNode* temp = head;
-        
-        while(point--){
-            temp = temp->next;
+        while(toTraverse--){
+            
+            t = t->next;
         }
         
-        if(temp->next->next != NULL){
-            ListNode* newTemp = temp->next->next;
-            temp->next = newTemp;
-        }
+        t->next = t->next->next;
         
-        else{
-        temp->next = temp->next->next;
-        }
-        return head;
+        return h;
+        
+        
     }
 };
