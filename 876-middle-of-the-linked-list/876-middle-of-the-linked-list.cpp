@@ -11,33 +11,38 @@
 class Solution {
 public:
     
-    int getLen(ListNode* head){
+    int len(ListNode* head){
         
         int l = 0;
-        while(head != NULL){
+        while(head!=NULL){
             head = head->next;
             l++;
         }
         
         return l;
     }
+    
     ListNode* middleNode(ListNode* head) {
         
         if(head == NULL || head->next == NULL){
             return head;
         }
         
-        int len = getLen(head);
-        ListNode* temp = head;
-        
-        int mid = len/2;
-        mid-=1;
-        
-        while(mid--){
-            temp = temp->next;
+        if(head == NULL){
+            return NULL;
         }
         
-        return temp->next;
+        int l = len(head);
+     
+        l = (l/2) -1;
+        
+        
+        while(l--){
+            head = head->next;
+        }
+        
+        return head->next;
+        
         
     }
 };
