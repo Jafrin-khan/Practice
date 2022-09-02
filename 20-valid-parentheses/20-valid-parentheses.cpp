@@ -2,7 +2,7 @@ class Solution {
 public:
     bool isValid(string s) {
         
-        stack<char> st;
+         stack<char> st;
         bool flag = false;
         
         for(int i = 0 ; i < s.size() ; i++){
@@ -18,15 +18,16 @@ public:
                 }
                 
                 char front = st.top();
-                st.pop();
+           
                 
                 if( (s[i] == '}' && front == '{') || (s[i] == ']' && front == '[') || (s[i] == ')' && front == '(')  ){
-                    flag = true;
+                    st.pop();
                 }
                 
                 else{
                     return false;
                 }
+              
             }
             
         }
@@ -35,7 +36,7 @@ public:
             return false;
         }
         
-        return flag;
+        return true;;
         
     }
 };
