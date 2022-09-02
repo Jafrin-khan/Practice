@@ -18,46 +18,50 @@ class Solution {
 public:
     Node* copyRandomList(Node* head) {
         
-         if(head == NULL){
+        if(head == NULL){
             return head;
         }
         
-        Node* copy = new Node(0);
-        Node* toReturn = copy;
-        Node* itr = head;
+         Node* temp = head;
         
-        //creating deep copy
-        while(itr != NULL){
-            Node* newNode = new Node(itr->val);
-            Node* nextNode = itr->next;
-            itr->next = newNode;
-            newNode->next = nextNode;
-            itr = itr->next->next;
+        //1st 
+        while(temp != NULL){
+           
+         Node* nextList = temp->next;
+         Node* node = new Node(temp->val);
+         temp->next = node;
+         node->next = nextList;
+            temp = temp->next->next;  
+            
         }
         
-        //pointing random pointers
-        itr = head;
-        
-        while(itr != NULL){
+        //2nd
+        temp = head;
+        while(temp != NULL){
             
-            if(itr->random){
-                itr->next->random = itr->random->next;
+            if(temp->random){
+            temp->next->random = temp->random->next;
             }
+            temp = temp->next->next;
+        }
+        
+        
+        //3rd
+        temp = head;
+        Node* newHead = new Node(0);
+        Node* tail = newHead;
+        
+        while(temp != NULL){
             
-            itr = itr->next->next;
+          
+            tail->next = temp->next;
+            tail = tail->next;
+            temp->next = temp->next->next;
+            temp = temp->next;
             
         }
         
-        itr = head;
-        while(itr != NULL){
-            
-            copy->next = itr->next;
-            itr->next = itr->next->next;
-            itr = itr->next;
-            copy = copy->next;
-        }
-        
-        return toReturn->next;
+        return newHead->next;
         
     }
 };
