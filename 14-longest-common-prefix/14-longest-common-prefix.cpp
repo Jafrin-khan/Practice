@@ -1,29 +1,23 @@
 class Solution {
 public:
     
-    static bool cmp(string &a , string &b){
-        return a.size() < b.size();
+    static bool cmp(string& s1 , string& s2){
+        return s1.size() < s2.size();
     }
     
-    string longestCommonPrefix(vector<string>& s) {
+    string longestCommonPrefix(vector<string>& strs) {
         
-        sort(s.begin() , s.end() , cmp);
-        string ans = s[0];
+        sort(strs.begin() , strs.end() , cmp);
         
-        for(int i = 1 ; i < s.size() ; i++){
+        string ans = strs[0];
+        
+       
+        for(int i = 1 ; i < strs.size() ; i++){
             
-            int p = 0;
-            int q = 0;
-            
-            while(p < ans.size()){
-                if(ans[p] == s[i][q]){
-                    p++;
-                    q++;
-                }
+            for(int j = 0 ; j < ans.size() ; j++){
                 
-                else{
-                    ans.erase(p , ans.size()-p+1);
-                    break;
+                if(ans[j] != strs[i][j]){
+                    ans.erase(j);
                 }
             }
         }
