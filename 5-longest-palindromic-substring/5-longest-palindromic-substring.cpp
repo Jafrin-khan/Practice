@@ -49,10 +49,6 @@ public:
         string ans = "";
         int len = end;
         
-        for(int i = 1 ; i <= end ; i++){
-            ans += s[start++];
-        }
-        
-        return ans;
+        return s.substr(start , len);
     }
 };
