@@ -1,15 +1,17 @@
 class Solution {
 public:
     
-    bool isCycle(int node , int prev , vector<int>& vis , vector<int> adj[] , vector<int>& dfsVis){
+    bool isCycle(int node , vector<int> adj[] , vector<int>& vis , vector<int>& dfsVis){
         
         vis[node] = 1;
         dfsVis[node] = 1;
         
         for(auto it : adj[node]){
             
-            if(!vis[it] && isCycle(it , node , vis , adj , dfsVis)){
-                return true;
+            if(!vis[it]){
+                if(isCycle(it , adj , vis , dfsVis)){
+                    return true;
+                }
             }
             
             else if(dfsVis[it] == 1){
@@ -18,26 +20,29 @@ public:
         }
         
         dfsVis[node] = 0;
-        
         return false;
-    }
-    bool canFinish(int v, vector<vector<int>>& nums) {
         
-        vector<int> adj[v];
-        vector<int> dfsVis(v , 0);
-        vector<int> vis(v,0);
+    }
+    bool canFinish(int n, vector<vector<int>>& nums) {
+        
+        vector<int> adj[n];
         
         for(int i = 0 ; i < nums.size() ; i++){
+            
             int u = nums[i][0];
             int v = nums[i][1];
             
             adj[u].push_back(v);
+            
         }
         
-        for(int i = 0 ; i < v ; i++){
+        vector<int> vis(n,0);
+        vector<int> dfsVis(n , 0);
+        
+        for(int i = 0 ; i < n ; i++){
             
-            if(!vis[i] && isCycle(i ,-1, vis , adj , dfsVis)){
-               return false;
+            if(!vis[i] && isCycle(i , adj , vis , dfsVis)){
+                return false;
             }
         }
         
@@ -45,3 +50,4 @@ public:
         
     }
 };
+
