@@ -1,47 +1,57 @@
 class Solution {
 public:
+    
+    /*
+    
+    version1 = "1.01", version2 = "1.001"
+                i                  j
+    
+    
+    */
     int compareVersion(string v1, string v2) {
         
-        int n = v1.size();
-        int m = v2.size();
-        
-        int i = 0;
+        int i = 0;;
         int j = 0;
         
-        while(i < n || j < m){
+        while(i < v1.size() || j < v2.size()){
             
-            string temp1 = "";
-            string temp2 = "";
+            string t1 = "";
             
-            while(i < n && v1[i] !='.'){
-                temp1 += v1[i++];
+            while(i < v1.size() && v1[i] !='.'){
+                t1 += v1[i++];
             }
             
-            while(j < m && v2[j] !='.'){
-                temp2 += v2[j++];
+            string t2 = "";
+            
+            while(j < v2.size() && v2[j] != '.'){
+                t2 += v2[j++];
             }
             
-            if(temp1.size() == 0){
-                temp1 = "0";
+            int num1 = 0;
+            int num2 = 0;
+            
+            if(t1.size() != 0){
+                num1 = stoi(t1);
             }
             
-            if(temp2.size() == 0){
-                temp2 = "0";
+            if(t2.size() != 0){
+                num2 = stoi(t2);
             }
-             
-            if(stoi(temp1) > stoi(temp2)){
+            
+            if(num1 > num2){
                 return 1;
             }
             
-            if(stoi(temp1) < stoi(temp2)){
+            if(num2 > num1){
                 return -1;
             }
             
             i++;
             j++;
+            
         }
-     
         
         return 0;
+        
     }
 };
