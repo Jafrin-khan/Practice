@@ -2,7 +2,7 @@ class MinStack {
 public:
     
     stack<int> st;
-    stack<int> helper;
+    stack<int> h;
     
     MinStack() {
         
@@ -11,9 +11,11 @@ public:
     void push(int val) {
         st.push(val);
         
-        if(helper.empty() || helper.top() >= val){
-            helper.push(val);
+        
+          if(h.empty() || h.top() >= val){
+            h.push(val);
         }
+        
     }
     
     void pop() {
@@ -21,26 +23,31 @@ public:
         if(st.empty()){
             return;
         }
-        int top = st.top();
+        
+        if(st.top() == h.top()){
+            h.pop();
+        }
         st.pop();
         
-        if(!helper.empty() && top == helper.top()){
-            helper.pop();
-        }
+        
     }
     
     int top() {
+        
         if(st.empty()){
             return -1;
         }
         return st.top();
+        
     }
     
     int getMin() {
-        if(helper.empty()){
+        
+        if(h.empty()){
             return -1;
         }
-        return helper.top();
+        return h.top();
+        
     }
 };
 
