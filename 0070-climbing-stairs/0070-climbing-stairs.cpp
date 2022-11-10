@@ -1,7 +1,20 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(n) + O(n)
+    SC = O(n)
+    
+    Time Complexity: O(N)
 
-   /* int f(int n , vector<int>& dp){
+Reason: The overlapping subproblems will return the answer in constant time O(1). Therefore the total number of new subproblems we solve is ‘n’. Hence total time complexity is O(N).
+
+Space Complexity: O(N)
+
+Reason: We are using a recursion stack space(O(N)) and an array (again O(N)). Therefore total space complexity will be O(N) + O(N) ≈ O(N)
+    */
+
+    int f(int n , vector<int>& dp){
 
         if(n == 1){
             return 1;
@@ -19,23 +32,10 @@ public:
         int two = f(n-2 , dp);
 
         return dp[n] = one + two;
-    }*/
-    
+    }
     int climbStairs(int n) {
-        
-        vector<int> dp(n+2 , 0);
 
-        dp[1] = 1;
-        dp[2] = 2;
-
-        for(int i = 3 ; i <= n ; i++){
-            int one = dp[i-1];
-            int two = dp[i-2];
-
-            dp[i] = one + two;
-
-        }
-        return dp[n];
-
+        vector<int> dp(n+1 , -1);
+        return f(n , dp);
     }
 };
