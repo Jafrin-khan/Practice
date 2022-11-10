@@ -1,6 +1,11 @@
 class Solution {
 public:
+    /*
     
+    TC = O(n)
+    SC = O(n)
+    
+    */
      int f(int ind , vector<int>& nums , vector<int>& dp){
          
         if(ind < 0){
