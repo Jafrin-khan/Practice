@@ -11,6 +11,19 @@
  */
 class Solution {
 public:
+    
+/*
+
+If we assume counts of nodes in this tree is n, the recursion will run on n + (n/2)*2 + (n/4)*4 + … + 1*n nodes. Therefore, it’s time complexity is O(nlogn).
+
+For space complexity, the maximum calls in calling stack will be h if h denotes to the length of the deepest path in this tree. Thus, it uses O(h) extra space. Or you can say O(logn) because h is bounded by logn.
+
+*/
+    
+  /*
+  TC = O(nlogn)
+  SC = O(h)
+  */
   void f(TreeNode* root , long long k , int& cnt){
 
         if(root == NULL){
