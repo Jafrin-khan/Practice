@@ -11,6 +11,10 @@
  */
 class Solution {
 public:
+    /*
+    TC = O(N) .......Reason: We are doing a simple level order traversal. The inner loop simply traverses the nodes level-wise and doesn’t add to the complexity.
+    SC = O(N)
+    */
     int widthOfBinaryTree(TreeNode* root) {
         
         if(root == NULL){
