@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N) + O(N)
+    SC = O(N)
+    */
     int minAddToMakeValid(string s) {
         
         stack<int> st;
