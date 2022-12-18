@@ -6,6 +6,10 @@ public:
     SC = O(3VO) ~ (V)....., Space for queue data structure, colour array and an adjacency list.
     */
     
+    /*
+    BFS
+    */
+    
     bool check(int start , vector<int>& color , vector<vector<int>>& adj){
         queue<int> q;
         
