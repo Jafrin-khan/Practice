@@ -4,6 +4,10 @@ public:
     /*
     TC = O(N) + O(N) ~ O(N)
     SC = O(N) + O(N) ~ O(N)
+    
+    https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/discuss/1073189/C%2B%2B-or-2-Approaches-or-O(n)-Beats-100-or-No-Extra-Space-(Best)-or-Explanation
+    
+    Imp solution tricks is link pe niiche mera code h ye leking map extra space lera h isliye aur optimal soln k liye ye link
     */
     string minRemoveToMakeValid(string s) {
         
