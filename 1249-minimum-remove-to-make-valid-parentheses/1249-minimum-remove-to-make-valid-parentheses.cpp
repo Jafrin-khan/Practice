@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N) + O(N) ~ O(N)
+    SC = O(N) + O(N) ~ O(N)
+    */
     string minRemoveToMakeValid(string s) {
         
         unordered_map<int,bool> inValid;
