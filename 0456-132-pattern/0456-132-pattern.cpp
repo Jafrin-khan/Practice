@@ -22,7 +22,7 @@ public:
             }
             
             st.push({nums[i] , currMin});
-            currMin = min(currMin , nums[i]);
+            currMin = min(nums[i] , currMin);
         }
       return false;
     }
