@@ -15,41 +15,30 @@ public:
     TC = O(N)
     SC = O(1)
     */
+        
+    /*
+    Naive approach isse pehle waale submission m h
+    */
+        
     ListNode* removeNthFromEnd(ListNode* head, int n) {
         
-        if(head == NULL){
-            return head;
-        }
-        ListNode* temp = head;
-        ListNode* t = head;
-        
-        int len = 0;
-        
-        while(t){
-            t = t->next;
-            len++;
-        }
-        
-        if(n == len){
-            return head->next;
+        ListNode * start = new ListNode();
+        start -> next = head;
+        ListNode* fast = start;
+        ListNode* slow = start;     
+
+        for(int i = 1; i <= n; ++i)
+            fast = fast->next;
+    
+        while(fast->next != NULL)
+        {
+            fast = fast->next;
+            slow = slow->next;
         }
         
-        int k = len - n - 1;
+        slow->next = slow->next->next;
         
-        while(k--){
-            temp = temp->next;
-        }
-        
-        if(n == 1){
-            temp->next = NULL;
-            return head;
-        }
-        
-        ListNode* nextNode;
-        nextNode = temp->next;
-        temp->next = nextNode->next;
-        
-        return head;
+        return start->next;
         
     }
 };
