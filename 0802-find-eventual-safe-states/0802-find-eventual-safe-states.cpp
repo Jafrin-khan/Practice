@@ -1,48 +1,54 @@
 class Solution {
 public:
-    
     /*
-    Time Complexity: O(V+E)+O(V), where V = no. of nodes and E = no. of edges. There can be at most V components. So, another O(V) time complexity.
-
-Space Complexity: O(3N) + O(N) ~ O(3N): O(3N) for three arrays required during dfs calls and O(N) for recursive stack space.
+    solved usig toposort..other methods are also there in accepted answers...2-3 methods h
     */
     
     /*
-    TC = O(V + E) + O(V)
-    SC = O(3N) + O(N) ~ O(3N)
+    TC = O(V+E)
+    SC = O(N^2) + O(N) + O(N) + O(NlogN)
     */
     
-      bool dfs(int node,vector<int> &vis,vector<int> &pathVis,vector<vector<int>>& graph){
-        vis[node]=1;
-        pathVis[node]=1;
-        //neighbours
-        for(auto it:graph[node]){
-            if(vis[it]==0){
-                if(dfs(it,vis,pathVis,graph)==true)
-                    return true;
-            }
-            else if(pathVis[it]==1)
-                return true;
-        }
-        pathVis[node]=0;
-        return false;
-    }
-public:
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n=graph.size();
-        vector<int> pathVis(n,0);
-        vector<int> vis(n,0);
+        
         vector<int> ans;
-        for(int i=0;i<n;i++){
-            if(vis[i]==0 ){
-                if(dfs(i,vis,pathVis,graph)==true)
-                    continue;
+        int n = graph.size();
+        vector<int> revGraph[n];
+        vector<int> indegree(n , 0);
+        
+        for(int i = 0 ; i < n ; i++){
+            
+            for(auto it : graph[i]){
+                revGraph[it].push_back(i);
+                indegree[i]++;
             }
-            if(pathVis[i]==0)
-                ans.push_back(i);
         }
         
-        return ans;
+        queue<int> q;
         
+        for(int i = 0 ; i < n ; i++){
+            
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+        
+        while(!q.empty()){
+            
+            int node = q.front();
+            q.pop();
+            
+            ans.push_back(node);
+            
+            for(auto it : revGraph[node]){
+                indegree[it]--;
+                
+                if(indegree[it] == 0){
+                    q.push(it);
+                }
+            }
+        }
+        sort(ans.begin() , ans.end());
+        return ans;
     }
 };
