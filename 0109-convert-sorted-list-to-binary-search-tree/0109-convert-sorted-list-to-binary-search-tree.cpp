@@ -1,32 +1,68 @@
-
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
+    /*
+Time complexity: O(n log(n)).
+There will be log(n) recursive levels because each time we split it to into half & in each level we loop through the whole list, divided into small parts.
+Space complexity: O(log(n)).
+We will have log(n) recursive calls on stack.
+    */
     
-    TreeNode* f(int i , int j , vector<int>& arr){
-        if(i > j){
+    /*
+    same as that of making BST from sorted array....prev accepted ans4
+    
+    TC = O(NlogN)
+    SC = O(logN)
+    */
+   
+    TreeNode* sortedListToBST(ListNode* head) {
+        
+        if(head == NULL){
             return NULL;
         }
         
-        int mid = i + (j-i)/2;
-        TreeNode* root = new TreeNode(arr[mid]);
+        if(head->next == NULL)
+            return new TreeNode(head->val);
         
-        root->left = f(i , mid-1 , arr);
-        root->right = f(mid+1 , j , arr);
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = head;
         
-        return root;
-    }
-    TreeNode* sortedListToBST(ListNode* head) {
-        
-        vector<int> arr;
-        ListNode* temp = head;
-        
-        while(temp){
-            arr.push_back(temp->val);
-            temp = temp->next;
+        while(fast != NULL && fast->next != NULL){
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
         }
         
-        TreeNode* root = f(0 , arr.size()-1 , arr);
+        
+        ListNode* mid = slow;
+        TreeNode* root = new TreeNode(mid->val);
+        
+        prev->next = NULL;
+        ListNode* rightHalf = mid->next;
+        
+        root->left = sortedListToBST(head);
+        root->right = sortedListToBST(rightHalf);
         
         return root;
         
