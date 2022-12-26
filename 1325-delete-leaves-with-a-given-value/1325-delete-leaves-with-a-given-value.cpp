@@ -12,47 +12,25 @@
 class Solution {
 public:
     
-    
-    void f(TreeNode* root , int target){
-        
-        if(root == NULL){
-            return;
-        }
-        
-        f(root->left , target);
-        f(root->right , target);
-        
-        if(root->left == NULL && root->right == NULL){
-            return;
-        }
-        
-        if(root->left && root->left->left == NULL && root->left->right == NULL && root->left->val == target){
-            root->left = NULL;
-        }
-        
-        if(root->right && root->right->left == NULL && root->right->right == NULL && root->right->val == target){
-            root->right = NULL;
-        }
-        
-       
-        
-    }
+    /*
+    TC = O(N)
+    SC = O(N)...stack space in dfs
+    */
     TreeNode* removeLeafNodes(TreeNode* root, int target) {
         
-        if(root == NULL){
-            return NULL;
+         if(root->left)
+        {
+            root->left = removeLeafNodes(root->left,target);
+        }
+                
+        if(root->right)
+        {
+            root->right = removeLeafNodes(root->right,target);
         }
         
-        //us particular root k corresponding leaf nodes with specified target remove krenge
-        f(root , target);
+        if(root->left==NULL && root->right==NULL && root->val==target)return NULL;
         
-        if(root->left == NULL && root->right == NULL && root->val == target){
-            return NULL;
-        }
-        
-        //iteration maintain krenge kyunki f call k baad tree change hoga to dobara call krenge taaki jo ab leaf bn gayi nodes change krne k baad agr wo target k equal h to remove krenge unhe ab
-        removeLeafNodes(root->left , target);
-        removeLeafNodes(root->right , target);
         return root;
+        
     }
 };
