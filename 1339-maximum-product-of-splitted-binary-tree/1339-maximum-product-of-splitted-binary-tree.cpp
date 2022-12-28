@@ -12,6 +12,10 @@
 class Solution {
 public:
     
+    /*
+    TC = O(N) + O(N) ~ O(N)
+    SC = O(N)
+    */
   
     long long totalSum = 0 , result = 0;
     
