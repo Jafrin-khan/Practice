@@ -14,6 +14,10 @@
 class Solution {
 public:
     
+    /*
+    TC = O(N)
+    SC = O(N)....stack space
+    */
     void f(TreeNode* root , int& sum , int k){
         
         if(root == NULL){
@@ -25,7 +29,6 @@ public:
             return;
         }
         
-       
         f(root->left , sum , k);
         f(root->right , sum , k);
         
