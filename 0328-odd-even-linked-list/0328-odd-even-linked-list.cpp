@@ -12,7 +12,7 @@ class Solution {
 public:
     /*
     TC = O(N)
-    SC = O(1)
+    SC = O(1)...check space complexity i think it should be O(2)~O(1)
     */
     ListNode* oddEvenList(ListNode* head) {
         
