@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     int maxArea(vector<int>& height) {
         
         int i = 0;
