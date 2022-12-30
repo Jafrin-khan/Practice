@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     bool isLongPressedName(string name, string typed) {
 
         int n = name.size();
