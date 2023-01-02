@@ -1,25 +1,30 @@
 class Solution {
 public:
+    
+    //Moore's voting algorithm
+    
     /*
     TC = O(N)
-    SC = O(N)
+    SC = O(1)
     */
+    
     int majorityElement(vector<int>& nums) {
         
-        unordered_map<int , int> mp;
-        int n = (nums.size()/2) + 1;
+        int cnt = 0;
+        int currMajority = 0;
         
         for(int i = 0 ; i < nums.size() ; i++){
-            mp[nums[i]]++;
-        }
-        
-        for(auto it : mp){
-            if(it.second >= n){
-                return it.first;
+            
+            if(cnt){
+                cnt += (nums[i] == currMajority ? 1 : -1);
+            }
+            
+            else{
+                currMajority = nums[i];
+                cnt = 1;
             }
         }
         
-        return -1;
-        
+        return currMajority;
     }
 };
