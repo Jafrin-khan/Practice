@@ -11,6 +11,11 @@
 class Solution {
 public:
     
+    /*
+    Time Complexity: O(N), Here N is the number of nodes in the linked list. In the worst case we need to traverse the list twice.
+Auxiliary Space: O(1), As constant extra space is used.
+    */
+    
     ListNode* reverse(ListNode* head , ListNode* last){
         
           if(head == NULL || head->next == NULL){
@@ -55,6 +60,7 @@ public:
         
         ListNode* nT = temp;
         
+        //remember this step (line 63 to 70)
         if(l == 1){
             return reverse(nH , nT);
         }
