@@ -15,7 +15,6 @@ public:
 */
 
 /*
-
 One brute force method is also there using hashmaps see TUF notes
 
 Time Complexity: O(N)+O(N)+O(N)
@@ -38,6 +37,8 @@ public:
         
         Node* temp = head;
         
+        
+        /******************step 1********************/
         //make copy of nodes and linking nodes by next pointers ONLY
         /*
         eg = 1->2->3->4
@@ -53,6 +54,7 @@ public:
             temp = temp->next->next;
         }
         
+        /******************step 2********************/
         //linking random pointers
         temp = head;
         while(temp != NULL){
@@ -64,6 +66,7 @@ public:
             temp = temp->next->next;
         }
         
+        /******************step 3********************/
         //segragating the lists
         temp = head;
         Node* newHead = new Node(0);
