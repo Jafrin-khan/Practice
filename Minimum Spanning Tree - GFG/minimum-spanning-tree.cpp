@@ -14,12 +14,17 @@ class Solution
         vector<int> vis(v , 0);
         int sum = 0;
         
+        //SC = O(E)
         priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> pq;
        //{wt , node}
         pq.push({0 , 0});
         
+        //TC = ElogE + ElogE ==> ElogE
+        
+        //E
         while(!pq.empty()){
             
+            //logE
             int wt = pq.top().first;
             int node = pq.top().second;
             
@@ -29,7 +34,7 @@ class Solution
                 
                 vis[node] = 1;
                 sum += wt;
-                
+                //ElogE
                 for(auto it : adj[node]){
                     
                     int n = it[0];
