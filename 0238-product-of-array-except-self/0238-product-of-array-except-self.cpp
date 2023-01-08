@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N) + O(N)
+    SC = O(1)
+    */
     vector<int> productExceptSelf(vector<int>& nums) {
         
         int prod = 1;
