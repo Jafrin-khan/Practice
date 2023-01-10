@@ -9,34 +9,38 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+/*
+OPTIMISED APPROACH
+TC is reduced since height and diameter are calculated in the same function function....main approach is in previous submission
+TC = O(N)
+SC = O(N)...recursive stack
+*/
+
 class Solution {
 public:
-    /*
-    TC = O(N^2)
-    SC = O(N)//recursive stack
-    */
-    int h(TreeNode* root){
-        if(root == NULL){
-            return 0;
-        }
-        return max(h(root->left),h(root->right)) + 1;
-    }
     
-    int d(TreeNode* root){
+    int d(TreeNode* root , int& height){
+        
         if(root == NULL){
+            height = 0;
             return 0;
         }
         
-        int lh = h(root->left);
-        int rh = h(root->right);
+        int lh = 0;
+        int rh = 0;
         
-        int dia = lh + rh + 1;
-        return max({dia , d(root->left) , d(root->right)});
+        int ld = d(root->left , lh);
+        int rd = d(root->right , rh);
+        
+        height = max(lh , rh) +1;
+        
+        return max({lh + rh + 1 , ld , rd});
+        
     }
-    
     int diameterOfBinaryTree(TreeNode* root) {
-        //remeber this -1 bcoz while calculating diameter we considered this root twice hence has to subtract it once
-        return d(root) -1;
-       
+        
+        int height = 0;
+        return d(root , height)-1;
     }
 };
