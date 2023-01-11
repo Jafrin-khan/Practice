@@ -25,8 +25,13 @@ public:
 */
     
     /*
-    TC = O(N)
-    SC = O(N)
+Time Complexity: O(N).
+
+Reason: We are doing a tree traversal.
+
+Space Complexity: O(N)
+
+Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).
     */
     int f(TreeNode* root , int& maxSum){
         
