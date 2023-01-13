@@ -11,7 +11,10 @@
  */
 class Solution {
 public:
-    
+    /*
+    TC = O(N)
+    SC = O(N)
+    */
     bool f(TreeNode* root , TreeNode* max , TreeNode* min){
         
         if(root == NULL){
