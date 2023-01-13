@@ -74,8 +74,10 @@ public:
     unordered_set<TreeNode*>s;
     void dfs(TreeNode* root,TreeNode* parent){
         if(root != NULL){
+            //we go to the deepest node
             dfs(root->left,root);
             dfs(root->right,root);
+            //this makes sure we have parent covered as well : parent==NULL && s.find(root) == s.end())
             if((parent==NULL && s.find(root) == s.end()) || s.find(root->left)== s.end() || s.find(root->right)== s.end()){
                 cnt++;
                 s.insert(root); 
@@ -92,7 +94,8 @@ public:
         if(!root) return 0;
         if(!root->left && !root->right) return 1;
         s.insert(NULL);  // this ensures that camera will not be inserted from the bottom most leavess 
-                        // as for leaves root->left = null && root->right = null
+                        // as for leaves root->left = null && root->right = null...also we want our algo to start putting cameras 
+                        //one level above the leaf nodes
         dfs(root,NULL);
         return cnt;
     }
