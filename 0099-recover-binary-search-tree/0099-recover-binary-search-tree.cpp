@@ -18,13 +18,7 @@ public:
     */
     
     TreeNode* firstMistake, *secondMistake, *pre;
-	void recoverTree(TreeNode* root) {
-		pre = new TreeNode(INT_MIN);
-		inorder(root);
-		swap(firstMistake->val, secondMistake->val);
-	}
-
-	void inorder(TreeNode* root) {
+    void inorder(TreeNode* root) {
 		if(root == nullptr) 
 			return;
 
@@ -38,4 +32,11 @@ public:
 
 		inorder(root->right);
 	}
+	void recoverTree(TreeNode* root) {
+		pre = new TreeNode(INT_MIN);
+		inorder(root);
+		swap(firstMistake->val, secondMistake->val);
+	}
+
+	
 };
