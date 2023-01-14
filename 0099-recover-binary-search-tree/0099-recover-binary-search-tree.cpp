@@ -35,6 +35,8 @@ public:
 	void recoverTree(TreeNode* root) {
 		pre = new TreeNode(INT_MIN);
 		inorder(root);
+        
+        cout<<firstMistake->val<<" "<<secondMistake->val;
 		swap(firstMistake->val, secondMistake->val);
 	}
 
