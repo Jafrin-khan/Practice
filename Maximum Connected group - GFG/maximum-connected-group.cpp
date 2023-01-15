@@ -8,6 +8,9 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
+/*
+TC = O(N^2)
+*/
 
 class DisjointSet{
 
