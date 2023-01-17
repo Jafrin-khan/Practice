@@ -1,7 +1,7 @@
-class Solution{
+class Solution {
 public:
     
-    /*
+     /*
     TC = O(V+2E)
     SC = O(3V) ~ O(V)
     */
@@ -11,39 +11,35 @@ public:
     BFS wala bhi h iska prev accepted ans 
     */
     
-    bool dfs(int node , vector<vector<int>>& graph , vector<int>& color , int col){
-            
-        for(auto it : graph[node]){
-            
+    bool dfs(int node , int col , vector<vector<int>> adj , vector<int>& color){
+        
+        for(auto it : adj[node]){
             if(color[it] == -1){
-                color[it] = !col;
-                if(!dfs(it , graph , color , color[it])){
+                color[it] = 1-col;
+                if(!dfs(it , color[it],adj,color)){
                     return false;
                 }
             }
             
-            else{
-                if(color[it] == col){
-                    return false;
-                }
+            else if(color[it] == col){
+                return false;
             }
-             
-        }   
+        }
         
         return true;
-        
     }
     
-    bool isBipartite(vector<vector<int>>& graph) {
+    bool isBipartite(vector<vector<int>>& adj) {
         
-        int n = graph.size();
-        int m = graph[0].size();
+        int n = adj.size();
+        int m = adj[0].size();
         
         vector<int> color(n , -1);
-        
+      
         for(int i = 0 ; i < n ; i++){
             if(color[i] == -1){
-                if(!dfs(i , graph , color , color[i])){
+                color[i] = 0;
+                if(!dfs(i , 0 , adj , color)){
                     return false;
                 }
             }
