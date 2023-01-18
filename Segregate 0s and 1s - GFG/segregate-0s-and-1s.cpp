@@ -18,9 +18,7 @@ public:
         while(i < j){
             
             if(arr[i] == 1 && arr[j] == 0){
-                swap(arr[i],arr[j]);
-                i++;
-                j--;
+                swap(arr[i++],arr[j--]);
             }
             
             else if(arr[i] == 0){
