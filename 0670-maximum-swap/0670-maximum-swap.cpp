@@ -1,33 +1,34 @@
 class Solution {
 public:
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     int maximumSwap(int num) {
         
-      string numstr = std::to_string(num);
-
-        int maxidx = -1; int maxdigit = -1;
-        int leftidx = -1; int rightidx = -1;        
-
-        for (int i = numstr.size() - 1; i >= 0; --i) {
-            // current digit is the largest by far
-            if (numstr[i] > maxdigit) {
-                maxdigit = numstr[i];
-                maxidx = i;
+        string dup = std:: to_string(num);
+        int maxInd = -1;
+        int maxNum = -1;
+        int left = -1;
+        int right = -1;
+        
+        for(int i = dup.size()-1 ; i >= 0 ; i--){
+            
+            if(dup[i] > maxNum){
+                maxNum = dup[i];
+                maxInd = i;
                 continue;
             }
-
-            // best candidate for max swap if there is no more 
-            // such situation on the left side
-            if (numstr[i] < maxdigit) {
-                leftidx = i;
-                rightidx = maxidx;
+            
+            if(dup[i] < maxNum){
+                right = maxInd;
+                left = i;
             }
         }
-
-        // num is already in order
-        if (leftidx == -1) return num;
-
-        std::swap(numstr[leftidx], numstr[rightidx]);
-
-        return std::stoi(numstr);
+        
+       if (left == -1) return num;
+       swap(dup[left],dup[right]);
+        return std:: stoi(dup);
+        
     }
 };
