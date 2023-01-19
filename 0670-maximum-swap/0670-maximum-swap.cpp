@@ -25,7 +25,8 @@ public:
                 left = i;
             }
         }
-        
+       
+    //means num is already in order
        if (left == -1) return num;
        swap(dup[left],dup[right]);
         return std:: stoi(dup);
