@@ -1,7 +1,12 @@
 class Solution {
 public:
     //https://www.youtube.com/watch?v=5LMkddl2NCk
+    /*
+    SIEVE OF ERATHOSTHENES
     
+    TC = O(log(LogN) * sqrt(N))
+    SC = O(N)
+    */
     
     int countPrimes(int n) {
         
