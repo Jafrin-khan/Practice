@@ -7,9 +7,9 @@ public:
     TC = O(NlogN) + O(N^2) ~ O(N^2)
     SC = O(N^2) + O(3)
     */
-
-
-
+    
+    //these conditions are used to remove duplicates
+    
     vector<vector<int>> threeSum(vector<int>& nums) {
         
         sort(nums.begin() , nums.end());
@@ -23,6 +23,7 @@ public:
         
         for(int i = 0 ; i < n-2 ; i++){
             
+            //25-27 conditions
             if(i > 0 && nums[i] == nums[i-1]){
                 continue;
             }
@@ -40,7 +41,8 @@ public:
                     v.push_back(nums[right]);
                  
                     ans.push_back(v);
-                   
+                 
+                //44 to 54 conditions
                 while(left < right && nums[left] == nums[left+1]){
                     left++;
                 }
