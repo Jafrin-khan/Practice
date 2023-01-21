@@ -1,27 +1,25 @@
 class Solution {
 public:
-    
-    bool isVowel(char ch){
-        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' ||
-               ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U';
-    }
+/*Complexity
+Time complexity: O(n)
+Space complexity: O(1)
+*/
+
+
     string reverseVowels(string s) {
+        int i =0,j= s.size()-1;
+        unordered_set<char> v({'a','e','i','o','u','A','E','I','O','U'});
         
-        string vowels = "";
-        
-        for(int i = 0 ; i < s.size() ; i++){
-            if(isVowel(s[i])){
-                vowels+=s[i];
-            }
+        while(i<j){
+           if(v.find(s[i])!=v.end() && v.find(s[j])!=v.end()){ 
+               swap(s[i++],s[j--]);
+           }
+           else if(v.find(s[i])==v.end())i++;
+           else if(v.find(s[j]) == v.end())j--;
+               
         }
-        
-        int k = vowels.size()-1;
-        for(int i = 0 ; i < s.size() ; i++){
-            if(isVowel(s[i])){
-                s[i] = vowels[k--];
-            }
-        }
-        
+
         return s;
+        
     }
 };
