@@ -1,5 +1,12 @@
 class Solution {
 public:
+    
+    /*
+    Input : [90,47,69,10,43,92,31,73,61,97]
+    Output : 9
+    
+    Dry run with this TC as well
+    */
     int partitionDisjoint(vector<int>& nums) {
         
         int n = nums.size();
