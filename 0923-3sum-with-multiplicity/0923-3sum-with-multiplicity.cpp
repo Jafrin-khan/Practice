@@ -3,6 +3,8 @@ public:
     
     //https://www.youtube.com/watch?v=jZcAldZP1ag
     
+  //  TC = O(N^2)
+  
     int threeSumMulti(vector<int>& arr, int target) {
         
         int n = arr.size();
