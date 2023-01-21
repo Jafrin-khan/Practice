@@ -3,6 +3,8 @@ public:
     
     /*
     https://www.youtube.com/watch?v=VD9NACqBCw4
+    
+    TC = O(6*N) ~ O(N)
     */
     int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
         
