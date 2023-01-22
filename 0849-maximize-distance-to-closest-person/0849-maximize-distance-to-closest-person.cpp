@@ -1,5 +1,12 @@
 class Solution {
 public:
+    
+    //khudka logic
+    
+    /*
+    TC = O(N) + O(N/2) ~ O(N)
+    SC = O(1)
+    */
     int maxDistToClosest(vector<int>& seats) {
         
         int currMax = -1;
