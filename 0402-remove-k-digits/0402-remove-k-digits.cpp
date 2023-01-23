@@ -1,5 +1,9 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(N)
+    */
     string removeKdigits(string s, int k) {
         
         stack<char> st;
