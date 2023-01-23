@@ -1,7 +1,7 @@
 class Solution {
 public:
     /*
-    TC = O(N)
+    TC = O(N^2)
     */
     vector<int> asteroidCollision(vector<int>& asteroids) {
         
