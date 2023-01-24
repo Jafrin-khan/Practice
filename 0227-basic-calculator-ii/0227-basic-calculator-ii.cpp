@@ -3,7 +3,7 @@ public:
     
     int calculate(string s) {
         
-        s+='+';
+         //no need to use later the if else firse agr ye line daali ho-->s+='+';
         stack<int> st;
         long long int curr = 0 , ans = 0;
         char sign = '+';
@@ -26,6 +26,18 @@ public:
             sign = s[i];  //sign of next curr
         }
         }
+         if(sign == '+') st.push(curr);
+                else if(sign == '-')st.push(curr*-1);
+                else if(sign == '*'){
+                    int top = st.top();
+                    st.pop();
+                    st.push(top*curr);}
+                else if(sign == '/'){
+                    int top = st.top();
+                    st.pop();
+                    st.push(top/curr);//Left to right chlta hai
+                }
+        
         while(!st.empty()){
             ans += st.top();
             st.pop();
