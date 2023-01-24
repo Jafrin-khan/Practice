@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     int calculate(string s) {
     int i,n=s.size(),sum=0,sign=1;
     stack<int> st;
