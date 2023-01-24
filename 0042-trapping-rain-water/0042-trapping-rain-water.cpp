@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     int trap(vector<int>& height) {
         
         int ans = 0;
