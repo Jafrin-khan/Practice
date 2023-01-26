@@ -27,7 +27,7 @@ Pos:  [0, 3, 5, 8,10]
 Speed:[1, 3, 1, 4, 2]
 Time: [12,3, 7, 1, 1]
 How to calculate the time?
-Easy, (target-pos)/time
+Easy, (target-pos)/speed
 
 Alright, I think the previous procedure is sort of intuitive if we want to observe the pattern of the problem.
 
