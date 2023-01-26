@@ -39,7 +39,10 @@ while(t--)
 }
 // } Driver Code Ends
 
-
+/*
+TC = O(N*N)
+SC = O(N)
+*/
 
 void helper(stack<int>& st , int num){
     
