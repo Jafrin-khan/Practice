@@ -20,11 +20,8 @@ public:
             //in case when k goes out of bound
             k %= size;
             if((k == 0 || k == size) && !isdigit(s[i])){
-                string ans = "";
-                ans+=s[i];
-                return ans;
+                string ans = "";ans+=s[i];return ans;
             }
-            
             else if(isdigit(s[i])) size/=(s[i]-'0');
             else size--;
         }
