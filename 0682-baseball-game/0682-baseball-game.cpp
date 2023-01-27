@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N)
+    SC = O(N)
+    */
     int calPoints(vector<string>& s) {
         
         int ans = 0;
