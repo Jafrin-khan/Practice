@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(NlogN) + O(N)
+    Sc = O(1)
+    */
     int numRabbits(vector<int>& answers) {
         
         int n = answers.size();
