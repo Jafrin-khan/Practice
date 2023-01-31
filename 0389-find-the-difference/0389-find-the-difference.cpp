@@ -1,5 +1,7 @@
 class Solution {
 public:
+    
+    //Important chars waali tricks..aise chote chote ques se hi aayegi
     char findTheDifference(string s, string t) {
         
         vector<int> cnt1(26,0);
