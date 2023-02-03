@@ -1,7 +1,10 @@
 class Solution {
     #define ll long long
 public:
-   
+   /*
+   TC = O(n*(n*(logn)))
+   SC = 
+   */
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         
         vector<vector<int>> ans;
@@ -18,12 +21,7 @@ public:
                 ll toFind = nt-nums[j];
                 while(left < right){
                     if(nums[left] + nums[right] == toFind){
-                        vector<int> v;
-                        v.push_back(nums[i]);
-                        v.push_back(nums[j]);
-                        v.push_back(nums[left]);
-                        v.push_back(nums[right]);
-                        ans.push_back(v);
+                        ans.push_back({nums[i],nums[j],nums[left],nums[right]});
                         
                         left++;
                         right--;
