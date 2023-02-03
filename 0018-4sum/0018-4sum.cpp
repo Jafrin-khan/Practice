@@ -3,8 +3,20 @@ class Solution {
 public:
    /*
    TC = O(n*(n*(logn)))
-   SC = 
+   SC = O(1)
    */
+    
+    /*
+    we can use set for preventing duplicates but due to SC its not optimal hence we use this technique:
+    
+    Remember->
+    1-if(i > 0 && nums[i] == nums[i-1]) continue;
+    2- if(j > i+1 && nums[j] == nums[j-1]) continue;
+    3- if(nums[low]+nums[high] == toFind){
+       while(left < right && nums[left] == nums[left-1]){left++;}
+       while(left < right && nums[right] == nums[right+1]){right--;}
+       }
+    */
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         
         vector<vector<int>> ans;
@@ -35,13 +47,7 @@ public:
                     
                     else{
                         right--;
-                    }
-                     
-                }
-               
-              
-            }
-        }
+                    }}}}
         
         return ans;
     }
