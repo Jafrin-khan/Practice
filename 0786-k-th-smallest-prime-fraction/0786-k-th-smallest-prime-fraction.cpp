@@ -8,7 +8,8 @@ public:
     2/5 = 0.4
     3/5 = 0.6
     
-    
+    TC = O(N^2)
+    SC = O(N)
     */
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
         
