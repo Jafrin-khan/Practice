@@ -10,21 +10,25 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
+    ListNode* f(ListNode* head){
         
         ListNode* curr = head;
         ListNode* prev = NULL;
         
         while(curr != NULL){
-            
             ListNode* nextPtr = curr->next;
             curr->next = prev;
             prev = curr;
             curr = nextPtr;
         }
-        
         return prev;
-        
+    }
+    
+    ListNode* reverseList(ListNode* head) {
+        return f(head);
     }
 };
