@@ -75,8 +75,8 @@ public:
         f(root->right,targetSum,sum,mp);
         
         //backtrack
-        if(mp[sum]>1)mp[sum]--;
-        else mp.erase(sum);
+        mp[sum]--;
+
     }
      int pathSum(TreeNode* root, int targetSum) {
       
