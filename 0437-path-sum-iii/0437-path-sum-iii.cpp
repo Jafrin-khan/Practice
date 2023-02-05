@@ -53,7 +53,7 @@ public:
     /*
     similar to find no. of subarray with sum equal to k
     TC = O(N)
-    SC = O(1)
+    SC = O(N)
     
      //https://www.youtube.com/watch?v=yyZA4v0x16w
     //similar to subarray with sum k,TC-O(N),SC-O(N)
