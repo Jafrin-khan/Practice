@@ -11,47 +11,41 @@
  */
 class Solution {
 public:
-    
-/*
-
-If we assume counts of nodes in this tree is n, the recursion will run on n + (n/2)*2 + (n/4)*4 + … + 1*n nodes. Therefore, it’s time complexity is O(nlogn).
-
-For space complexity, the maximum calls in calling stack will be h if h denotes to the length of the deepest path in this tree. Thus, it uses O(h) extra space. Or you can say O(logn) because h is bounded by logn.
-
-*/
-    
-  /*
-  TC = O(nlogn)
-  SC = O(h)
-  */
-  void f(TreeNode* root , long long k , int& cnt){
-
-        if(root == NULL){
-            return;
-        }
-      
-        if(k == root->val){
+    /*
+    TC = O(NlogN)
+    SC = O(N)
+    */
+    void f(TreeNode* root , long long k , int& cnt){
+        
+        if(root == NULL) return;
+        if(root->val == k){
             cnt++;
-        }
-
+            //dont return here consider this eg test case 
+           /* [1,-2,-3,1,3,-2,null,-1]
+              -1
+              here the ans should be 4 but it gives 3 hence we dont need to return from here
+            */
+        } 
+        
         f(root->left , k - root->val , cnt);
-        f(root->right , k - root->val , cnt);
- 
+        f(root->right , k- root->val , cnt);
     }
-
-    int pathSum(TreeNode* root, int targetSum) {
-
-        if(root == NULL){
-            return 0;
-        }
+   
+    void helper(TreeNode* root, long long k , int& cnt){
+         
+        if(root == NULL) return;
         
-        long long k = targetSum;
-        
-        int cnt = 0;
         f(root , k , cnt);
-
-        return cnt + pathSum(root->left , k) + pathSum(root->right , k);
-
+        helper(root->left,k , cnt);
+        helper(root->right,k , cnt);
+        
+    }
+    int pathSum(TreeNode* root, int target) {
+       int cnt = 0;
+       long long k = target;
+       helper(root,k,cnt);
+        
+       return cnt;
         
     }
 };
