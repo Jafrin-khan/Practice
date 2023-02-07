@@ -1,34 +1,21 @@
 class Solution {
 public:
-    
     /*
     TC = O(N)
     SC = O(1)
     */
     int maxArea(vector<int>& height) {
         
-        int i = 0;
-        int j = height.size()-1;
-        
-        int water = -1e9;
+        int n = height.size();
+        int ans = 0;
+        int i = 0 , j = n-1;
         
         while(i < j){
-            
-            int left = height[i];
-            int right = height[j];
-            
-            water = max(water , (j-i)*min(left , right));
-            
-            if(left > right){
-                j--;
-            }
-            
-            else{
-                i++;
-            }
+            ans = max(ans , min(height[i],height[j])*(j-i));
+            if(height[i]<height[j])i++;
+            else j--;
         }
         
-        return water;
-        
+        return ans;
     }
 };
