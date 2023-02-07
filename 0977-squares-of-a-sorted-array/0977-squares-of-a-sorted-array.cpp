@@ -1,30 +1,23 @@
 class Solution {
 public:
-    
     /*
-    TC = O(N)
-    SC = O(N)
+    TC = O(N) + O(NlogN) ~ O(NlogN)
+    SC = O(1)
     */
     vector<int> sortedSquares(vector<int>& nums) {
         
-       vector<int> ans(nums.size());
-       
-        int k = nums.size()-1;
+        int n = nums.size();
+        vector<int> ans;
         
-        int l = 0;
-        int r = nums.size()-1;
+        int i = 0;
+        int j = n-1;
         
-        while(l <= r){
-            
-            if(abs(nums[l]) > abs(nums[r])){
-                ans[k--] = nums[l]*nums[l++];
-            }
-            
-            else{
-                ans[k--] = nums[r]*nums[r--];
-            }
+        while(i <= j){
+            if(pow(nums[i],2) >= pow(nums[j],2)) ans.push_back(pow(nums[i++],2));
+            else ans.push_back(pow(nums[j--],2));
         }
         
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
