@@ -2,19 +2,14 @@ class Solution {
 public:
     int nextGreaterElement(int n) {
         
-        string temp = to_string(n);
-        next_permutation(temp.begin() , temp.end());
+        string s = to_string(n);
+        next_permutation(s.begin(),s.end());
         
-        if(temp == to_string(n)){
-            return -1;
-        }
-        //string to long int
-        int newInt = stol(temp);
+        if(s == to_string(n)) return -1;
         
-        if(newInt > n){
-            return newInt;
-        }
+        int dup = std:: stol(s);
+        if(dup > n) return dup;
+        else return -1;
         
-        return -1;
     }
 };
