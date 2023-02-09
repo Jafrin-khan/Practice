@@ -9,6 +9,11 @@ using namespace std;
 
 class Solution{
 public:
+
+    /*
+    TC = O(N)
+    SC = O(N)
+    */
     int isPossible(int n, int arr[], int K){
         // code here
         unordered_map<int,int> mp;
