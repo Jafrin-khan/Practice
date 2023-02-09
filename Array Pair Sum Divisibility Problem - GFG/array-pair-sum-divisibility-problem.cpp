@@ -8,6 +8,8 @@ class Solution {
     /*
     TC = O(N)
     SC = O(N)
+    
+    https://www.youtube.com/watch?v=BvKv-118twg
     */
     
     bool canPair(vector<int> nums, int k) {
