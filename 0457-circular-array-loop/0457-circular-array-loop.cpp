@@ -90,6 +90,11 @@ public:
     }
     
     */
+      
+    /*
+    TC = O(N^2)
+    SC = O(1)
+    */
     
     int getDirection(vector<int>& nums, int ind , bool ifForward){
         
@@ -103,7 +108,7 @@ public:
         
         return nextInd;
     }
-    
+   
     bool circularArrayLoop(vector<int>& nums) {
         
         int n = nums.size();
