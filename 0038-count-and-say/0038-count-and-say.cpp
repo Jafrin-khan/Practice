@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N*M)
+    SC = O(1)
+    */
     string countAndSay(int n) {
         
         if(n == 1) return "1";
