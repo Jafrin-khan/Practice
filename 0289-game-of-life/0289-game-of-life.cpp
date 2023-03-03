@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N*M)
+    SC = O(N*M)
+    */
     void gameOfLife(vector<vector<int>>& board) {
         
         int n = board.size();
