@@ -6,43 +6,40 @@ public:
     }
     void gameOfLife(vector<vector<int>>& board) {
         int n=board.size();
-        int m=board[0].size();
-        
-        
-        int dx[8]={-1,-1,-1,0,1,1,1,0};
-        int dy[8]={-1,0,1,1,1,0,-1,-1};
-        
+        int m=board[0].size();  
         // create a ans vector to store next state
         
         vector<vector<int>>ans(n,vector<int>(m,0));
         
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
+        for(int row=0;row<n;row++){
+            for(int col=0;col<m;col++){
                 int live=0;
                 
                 // move in ll eight direction and count the no. of live cells
-                for(int k=0;k<8;k++){
-                    int cx=i+dx[k];
-                    int cy=j+dy[k];
+                for(int i = -1 ; i <= 1 ; i++){
+                    for(int j = -1 ; j <= 1 ; j++){
+                    int cx=row+i;
+                    int cy=col+j;
+                    if(row == cx && col == cy) continue; // inp condition baar baar bhulne ki aadat
                     if(isValid(cx,cy,n,m) && board[cx][cy]==1){
                         live++;
             
                     }
                 }
-            
+                }
                 // Check if current cell is live or dead and apply rules accordingly and update ans vector
-                if(board[i][j]==1){
+                if(board[row][col]==1){
                     if(live<2 || live >3){
-                        ans[i][j]=0;
+                        ans[row][col]=0;
                     }else{
-                        ans[i][j]=1;
+                        ans[row][col]=1;
                     }
                 }
                 else{
                     if(live==3){
-                        ans[i][j]=1;
+                        ans[row][col]=1;
                     }else{
-                        ans[i][j]=0;
+                        ans[row][col]=0;
                     }
                 }
             }
