@@ -24,7 +24,6 @@ public:
     dono check karo TC and SC
     TC = O(N)
     SC = O(N)
-    */
     
     int f(int n , vector<int>& dp){
         if(n == 1) return 1;
@@ -40,6 +39,24 @@ public:
     int climbStairs(int n) {
         vector<int> dp(n+1 , -1);
         return f(n,dp);
+    }
+    */
+    
+    //Tabulated
+    /*
+    TC = O(N)
+    SC = O(N)
+    */
+     int climbStairs(int n) {
+        vector<int> dp(n+1 , 0);
+        dp[1] = 1;
+        dp[0] = 1;
+        for(int i = 2 ; i <= n ; i++){    
+            int one = dp[i-1];
+            int two = dp[i-2];
+            dp[i] = one+two;
+        } 
+        return dp[n];
     }
     
 };
