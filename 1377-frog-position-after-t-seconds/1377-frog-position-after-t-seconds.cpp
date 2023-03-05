@@ -85,7 +85,7 @@ public:
             if(adj[curr].size() == 1 || time == 0) return prob*1;
             return 0;
         } 
-            int neighbors = curr == 1 ? adj[curr].size() : adj[curr].size()-1;// -1 islie kyunki pichle wala neighbbour cnt ni hoga
+            int neighbors = curr == 1 ? adj[curr].size() : adj[curr].size()-1;// -1 islie kyunki pichle wala neighbbour cnt ni hoga coz already visited
             double newProb = prob*(1.0/neighbors);
             double ans = 0;
             for(auto it : adj[curr]){
