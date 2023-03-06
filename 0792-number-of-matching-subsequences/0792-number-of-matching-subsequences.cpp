@@ -74,10 +74,9 @@ public:
         int n1 = a.size();
         int n2 = b.size();
         int i=0,j=0;
-        int m=0;
         while(i!=n1 && j!=n2){
             if(a[i]==b[j]){
-                m++;j++;
+                j++;
             }
             i++;
         }
