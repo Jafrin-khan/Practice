@@ -22,7 +22,7 @@ public:
                 if(grid[i][j] != 0) tot++;
             }
         }
-        
+        //imp condition
         if(tot == rotten) return 0;
         
         int time = -1;
