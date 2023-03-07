@@ -1,5 +1,11 @@
 class Solution {
 public:
+    /*
+    Sliding window approach
+    TC = O(N) + O(M)
+    SC = O(26) + O(26)
+    
+    */
     
     bool checkFreq(vector<int>& freq1 , vector<int>& freq2){
          for(int i = 0; i < 26 ; i++){
