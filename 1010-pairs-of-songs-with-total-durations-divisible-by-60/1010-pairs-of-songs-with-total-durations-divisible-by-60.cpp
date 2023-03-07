@@ -38,7 +38,7 @@ We basically need to consider the time[i]%60 each time to know if it is==0 or no
         
         for(int i = 0 ; i < time.size() ; i++){
             int check = time[i]%60;
-            if(check == 0) cnt += hash[0];
+            if(check == 0) cnt += hash[check];
             else cnt += hash[60-check];
             hash[check]++;
         }
