@@ -2,7 +2,7 @@ class Solution {
 public:
     /*
     Sliding window approach
-    TC = O(N) + O(M)
+    TC = O(N) + O(M-N)
     SC = O(26) + O(26)
     
     */
