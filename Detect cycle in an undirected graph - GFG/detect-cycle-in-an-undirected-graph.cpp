@@ -7,49 +7,35 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     
-    bool detectBfs(int src , vector<int>& vis, vector<int> adj[]){
-        
-        queue<pair<int,int>> q;
-        q.push({src , -1});
-        vis[src] = 1;
-        
-        while(!q.empty()){
-            
-            int node = q.front().first;
-            int parent = q.front().second;
-            
-            q.pop();
-            
-            for(auto adjacentNode : adj[node]){
-                
-                if(!vis[adjacentNode]){
-                    vis[adjacentNode] = 1;
-                    q.push({adjacentNode , node});
-                }
-                
-                else if(parent != adjacentNode){
-                    return true;
-                }
+    /*
+    Time Complexity: O(N + 2E) + O(N), Where N = Nodes, 2E is for total degrees as we traverse all adjacent nodes. In the case of connected components of a graph, it will take another O(N) time.
+
+Space Complexity: O(N) + O(N) ~ O(N), Space for recursive stack space and visited array.
+    */
+    
+    bool check(int node , int par , vector<int>& vis , vector<int> adj[]){
+        vis[node] = 1;
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                if(check(it , node , vis , adj)) return true;
+            }
+            else{
+                if(par != it) return true;
             }
         }
-        
-          return false;
-        
+        return false;
     }
     bool isCycle(int v, vector<int> adj[]) {
-        // Code here
         
         vector<int> vis(v , 0);
         
-         
-         for(int i = 0 ; i < v ; i++){
-             if(!vis[i] &&  detectBfs(i ,vis, adj)){
-                  return true;
-             }
-         }
-         
-         return false;
-      
+        for(int i = 0 ; i < v ; i++){
+            if(!vis[i]){
+                if(check(i , -1 , vis , adj)) return true;
+            }
+        }
+        
+        return false;
     }
 };
 
