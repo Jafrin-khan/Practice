@@ -26,8 +26,8 @@ public:
  
     /*
     //tabulation
-    TC = 
-    SC = 
+    TC = O(M*N)
+    SC = O(M*N)
     */
     
     int uniquePaths(int m, int n) {
