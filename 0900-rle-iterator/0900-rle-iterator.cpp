@@ -14,7 +14,7 @@ public:
                 v[i]-=n;
                 return v[i+1];
             }else{
-                n -= v[i];//ye condition ni daali thi pichle submissions mai
+                n -= v[i];//ye condition ni daali thi pichle submissions mai...lekin iska logic samajh ni aaya k ye condition daali kyu hai
                 i += 2;
             }
         }
