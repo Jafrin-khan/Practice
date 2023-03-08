@@ -1,41 +1,52 @@
 class Solution {
 public:
+    /* // Recursion
     
-    /*TC : O(m*n)
-    SC : O(N*M)
-    */
-  
+    //TC = 
+    //SC = 
+    int f(int i , int j , int n , int m , vector<vector<int>>& grid){
+        if(i >= n || j >= m || i < 0 || j < 0) return 1e9;
+        if(i == 0 && j == 0) return grid[i][j];
+        
+        int left = f(i , j-1 , n , m , grid);
+        int up = f(i-1 , j , n , m , grid);
+      
+        return grid[i][j] + min({left  , up});
+    }
+    
     int minPathSum(vector<vector<int>>& grid) {
         
-        int m = grid.size();
-        int n = grid[0].size();
+        int n = grid.size();
+        int m = grid[0].size();
         
-        vector<vector<int>> dp(m , vector<int>(n , 0));
+        return f(n-1 , m-1 , n , m , grid);
+    }
+    */
+    
+    //Memoization
+    
+    //TC = 
+    //SC = 
+    int f(int i , int j , int n , int m , vector<vector<int>>& grid , vector<vector<int>>& dp){
+        if(i >= n || j >= m || i < 0 || j < 0) return 1e9;
         
-        dp[0][0] = grid[0][0];
+        if(dp[i][j] != -1) return dp[i][j];
         
-        for(int i = 0 ; i < m ; i++){
-            for(int j = 0 ; j < n ; j++){
-                
-                if(i == 0 && j == 0){
-                    continue;
-                }
-                int left = 1e9;
-                int up = 1e9;
-                
-                if(j >= 1){
-                left = grid[i][j] + dp[i][j-1];
-                }
-                
-                if(i >= 1){
-                up = grid[i][j] + dp[i-1][j];
-                }
-                dp[i][j] = min(left , up);
-            }
-        }
-
+        if(i == 0 && j == 0) return dp[i][j] =  grid[i][j];
         
-        return dp[m-1][n-1];
+        int left = f(i , j-1 , n , m , grid , dp);
+        int up = f(i-1 , j , n , m , grid , dp);
+      
+        return dp[i][j] = grid[i][j] + min({left  , up});
+    }
+    
+    int minPathSum(vector<vector<int>>& grid) {
         
+        int n = grid.size();
+        int m = grid[0].size();
+        
+        vector<vector<int>> dp(n , vector<int>(m , -1));
+        
+        return f(n-1 , m-1 , n , m , grid , dp);
     }
 };
