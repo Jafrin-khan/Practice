@@ -1,8 +1,6 @@
 class Solution {
 public:
     ///Extra space is not required use more optimised approach
-    
-    //https://leetcode.com/problems/set-matrix-zeroes/discuss/2525398/All-approaches-from-brute-force-to-optimal-with-easy-explanation
     void setZeroes(vector<vector<int>>& matrix) {
         
         int n = matrix.size();
