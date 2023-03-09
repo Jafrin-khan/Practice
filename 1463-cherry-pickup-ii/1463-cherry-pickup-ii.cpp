@@ -1,8 +1,15 @@
 class Solution {
 public:
-    //Recursion
-    //TC :
-    //SC :
+    //Memoization
+    /*
+Time Complexity: O(N*M*M) * 9
+
+Reason: At max, there will be N*M*M calls of recursion to solve a new problem and in every call, two nested loops together run for 9 times.
+
+Space Complexity: O(N) + O(N*M*M)
+
+Reason: We are using a recursion stack space: O(N), where N is the path length and an external DP Array of size ‘N*M*M’.
+    */
     int f(int i , int j1 , int j2 , int n , int m , vector<vector<int>>& grid,vector<vector<vector<int>>>& dp){
         if(j1 < 0 || j2 < 0 || j1 >= m || j2 >= m) return -1e9;
         if(dp[i][j1][j2] != -1) return dp[i][j1][j2];
