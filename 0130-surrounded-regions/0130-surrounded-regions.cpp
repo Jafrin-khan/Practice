@@ -1,78 +1,43 @@
 class Solution {
 public:
-    
     /*
     TC = O(M*N).....every element of matrix is processed at most three times.
     
     SC = O(M*N)...Stack space in recursive call
-    
     */
-    
-    void dfs(int i , int j , vector<vector<char>>& board){
+    void dfs(int i , int j , int n , int m , vector<vector<char>>& grid ,  vector<vector<int>>& vis){
+        if(i < 0 || j < 0 || i >= n || j >= m || grid[i][j] != 'O') return;
         
-        int n = board.size();
-        int m = board[0].size();
+        vis[i][j] = 1;
+        grid[i][j] = '$';
         
-        if(i < 0 || j < 0 || i >= n || j >= m || board[i][j] != 'O'){
-            return;
-        }
-        
-        board[i][j] = '$';
-        
-        dfs(i+1 , j , board);
-        dfs(i , j+1 , board);
-        dfs(i-1 , j , board);
-        dfs(i , j-1 , board);
+        dfs(i+1,j,n,m,grid,vis);
+        dfs(i,j+1,n,m,grid,vis);
+        dfs(i-1,j,n,m,grid,vis);
+        dfs(i,j-1,n,m,grid,vis);
     }
-    void solve(vector<vector<char>>& board) {
+    void solve(vector<vector<char>>& grid) {
         
-        int n = board.size();
-        int m = board[0].size();
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n , vector<int>(m,0));
         
-        //row-wise iterate krke 1st aur last col check kro koi 'O' h to dfs
         for(int i = 0 ; i < n ; i++){
-            
-            if(board[i][0] == 'O'){
-                dfs(i , 0 , board);
-            }
-            
-            if(board[i][m-1] == 'O'){
-                dfs(i , m-1 , board);
-            }
+            if(grid[i][0] == 'O' && !vis[i][0]) dfs(i,0,n,m,grid,vis); 
+            if(grid[i][m-1] == 'O' && !vis[i][m-1]) dfs(i,m-1,n,m,grid,vis);
         }
         
-         //col-wise iterate krke 1st aur last row check kro koi 'O' h to dfs
-         for(int i = 0 ; i < m ; i++){
-             
-             if(board[0][i] == 'O'){
-                 dfs(0 , i , board);
-             }
-             
-             if(board[n-1][i] == 'O'){
-                 dfs(n-1 , i , board);
-             }
-         }
+        for(int j = 0 ; j < m ; j++){
+            if(grid[0][j] == 'O' && !vis[0][j]) dfs(0,j,n,m,grid,vis);
+            if(grid[n-1][j] == 'O' && !vis[n-1][j]) dfs(n-1,j,n,m,grid,vis);
+        }
         
-        //uper do loops se humne boundary conditions check krli hai aur jo O h boundary mai aur usse connected unhe $ kr diya h dfs se to ab jo bche hue O h wo puri tarah X se surrounded h (wo Os ka patch) isliye un sbko X m convert krdo
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < m ; j++){
-                
-                if(board[i][j] == 'O'){
-                    board[i][j] = 'X';
-                }
+                if(grid[i][j] == '$') grid[i][j] = 'O';
+                else grid[i][j] = 'X';
             }
         }
         
-        //jo $ hai wo actually m Os ka patch h jo boundary se jude hai isliye surrounded by X ni h isliye unhe ab pehle jaise O bana do
-        
-         for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < m ; j++){
-                
-                if(board[i][j] == '$'){
-                    board[i][j] = 'O';
-                }
-            }
-        }
-                
     }
 };
