@@ -45,6 +45,15 @@ Reason: We are using a recursion stack space: O(N), where N is the path length a
     */
   
     //Tabulation
+    /*
+Time Complexity: O(N*M*M)*9
+
+Reason: The outer nested loops run for (N*M*M) times and the inner two nested loops run for 9 times.
+
+Space Complexity: O(N*M*M)
+
+Reason: We are using an external array of size ‘N*M*M’. The stack space will be eliminated.
+    */
     int cherryPickup(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
