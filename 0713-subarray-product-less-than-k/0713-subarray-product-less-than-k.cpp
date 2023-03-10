@@ -1,10 +1,7 @@
 class Solution {
 public:
-    
-    // https://leetcode.com/problems/subarray-product-less-than-k/discuss/3131119/Sliding-Window-Approach-oror-With-simple-mathematics-trick-oror-C%2B%2B
-    
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
-        
+         
         int n = nums.size();
         
         int left = 0 ,right = 0;
