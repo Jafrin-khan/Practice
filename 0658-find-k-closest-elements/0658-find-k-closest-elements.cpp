@@ -1,5 +1,9 @@
 class Solution {
 public:
+    /*
+    TC = O(N) + O(K) + O(KlogK)
+    SC = O(K)
+    */
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
         int n = arr.size();
