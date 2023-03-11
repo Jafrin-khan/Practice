@@ -1,24 +1,23 @@
 class Solution {
 public:
-    /*
-    TC = O(N) + O(M)
-    SC = O(1)
-    */
+    
+    // https://leetcode.com/problems/search-a-2d-matrix/discuss/1895837/C%2B%2B-BINARY-SEARCH-TREE-(**)-Explained-with-IMG
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         
         int n = matrix.size();
         int m = matrix[0].size();
         
-        for(int i = 0 ; i < n ; i++){
-            int left = matrix[i][0];
-            int right = matrix[i][m-1];
+        int row = 0;
+        int col = m-1;
+        
+        while(row < n && col >= 0){
+            if(matrix[row][col] == target) return true;
             
-            if(target >= left && target <= right){
-                for(int j = 0 ; j < m ; j++){
-                    if(matrix[i][j] == target) return true;
-                }
-            }
+            else if(matrix[row][col] < target) row++;
+            
+            else col--;
         }
+       
         return false;
     }
 };
