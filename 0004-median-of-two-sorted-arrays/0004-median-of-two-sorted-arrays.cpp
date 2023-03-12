@@ -1,5 +1,16 @@
 class Solution {
 public:
+    
+    /*
+Time Complexity : O(log(min(m,n)))
+
+Reason – We are applying binary search on the array which has a minimum size.
+
+Space Complexity: O(1)
+
+Reason – No extra array is used.
+    */
+    
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         
         int n = nums1.size();
