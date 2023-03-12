@@ -1,5 +1,7 @@
 class Solution {
 public:
+    
+    //cycle detection using DFS for directed graphs
      bool isCycle(int node , vector<vector<int>>& adj , vector<int>& vis , vector<int>& dfsVis){
         vis[node] = 1;
         dfsVis[node] = 1;
@@ -18,7 +20,7 @@ public:
       vector<vector<int>> adj(n);
        
        for(int i = 0 ; i < nums.size() ; i++){
-           adj[nums[i][0]].push_back(nums[i][1]);// as directed graph
+           adj[nums[i][1]].push_back(nums[i][0]);// as directed graph
        }
         
        vector<int> vis(n,0);
