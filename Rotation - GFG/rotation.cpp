@@ -16,10 +16,7 @@ public:
 	  while(low < high){
 	      
 	      int mid = low + (high - low) / 2;
-	      if(mid > low && arr[mid-1] > arr[mid]){ 
-	          return mid;
-	          
-	      }
+	      if(mid > low && arr[mid-1] > arr[mid]) return mid;
 	      else if(mid < high && arr[mid+1] < arr[mid]) return mid+1;
 	      
 	      if(arr[high] > arr[mid]) high = mid-1;
