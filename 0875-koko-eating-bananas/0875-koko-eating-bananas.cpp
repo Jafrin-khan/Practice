@@ -40,6 +40,12 @@ public:
 };
 */
 
+/*
+
+https://leetcode.com/problems/koko-eating-bananas/discuss/3270468/Complete-Intuition-to-use-binary-search-explained-oror-Easy-to-understand
+
+*/
+
 class Solution {
 public:
     
