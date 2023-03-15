@@ -20,6 +20,7 @@ class Solution{
         vector<long long> temp(end-start+1);
         long long k = 0;
         
+        //no need to push_back in temp since we have already defined size of vector hence it is filled with garbage value which we have to replace with required values
         while(i <= mid && j <= end){
             if(arr[i] <= arr[j]) temp[k++] = arr[i++];
             else{
@@ -49,7 +50,7 @@ class Solution{
         
         long long cnt = 0;
         
-        if(start < end){
+        if(start < end){ // use 'if' not 'while' loop since we are already doing recursion
         long long mid = (start + end)/2;
         cnt += mergeSort(arr , start , mid);
         cnt += mergeSort(arr , mid+1 , end);
