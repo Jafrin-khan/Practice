@@ -1,5 +1,11 @@
 class Solution {
 public:
+ /*
+Time Complexity: O(V+E), where V = no. of nodes and E = no. of edges. This is a simple BFS algorithm.
+
+Space Complexity: O(N) + O(N) ~ O(2N), O(N) for the indegree array, and O(N) for the queue data structure used in BFS(where N = no.of nodes). Extra O(N) for storing the topological sorting. Total ~ O(3N).
+    
+*/
     //By toposort we detect whether cycle is present or not...it can also be implemented via dfs
     
     bool canFinish(int n, vector<vector<int>>& prerequisites) {
