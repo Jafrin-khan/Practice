@@ -31,7 +31,7 @@ public:
      
      0 == 0 return 4;
      
-     
+     //HERE WE HAVE DISTINCT VALUES
     */
     int search(vector<int>& nums, int target) {
         
