@@ -1,35 +1,45 @@
 class Solution {
 public:
+    //By toposort we detect whether cycle is present or not...it can also be implemented via dfs
     
-    //cycle detection using DFS for directed graphs
-     bool isCycle(int node , vector<vector<int>>& adj , vector<int>& vis , vector<int>& dfsVis){
-        vis[node] = 1;
-        dfsVis[node] = 1;
-        for(auto it : adj[node]){
-            if(!vis[it]){
-                if(isCycle(it , adj, vis , dfsVis)) return true;
-            }
-            else if(dfsVis[it] == 1) return true;
+    bool canFinish(int n, vector<vector<int>>& prerequisites) {
+        
+         vector<int> adj[n];
+        
+        for(int i = 0 ; i < prerequisites.size() ; i++){
+            int u = prerequisites[i][0];
+            int v = prerequisites[i][1];
+            adj[v].push_back(u);
         }
         
-        dfsVis[node] = 0;
-        return false;
-    }
-  
-    bool canFinish(int n, vector<vector<int>>& nums) {
-      vector<vector<int>> adj(n);
-       
-       for(int i = 0 ; i < nums.size() ; i++){
-           adj[nums[i][1]].push_back(nums[i][0]);// as directed graph
-       }
+        vector<int> indegree(n,0);
         
-       vector<int> vis(n,0);
-       vector<int> dfsVis(n,0);
+        for(int i = 0 ; i < n ; i++){
+            for(auto it : adj[i]) indegree[it]++;
+        }
         
-       for(int i = 0 ; i < n ; i++){
-           if(!vis[i] && isCycle(i , adj , vis,dfsVis)) return false;
-       }
+        int cnt = 0;
+        queue<int> q;
         
-        return true;
+        for(int i = 0 ; i < n ; i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            } 
+        }
+        
+        while(!q.empty()){
+            int node = q.front();q.pop();
+            cnt++;
+            
+            for(auto it : adj[node]){
+                indegree[it]--;
+                if(indegree[it] == 0) {
+                    q.push(it);
+                }
+            }
+        }
+        
+        return cnt == n;
+        
     }
 };
