@@ -19,7 +19,7 @@ class Solution
             
             while(s<=e){
                 if(arr[s]+arr[e]>arr[i]){
-                    count = count+(e-s);
+                    count = count+(e-s); // cnt mai hum (e-s) islie add krrey coz agr arr[s] + arr[e] > arr[i] to arr[s+1]+arr[e] aur arr[s+2]+arr[e]..and so on bhi bde hue coz array ascending order mai hai islie saara cnt consider krke e-- kr diya
                     e--;
                 }
                 else
