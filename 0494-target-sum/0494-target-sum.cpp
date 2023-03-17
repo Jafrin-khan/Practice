@@ -66,7 +66,7 @@ public:
         for(int i = 0 ; i < n ; i++){totSum += nums[i];}
         
         int s2 = (totSum - tar)/2;
-        if((totSum - tar) < 0 || (totSum-tar)%2) return 0;
+        if((totSum - tar) < 0 || (totSum-tar)%2 != 0) return 0;
         
         vector<vector<int>> dp(n , vector<int>(s2+1 , 0));//imp. we are finding subset with targetSum 's2' hence dp array uska bna
         
