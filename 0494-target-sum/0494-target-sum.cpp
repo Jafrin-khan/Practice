@@ -69,13 +69,12 @@ public:
         if((totSum - tar) < 0 || (totSum-tar)%2) return 0;
         
         vector<vector<int>> dp(n , vector<int>(s2+1 , 0));//imp. we are finding subset with targetSum 's2' hence dp array uska bna
-          //base cases ka conversion
-        if(nums[0] == 0) dp[0][0] =2;  // 2 cases -pick and not pick
-        else dp[0][0] = 1;  // 1 case - not pick
-
-        if(nums[0]!=0 && nums[0]<=s2) dp[0][nums[0]] = 1;  // 1 case -pick
+        
 				
-       
+		for(int target = 0 ; target <= s2 ; target++){
+            if(target == 0 && nums[0] == 0) dp[0][0] = 2;
+            else if(target == 0 || target == nums[0]) dp[0][target] = 1;   
+        }
         
         for(int ind = 1 ; ind < n ; ind++){
             for(int target = 0 ; target <= s2 ; target++){
