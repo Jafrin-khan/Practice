@@ -24,9 +24,11 @@ public:
     }
     
 */
+    
+/*
     //Memoised
-    //TC = O(N^T)
-    //SC = O(N^T)+O(N)
+    //TC = O(N*T)
+    //SC = O(N*T)+O(N)
     
 //Time Complexity: O(N*T)
 //Reason: There are N*W states therefore at max ‘N*T’ new problems will be solved.
@@ -53,4 +55,32 @@ public:
         vector<vector<int>> dp(n , vector<int>(amount+1,-1));
         return f(n-1 , amount , coins , dp);
     }
+*/
+    
+     //Tabulated
+    //TC = O(N*T)
+    //SC = O(N*T)
+
+    int change(int amount, vector<int>& coins) {
+        
+        int n = coins.size();
+        vector<vector<int>> dp(n , vector<int>(amount+1,0));
+        
+        for(int amt = 0 ; amt <= amount ; amt++){
+            if(amt%coins[0] == 0) dp[0][amt] = 1;
+        }
+        
+        for(int ind = 1 ;  ind < n ; ind++){
+            for(int amt = 0 ; amt <= amount ; amt++){
+                int take = 0;
+                if(amt >= coins[ind]) take = dp[ind][amt - coins[ind]];
+                int notTake = dp[ind-1][amt];
+
+                dp[ind][amt] = take + notTake;
+            }
+        }
+        
+        return dp[n-1][amount];
+    }
+    
 };
