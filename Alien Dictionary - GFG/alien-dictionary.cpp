@@ -9,97 +9,54 @@ using namespace std;
 
 class Solution{
     public:
-    
-    /*
-    
-Time Complexity: O(N*len)+O(K+E), where N is the number of words in the dictionary, ‘len’ is the length up to the index where the first inequality occurs, K = no. of nodes, and E = no. of edges.
-
-Space Complexity: O(K) + O(K)+O(K)+O(K) ~ O(4K), O(K) 
-for the indegree array, and O(K) for the queue data structure
-used in BFS(where K = no.of nodes), O(K) for the answer array
-and O(K) for the adjacency list used in the algorithm.
-    
-    
-    */
-    
-    vector<int> topoSort(int v, vector<int> adj[]){
-	    // code here
-	    
-	    vector<int> ans;
-	     queue<int> q;
-	    vector<int> indegree(v , 0);
-	    
-	    for(int i = 0 ; i < v ; i++){
-	        
-	        for(auto it : adj[i]){
-	            indegree[it]++;
-	        }
-	       
-	    }
-	    
-	     for(int i = 0 ; i < v ; i++){
-	        
-	        
-	     if(indegree[i] == 0){
-	            q.push(i);
-	        }
-	       
-	    }
-	   
-	    
-	    while(!q.empty()){
-	        
-	        int node = q.front();
-	        q.pop();
-	        
-	        ans.push_back(node);
-	        
-	        for(auto it : adj[node]){
-	            indegree[it]--;
-	            
-	            if(indegree[it] == 0){
-	                q.push(it);
-	            }
-	        }
-	        
-	    }
-	    
-	  
-	    return ans;
-	}
-	
-    string findOrder(string dict[], int n, int k) {
-        //code here
+    //explanation in prev submission
+    string toposort( vector<vector<int>>& adj , int v){
         
-        //storing as
-        /* a-->0
-           b-->1
-           c-->2 ... and so on
-         */
-         
-        //making the adj list ,i.e,graph
-        vector<int> adj[k];
+        string topo = "";
+        queue<int> q;
+        vector<int> indegree(v,0);
+        
+        for(int i = 0 ; i < v ; i++){
+            for(auto it : adj[i]) indegree[it]++;
+        }
+        
+        for(int i = 0 ; i < v ; i++){
+            if(indegree[i] == 0) q.push(i);
+        }
+        
+        while(!q.empty()){
+            int node = q.front();
+            q.pop();
+            topo += (node + 'a');
+            for(auto it : adj[node]){
+                indegree[it]--;
+                if(indegree[it] == 0) q.push(it);
+            }
+        }
+        
+        return topo;
+    }
+    string findOrder(string dict[], int n, int v) {
+        
+        vector<vector<int>> adj(v);
         
         for(int i = 0 ; i < n-1 ; i++){
             string s1 = dict[i];
             string s2 = dict[i+1];
-            int len = min(s1.size() , s2.size());
+            
+            int len = min(s1.size(),s2.size());
+            
             for(int ptr = 0 ; ptr < len ; ptr++){
                 if(s1[ptr] != s2[ptr]){
-                    adj[s1[ptr] - 'a'].push_back(s2[ptr]-'a');
+                    adj[s1[ptr] - 'a'].push_back(s2[ptr] - 'a');
                     break;
                 }
             }
         }
         
-        vector<int> topo = topoSort(k , adj);
-        string ans = "";
+        string topo = toposort(adj,v);
         
-        for(auto it : topo){
-            ans = ans + char(it + 'a');
-        }
-        
-        return ans;
+        return topo;
     }
 };
 
