@@ -1,12 +1,13 @@
 class Solution {
 public:
-    /*
+/*
     //Recursion
     //TC = O(2^N)
     //SC = O(N)
 */
     
-    //Memoised
+/*
+//Memoised
 //Time Complexity: O(N*K)
 
 //Reason: There are N*K states therefore at max ‘N*K’ new problems will be solved.
@@ -46,6 +47,48 @@ public:
         vector<vector<int>> dp(n , vector<int>(s2+1 , -1));//imp. we are finding subset with targetSum 's2' hence dp array uska bna
         
         return f(n-1 , s2 , nums , dp);
+        
+    }*/
+    
+//tabulated
+//Time Complexity: O(N*K)
+//Reason: There are two nested loops
+//Space Complexity: O(N*K)
+//Reason: We are using an external array of size ‘N*K’. Stack Space is eliminated.
+    
+ 
+    
+    int findTargetSumWays(vector<int>& nums, int tar) {
+        
+        int n = nums.size();
+        int totSum = 0;
+        
+        for(int i = 0 ; i < n ; i++){totSum += nums[i];}
+        
+        int s2 = (totSum - tar)/2;
+        if((totSum - tar) < 0 || (totSum-tar)%2) return 0;
+        
+        vector<vector<int>> dp(n , vector<int>(s2+1 , 0));//imp. we are finding subset with targetSum 's2' hence dp array uska bna
+          //base cases ka conversion
+        if(nums[0] == 0) dp[0][0] =2;  // 2 cases -pick and not pick
+        else dp[0][0] = 1;  // 1 case - not pick
+
+        if(nums[0]!=0 && nums[0]<=s2) dp[0][nums[0]] = 1;  // 1 case -pick
+				
+       
+        
+        for(int ind = 1 ; ind < n ; ind++){
+            for(int target = 0 ; target <= s2 ; target++){
+                int notTake = dp[ind-1][target];
+                int take = 0;
+                if(nums[ind] <= target){
+                    take = dp[ind-1][target - nums[ind]];
+                }
+                dp[ind][target] = take + notTake;
+            }
+        }
+        
+        return dp[n-1][s2];
         
     }
     
