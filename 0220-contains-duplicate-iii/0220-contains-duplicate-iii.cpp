@@ -74,6 +74,11 @@ struct Solution {
 };
 */
 
+//SLIDING WINDOW IMPLEMENT KRNA NI AARA ISLIE YE SUBMISSION DIYA ABHI
+/*
+TC = O(N*K)
+SC = O(N)
+*/
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
