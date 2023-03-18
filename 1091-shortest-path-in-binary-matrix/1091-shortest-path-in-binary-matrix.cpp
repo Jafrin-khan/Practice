@@ -1,5 +1,12 @@
 class Solution {
 public:
+    
+    /*
+Time Complexity: O( 8*N*M ) { N*M are the total cells, for each of which we also check 4 adjacent nodes for the shortest path length}, Where N = No. of rows of the binary maze and M = No. of columns of the binary maze.
+
+Space Complexity: O( N*M ), Where N = No. of rows of the binary maze and M = No. of columns of the binary maze.
+    
+    */
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         
         int n = grid.size();
