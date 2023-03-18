@@ -8,40 +8,28 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    
-    /*
-Time Complexity: O( E log(V) ), Where E = Number of edges and V = Number of Nodes.
-
-Space Complexity: O( |E| + |V| ), Where E = Number of edges and V = Number of Nodes.
-    */
     vector <int> dijkstra(int v, vector<vector<int>> adj[], int src)
     {
-        // Code here
-        priority_queue<pair<int , int> , vector<pair<int , int>> , greater<pair<int , int>>> pq;
-        vector<int> dist(v , 1e9);
+        priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> pq;
+        pq.push({src,0});
         
-        dist[src] = 0;
-        pq.push({0 , src});
+        vector<int> disTo(v , 1e9);
+        disTo[src] = 0;
         
         while(!pq.empty()){
-            
-            int dis = pq.top().first;
-            int node = pq.top().second;
-            
-            pq.pop();
+            int node = pq.top().first;
+            int dist = pq.top().second; pq.pop();
             
             for(auto it : adj[node]){
-                int currDis = it[1];
-                int currNode = it[0];
-                
-                if(dist[currNode] > dis + currDis){
-                    dist[currNode] = dis + currDis;
-                    pq.push({dist[currNode] , currNode});
+                if(disTo[it[0]] > dist + it[1]){
+                    disTo[it[0]] = dist + it[1];
+                    
+                    pq.push({it[0],dist + it[1]});
                 }
             }
         }
         
-        return dist;
+        return disTo;
         
     }
 };
