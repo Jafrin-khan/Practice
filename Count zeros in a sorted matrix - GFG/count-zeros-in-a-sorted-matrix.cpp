@@ -8,6 +8,9 @@ using namespace std;
 
 class Solution{
 public:
+
+    //https://www.youtube.com/watch?v=IWEVmB8QF2k
+    
 	int countZeros(vector<vector<int>>& nums)
 	{
 	    int ans = 0;
