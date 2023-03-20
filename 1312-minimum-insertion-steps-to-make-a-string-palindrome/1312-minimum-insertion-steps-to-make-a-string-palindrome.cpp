@@ -1,6 +1,16 @@
 class Solution {
 public:
     
+/*
+Time Complexity: O(N*N)
+
+Reason: There are two nested loops
+
+Space Complexity: O(N*N)
+
+Reason: We are using an external array of size (N*N). Stack Space is eliminated.
+  
+ */
     int lcs(string s1 , string s2){
         
         int n = s1.size();
