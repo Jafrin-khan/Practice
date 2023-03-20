@@ -1,60 +1,53 @@
 class Solution {
 public:
     
-     /*
-  TC = ElogV ----> O(n*m*4*log(n*m)).......{log(v) = log(n*m)}..priority_queue l liye h ye
-  SC = O(n*m)
-  */
+    /*
+Time Complexity: O( 4*N*M * log( N*M) ) { N*M are the total cells, for each of which we also check 4 adjacent nodes for the minimum effort and additional log(N*M) for insertion-deletion operations in a priority queue } 
+
+Where, N = No. of rows of the binary maze and M = No. of columns of the binary maze.
+
+Space Complexity: O( N*M ) { Distance matrix containing N*M cells + priority queue in the worst case containing all the nodes ( N*M) }.
+
+Where, N = No. of rows of the binary maze and M = No. of columns of the binary maze.
+    */
     int minimumEffortPath(vector<vector<int>>& heights) {
         
-         int n = heights.size();
+        int n = heights.size();
         int m = heights[0].size();
         
-        //{diff , {row,col}}
-        priority_queue<pair<int , pair<int,int>> ,
-        vector<pair<int , pair<int,int>>> ,
-        greater<pair<int , pair<int,int>>>> pq;
+        priority_queue<pair<int,pair<int,int>> , vector<pair<int ,pair<int,int>>> , greater<pair<int ,pair<int,int>>>> pq; //<diff , i , j > 
+        pq.push({0 , {0 , 0}});
         
-        vector<vector<int>> dist(n , vector<int>(m , 1e9));
+        vector<vector<int>> diffMatrix(n , vector<int>(m,1e9));
+        diffMatrix[0][0] = 0;
         
-        dist[0][0] = 0;
-        pq.push({0 , {0,0}});
-        
-        int dx[] = {-1 , 0 , +1 , 0};
-        int dy[] = {0 , +1 , 0 , -1};
+        int dx[4] = {-1 , 1 , 0 , 0};
+        int dy[4] = {0 , 0 , -1 , 1};
         
         while(!pq.empty()){
             
-            auto it = pq.top();
-            pq.pop();
+            auto front = pq.top();pq.pop();
             
-            int diff = it.first;
-            int r = it.second.first;
-            int c = it.second.second;
-            
-            if(r == n-1 && c == m-1){
-                return diff;
-            }
+            int diff = front.first;
+            int x = front.second.first;
+            int y = front.second.second;
             
             for(int i = 0 ; i < 4 ; i++){
+                int nx = x + dx[i];
+                int ny = y + dy[i];
                 
-                int nr = r + dx[i];
-                int nc = c + dy[i];
-                
-                if(nr >= 0 && nc >= 0 && nr < n && nc < m){
+                if(nx >= 0 && ny >= 0 && nx < n && ny < m){
+                    int newEffort = max(diff , abs(heights[nx][ny] - heights[x][y]));
                     
-                    int newEffort = max(abs(heights[r][c] - heights[nr][nc]) , diff);
-                    if(newEffort < dist[nr][nc]){
-                        dist[nr][nc] = newEffort;
-                        pq.push({newEffort , {nr , nc}});
+                    if(newEffort < diffMatrix[nx][ny]){
+                        diffMatrix[nx][ny] = newEffort;
+                        pq.push({newEffort,{nx,ny}});
                     }
                 }
             }
-            
-            
         }
         
+        return diffMatrix[n-1][m-1];
         
-        return 0;
     }
 };
