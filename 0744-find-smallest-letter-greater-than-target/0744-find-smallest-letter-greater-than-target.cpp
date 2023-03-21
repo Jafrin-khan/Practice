@@ -12,7 +12,7 @@ public:
         while(low <= high){
             int mid = (low + high)/2;
             
-            if((letters[mid] - 'a') > tar) {ans = min(ans , letters[mid]-'a');high = mid-1;}
+            if((letters[mid] - 'a') > tar) {ans = letters[mid]-'a';high = mid-1;}
             else low = mid+1;
         }
         if(ans == 1e9) return letters[0];
