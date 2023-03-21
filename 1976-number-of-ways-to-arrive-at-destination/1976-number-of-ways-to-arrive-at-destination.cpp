@@ -1,6 +1,9 @@
 class Solution {
 public:
-
+   /*
+   TC = O(ElogV)
+   SC = O(N)
+   */
     int countPaths(int n, vector<vector<int>>& r) {
         
       int mod=1e9+7;
@@ -11,7 +14,7 @@ public:
         }
         vector<long long>c(n,0);
         c[0]=1;
-        priority_queue<pair<long long,long long>, vector<pair<long long,long long>>, greater<pair<long long,long long>>> pq;
+        priority_queue<pair<long long,long long>, vector<pair<long long,long long>>, greater<pair<long long,long long>>> pq;//<dis,node>
         vector<long long int>dist(n,1e15);
         dist[0]=0;
         pq.push({0,0});
