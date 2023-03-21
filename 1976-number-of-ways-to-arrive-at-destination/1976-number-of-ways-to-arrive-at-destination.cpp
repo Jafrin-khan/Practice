@@ -4,39 +4,43 @@ public:
    TC = O(ElogV)
    SC = O(N)
    */
-    int countPaths(int n, vector<vector<int>>& r) {
+    int countPaths(int n, vector<vector<int>>& roads) {
         
       int mod=1e9+7;
         vector<vector<pair<long long,long long>>>adj(n);
-        for(int i=0;i<r.size();i++){
-            adj[r[i][0]].push_back({r[i][1],r[i][2]});
-            adj[r[i][1]].push_back({r[i][0],r[i][2]});
+        
+        for(auto road : roads){
+            adj[road[0]].push_back({road[1],road[2]});
+            adj[road[1]].push_back({road[0],road[2]});
         }
-        vector<long long>c(n,0);
-        c[0]=1;
+       
         priority_queue<pair<long long,long long>, vector<pair<long long,long long>>, greater<pair<long long,long long>>> pq;//<dis,node>
-        vector<long long int>dist(n,1e15);
-        dist[0]=0;
+        vector<long long int>disArr(n,1e15);
+        vector<long long>ways(n,0);
+        ways[0]=1;
+        disArr[0]=0;
         pq.push({0,0});
         while(pq.empty()==false){
+            
             auto x=pq.top();
-            long long dis=x.first;
-            long long node=x.second;
-            pq.pop();
+            long long cost=x.first;
+            long long node=x.second;pq.pop();
+            
             for(auto it:adj[node]){
+                long long adjNode=it.first; 
                 long long wt=it.second;
-                long long y=it.first; 
-                if(wt+dis<dist[y]){
-                    dist[y]=(wt+dis);
-                    pq.push({dist[y],y});
-                    c[y]=c[node];
+                
+                if(wt+cost<disArr[adjNode]){
+                    disArr[adjNode]=(wt+cost);
+                    pq.push({wt+cost,adjNode});
+                    ways[adjNode]=ways[node];
                 }
-                else if((wt+dis)==dist[y]){
-                    c[y]=(c[y]+c[node])%mod;
+                else if((wt+cost)==disArr[adjNode]){
+                    ways[adjNode]=(ways[adjNode]+ways[node])%mod;
                 }
                 
             }
         }
-        return c[n-1];
+        return ways[n-1];
     }
 };
