@@ -22,7 +22,7 @@ int main() {
 
 
 int transitionPoint(int arr[], int n) {
-    // code here
+
     int low = 0;
     int high = n-1;
     
