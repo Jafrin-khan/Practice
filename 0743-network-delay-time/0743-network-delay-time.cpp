@@ -1,5 +1,10 @@
 class Solution {
 public:
+    
+    /*
+    TC = O(V + ElogV)
+    SC = O(V) + O(V)
+    */
     int networkDelayTime(vector<vector<int>>& times, int n, int src) {
    
         vector<vector<pair<int,int>>> adj(n+1);
@@ -29,7 +34,6 @@ public:
                 if(disArr[adjNode] > wt + timeTillNode){
                     disArr[adjNode] = wt + timeTillNode;
                     pq.push({adjNode , wt + timeTillNode});
-                    ans = wt + timeTillNode;
                 }
             }
         }
