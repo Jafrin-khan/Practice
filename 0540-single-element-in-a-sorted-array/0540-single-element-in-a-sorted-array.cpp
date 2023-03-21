@@ -1,7 +1,20 @@
 class Solution {
 public:
     
-    //https://www.youtube.com/watch?v=PzszoiY5XMQ
+    /*
+    //Approach 1
+    int singleNonDuplicate(vector<int>& nums) {
+        
+        int ans = 0;
+        for(int i = 0 ; i < nums.size() ; i++){
+            ans = nums[i]^ans;
+                
+        }
+        
+        return ans;
+    }*/
+    
+     //https://www.youtube.com/watch?v=PzszoiY5XMQ
     
     /*
     TC = O(logN)
