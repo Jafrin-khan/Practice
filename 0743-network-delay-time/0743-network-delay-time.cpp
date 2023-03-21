@@ -7,7 +7,7 @@ public:
     */
     int networkDelayTime(vector<vector<int>>& times, int n, int src) {
    
-        vector<vector<pair<int,int>>> adj(n+1);
+        vector<vector<pair<int,int>>> adj(n+1);//here graph is given as 1 b-based endexing hence n+1
         
         for(auto it : times){
             int node = it[0];
