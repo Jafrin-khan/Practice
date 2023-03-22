@@ -5,6 +5,10 @@ public:
     //TC = O(3^N * 3^M)
     //SC = O(N+M)
     
+    //Memoised
+    //TC = O(N*M)
+    //SC = O(N*M) + O(N+M)
+    
     int f(int i , int j , string s1, string s2 , vector<vector<int>>& dp){
         
         if(i < 0) return j+1;
