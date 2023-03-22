@@ -10,31 +10,29 @@ using namespace std;
 
 class Solution {
   public:
+  
+    int mod = 100000;
+    
     int minimumMultiplications(vector<int>& arr, int start, int end) {
-        // code here
         
-        vector<int> dist(100000 , 1e9);
-        queue<pair<int,int>> q; //{node , steps}
-        dist[start] = 0;
-        q.push({start , 0});
-        int mod = 100000;
+        vector<int> disArr(100000 , 1e9);
+        queue<pair<int,int>> q; //<steps,node>
+        
+        q.push({0 , start});
+        disArr[start] = 0;
+        
         while(!q.empty()){
-            
-            int node = q.front().first;
-            int steps = q.front().second;
-            
-            q.pop();
+            int steps = q.front().first;
+            int node = q.front().second;q.pop();
             
             for(auto it : arr){
-                int num = (node*it)%mod; 
-                if(steps+1 < dist[num]){
-                    
-                    if(num == end){
-                        return steps+1;
-                    }
-                    
-                    dist[num] = steps+1;
-                    q.push({num , steps+1});
+                int prod = (it*node)%mod;
+                
+                if(prod == end) return steps+1;
+                
+                if(disArr[prod] > steps+1){
+                    disArr[prod] = steps+1;
+                    q.push({steps+1,prod});
                 }
             }
         }
