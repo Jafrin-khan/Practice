@@ -7,48 +7,32 @@ using namespace std;
 
 class Solution {
   public:
-    /*  Function to implement Bellman Ford
-    *   edges: vector of vectors which represents the graph
-    *   S: source vertex to start traversing graph with
-    *   V: number of vertices
-    */
-    
-    /*
-    TC = V*E.....more than dijksta...hence use in cases having negative cycles only 
-    SC = V
-    */
-    vector<int> bellman_ford(int v, vector<vector<int>>& edges, int s) {
-        // Code here
+   
+    vector<int> bellman_ford(int v, vector<vector<int>>& edges, int src) {
         
-        vector<int> dist(v , 1e8);
-        dist[s] = 0;
-        for(int i = 0 ; i < v ; i++){
-            
+        vector<int> disArr(v,1e8);
+        disArr[src] = 0;
+        
+        v = v-1;
+        
+        while(v--){ // relaxing disArr v-1 times
             for(auto it : edges){
-                
                 int u = it[0];
                 int v = it[1];
                 int wt = it[2];
                 
-                if(dist[u] != 1e8 && dist[u] + wt < dist[v]){
-                    dist[v] = dist[u]+wt;
-                }
+                if(disArr[u] != 1e8 && disArr[v] > wt + disArr[u]) disArr[v] = wt + disArr[u];
             }
         }
         
-         for(auto it : edges){
-                
-                int u = it[0];
-                int v = it[1];
-                int wt = it[2];
-                
-                if(dist[u] != 1e8 && dist[u] + wt < dist[v]){
-                    return {-1};
-                }
-            }
-            
-        return dist;
+        for(auto it : edges){
+            int u = it[0];
+            int v = it[1];
+            int wt = it[2];
+            if(disArr[u] != 1e8 && disArr[v] > disArr[u] + wt) return {-1};
+        }
         
+        return disArr;
     }
 };
 
