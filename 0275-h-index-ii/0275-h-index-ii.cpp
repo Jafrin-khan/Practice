@@ -18,7 +18,7 @@ public:
         int n = citations.size();
         if(n == 1) return min(citations[0] , 1);
         
-        int low = 0 , high = n;
+        int low = 0 , high = n;// yhn high = n naaaki n-1 
         int ans;
         
         while(low <= high){
