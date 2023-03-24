@@ -26,7 +26,7 @@ public:
         return f(0 , 1 , 0 , n , prices);
     }
     */
-    
+    /*
     
     //Memoised
     //TC = O(2*3*N)
@@ -55,5 +55,32 @@ public:
         vector<vector<vector<int>>> dp(n , vector<vector<int>> (2 , vector<int>(3,-1)));//buy --> 0 or 1     transactions --> two ---> 0 , 1 , 2
         
         return f(0 , 1 , 0 , n , prices , dp);
+    }
+    */
+     //Tabulation
+    //TC = O(2*3*N)
+    //SC = O(2*3*N) 
+
+    int maxProfit(vector<int>& prices) {
+        
+        int n = prices.size();
+        
+        vector<vector<vector<int>>> dp(n+1 , vector<vector<int>> (2 , vector<int>(3,0)));//buy --> 0 or 1     transactions --> two ---> 0 , 1 , 2
+        
+        for(int ind = n-1 ; ind >= 0 ; ind--){
+            for(int buy = 0 ; buy <= 1 ; buy++){
+                for(int t = 1 ; t >= 0 ; t--){
+                        int profit = 0;
+                        if(buy){
+                            profit = max(-prices[ind] + dp[ind+1][0][t] , 0 + dp[ind+1][1][t]);
+                        }
+                        else profit = max(prices[ind] + dp[ind+1][1][t+1] , 0 + dp[ind+1][0][t]);//jab sell krte hai stocks tb transaction complete hoga
+
+                        dp[ind][buy][t] = profit;
+                                }
+            }
+        }
+        
+        return dp[0][1][0];
     }
 };
