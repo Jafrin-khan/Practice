@@ -80,10 +80,10 @@ public:
     int maxProfit(vector<int>& prices) {
        
         int n = prices.size();
-        vector<vector<int>> dp(n+1 , vector<int>(3,0));
+        vector<vector<int>> dp(n+1 , vector<int>(2,0));
         
         for(int ind = n-1 ; ind >= 0 ; ind--){
-            for(int buy = 0 ; buy < 3 ; buy++){
+            for(int buy = 0 ; buy < 2 ; buy++){
                 int profit = 0;
                 if(buy){       
                 profit = max(-prices[ind] + dp[ind+1][0] , 0 + dp[ind+1][1]);//max(buy,notBuy);
