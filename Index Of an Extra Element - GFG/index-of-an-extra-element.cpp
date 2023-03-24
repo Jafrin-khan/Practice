@@ -5,6 +5,10 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
   public:
+  /*
+  TC = O(logN)
+  SC = O(1)
+  */
     int findExtra(int a[], int b[], int n) {
         // add code here.
         int low = 0;
