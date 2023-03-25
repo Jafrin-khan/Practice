@@ -24,6 +24,7 @@ public:
     }
     */
     
+    /*
     //memoised
     int f(int ind , int buy , int t , vector<int>& prices , int n , int k , vector<vector<vector<int>>>& dp){
         
@@ -48,5 +49,31 @@ public:
         int n = prices.size();
         vector<vector<vector<int>>> dp(n , vector<vector<int>>(2 , vector<int>(k+1,-1)));
         return f(0 , 1 , 0 , prices , n , k , dp);
+    }
+    */
+    
+    
+     //Tabulated
+   
+    int maxProfit(int k, vector<int>& prices) {
+         
+        int n = prices.size();
+        vector<vector<vector<int>>> dp(n+1 , vector<vector<int>>(2 , vector<int>(k+1,0)));
+        
+        for(int ind = n-1 ; ind >= 0 ; ind--){
+            for(int buy = 0 ; buy <= 1 ; buy++){
+                for(int t = k-1 ; t >= 0 ; t--){
+                    int profit = 0;
+        
+                    if(buy){       
+                            profit = max(-prices[ind] + dp[ind+1][0][t] , 0 + dp[ind+1][1][t]);
+                    }
+                    else profit = max(prices[ind] + dp[ind+1][1][t+1] , 0 + dp[ind+1][0][t]);//jab sell krenge tab transaction complete hogi islie sirf yahi t+1
+
+                    dp[ind][buy][t] = profit;
+                }
+            }
+        }
+        return dp[0][1][0];
     }
 };
