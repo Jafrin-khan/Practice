@@ -35,16 +35,12 @@ We find that b+a is bigger, so a is smaller. So we can define our own compare fu
         int pos = -1;
         
         while(i < ans.size()){
-            if(ans[i] == '0'){
-                if(pos == -1) pos = i;
-                cnt++;
-            }
-            i++;
+            if(ans[i++] == '0')cnt++;
+
         }
         
         if(cnt == ans.size()) return "0";
        
-        
         return ans;
     }
 };
