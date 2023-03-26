@@ -73,7 +73,7 @@ Space Complexity: O(max(m,n)). The length of the new list is at most max(m,n)+1.
         
         /*ye short code bhi dekho accha hai...logic same h bs OR condition daalke better bna diya hai
         
-          ListNode *dummy = new ListNode(); 
+        ListNode *dummy = new ListNode(); 
         ListNode *temp = dummy; 
         int carry = 0;
         while( (l1 != NULL || l2 != NULL) || carry) {
