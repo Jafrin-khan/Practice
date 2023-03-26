@@ -10,6 +10,12 @@ public:
     SC = O(1)
     */
     
+    /*
+    [2, 1, 0, 3]
+    
+    Output : 2
+    */
+    
     int maxChunksToSorted(vector<int>& arr) {
         
         int idx = 0;
