@@ -6,6 +6,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 	
+	// https://www.youtube.com/watch?v=_7VDTBga4XE
 	public:
 	vector<int> findMaxGuests(int entry[], int exit[], int n)
 	{
