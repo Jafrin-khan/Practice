@@ -1,4 +1,29 @@
+/*
 
+DFS APPROACH
+
+ void dfs(int i, vector<int> &vis, vector<vector<int>>& stones){
+        vis[i]=1;
+        for(int u=0;u<stones.size();u++){
+            if(!vis[u] && (stones[u][1]==stones[i][1] || stones[u][0]==stones[i][0]))
+                dfs(u, vis, stones);
+        }
+    }
+    
+    int removeStones(vector<vector<int>>& stones) {
+        int n=stones.size();
+        vector<int> vis(n,0);
+        int v=0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i, vis, stones);
+                    v++;
+            }
+        }
+        return n-v;
+    }
+
+*/
 
 class DisjointSet{
     public:
@@ -44,6 +69,7 @@ public:
         int maxRow = 0;
         int maxCol = 0;
         
+        //for finding the grid size
         for(auto it : stones){
             maxRow = max(maxRow , it[0]);
             maxCol = max(maxCol , it[1]);
