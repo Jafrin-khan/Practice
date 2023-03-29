@@ -31,12 +31,12 @@ Reason: We are only using two rows of size n.
             
         }
         int lastIndex = -1;
-        int cmp = -1;
+        int cmp = -1;//sirf comparison k lie.. koi kaam ni iska aage..hum use krre taaki hmein lastIndex mil ske
         
         for(int ind = 0 ; ind < n ; ind++){
             if(dp[ind] > cmp){
-                cmp = dp[ind];
-                lastIndex = ind;
+                 lastIndex = ind;
+                cmp = dp[ind];   
             }
         }
         
