@@ -42,6 +42,8 @@ The above code may not be accepted, since K * 5 can be more than INT_MAX, but I 
 
 class Solution {
 public:
+    //https://www.youtube.com/watch?v=8VQQbK1uMMc
+    //ye gfg wala YT vid h lekin comcept almost same hai
        long long f(long long num){
             long long cnt = 0;
             while(num){
@@ -64,7 +66,7 @@ public:
                 long long check = f(mid);
                 
                 if(check >= n){
-                    if(check == n ) return 5;
+                    if(check == n ) return 5;//only 2 answers possible 0 or 5
                     high = mid-1;
                 }
                 
