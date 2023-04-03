@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+                                                                                                 
     int binarySearch(vector<pair<int,int>>&inv, int end)
     {
         int lo = 0, hi=inv.size()-1;
@@ -23,8 +23,7 @@ public:
          
         int n = intervals.size();
         if(n==1) return {-1};
-
-         
+ 
         vector<pair<int,int>> v; //<start,ind>
        
         for(int i = 0 ; i < n ; i++){
