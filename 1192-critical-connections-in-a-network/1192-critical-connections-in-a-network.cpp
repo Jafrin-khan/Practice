@@ -1,6 +1,7 @@
 class Solution {
 public:
-    
+    //TC = O(V+2E)
+    //SC = O(V+2E) + O(3N)
     void dfs(int node , int parent , int timer , vector<int>& vis , vector<int> adj[] , vector<int>& tin , vector<int>& low , vector<vector<int>>& bridges){
         vis[node] = 1;
         tin[node] = low[node] = timer;
