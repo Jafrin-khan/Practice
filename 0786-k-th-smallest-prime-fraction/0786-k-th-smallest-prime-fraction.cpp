@@ -11,6 +11,8 @@ public:
     TC = O(N^2)
     SC = O(N)
     */
+    
+    //https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/862410/C%2B%2B-Binary-Search-short-and-easy-Faster-than-99
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
         
         priority_queue<pair<double,pair<int,int>>> pq; //<fraction,n1,n2>
@@ -20,10 +22,7 @@ public:
                 double fraction = (double)arr[i]/arr[j];
                 pq.push({fraction,{arr[i],arr[j]}});
                 if(pq.size() > k) pq.pop();
-            }
-            
-        }
-        
+            }}
         auto top = pq.top();pq.pop();
         vector<int> ans;
         
