@@ -24,13 +24,8 @@ public:
                 cnt++;
             }
         }
-        
-        while(!st.empty()){
-            cnt++;
-            st.pop();
-        }
-        
-        return cnt;
+      
+        return st.size() + cnt;
         
     }
 };
