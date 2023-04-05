@@ -39,8 +39,8 @@ public:
         
         for(auto it : mp){
             vector<int> setElem;
-            for(auto x : it.second){
-                setElem.insert(setElem.end(),x.second.begin(),x.second.end());
+            for(auto x : it.second){//it.second hamara map hai
+                setElem.insert(setElem.end(),x.second.begin(),x.second.end());//set mai hum inset krrke hai  apne s.second mai stored saari nodes jo pehle se asc order mai stored hai coz humner multiset use kra tha
             }
             ans.push_back(setElem);
         }
