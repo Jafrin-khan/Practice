@@ -23,7 +23,7 @@ public:
         return NULL;
     }
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        ListNode* node = new ListNode (INT_MIN);
+        ListNode* node = new ListNode (-1e9);
         for(auto it: lists){
             node = solve(node,it);
         }
