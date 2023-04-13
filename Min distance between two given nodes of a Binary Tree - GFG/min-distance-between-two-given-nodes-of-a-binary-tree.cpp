@@ -86,72 +86,51 @@ Node* buildTree(string str) {
 
 
 // } Driver Code Ends
-/* A binary tree node
-struct Node
-{
-    int data;
-    Node* left, * right;
-}; */
+
 
 class Solution{
     public:
-    /* Should return minimum distance between a and b
-    in a tree with given root*/
-                                
+    
     Node* lca(Node* root , int a , int b){
         
-        if(root == NULL){
-            return root;
-        }
+        if(root == NULL) return NULL;
         
-        if(root->data == a || root->data == b){
-            return root;
-        }
+        if(root->data == a || root->data == b) return root;
         
         Node* left = lca(root->left , a , b);
         Node* right = lca(root->right , a , b);
         
-        if(left && right){
-            return root;
-        }
+        if(left && right) return root;
         
-        return left == NULL? right : left;
+        return left == NULL ? right : left;
         
     }
     
-    void findPath(Node* root , vector<int>& path , int target , vector<int> helper){
-        
-        if(root == NULL){
-            return;
-        }
+    void findPath(Node* root , int target , vector<int>& p , vector<int> helper){
+        if(root == NULL) return;
         
         helper.push_back(root->data);
-        
         if(root->data == target){
-            path = helper;
+            p = helper;
             return;
         }
-        findPath(root->left , path , target , helper);
-        findPath(root->right , path , target , helper);
+        findPath(root->left , target , p , helper);
+        findPath(root->right , target , p , helper);
         helper.pop_back();
     
     }
+    
     int findDist(Node* root, int a, int b) {
-        // Your code here
         
-        if(root == NULL){
-            return 0;
-        }
         Node* common = lca(root , a , b);
+        
+        vector<int> p1 , p2;
         vector<int> helper;
         
-        vector<int> p1;
-        findPath(common , p1 , a , helper);
+        findPath(common , a , p1 , helper);
+        findPath(common , b , p2 , helper);
         
-        vector<int> p2;
-        findPath(common , p2 , b , helper);
-        
-        return p1.size() + p2.size()-2;
+        return p1.size() + p2.size() - 2;
     }
 };
 
