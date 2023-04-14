@@ -1,7 +1,6 @@
-
 class Solution {
 public:
-    TreeNode* f(int& ind , int si , int ei , vector<int>& inorder, vector<int>& postorder){
+    TreeNode* f(int& ind , int si , int ei , vector<int>& inorder , vector<int>& postorder){
         if(si > ei) return NULL;
         int value = postorder[ind];
         ind--;
@@ -25,4 +24,4 @@ public:
         int ind = postorder.size()-1;
         return f(ind , 0 , inorder.size()-1 , inorder , postorder);
     }
-};
+}; 
