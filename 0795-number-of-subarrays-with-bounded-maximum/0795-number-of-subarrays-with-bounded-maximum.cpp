@@ -8,21 +8,20 @@ public:
     SC = O(N)
     */
     
-    int numSubarrayBoundedMax(vector<int>& nums, int L, int R) {
+    //Sliding Window
+    int numSubarrayBoundedMax(vector<int>& A, int L, int R) {
+        int n = A.size();
+        int res = 0, left = -1, right = -1;
         
-        int n = nums.size();
-        int cnt = 0;
-        
-        int left = -1;
-        int right = -1;
-        
-        for(int i = 0 ; i < n ; i++){
-            if(nums[i] > R) left = i;
-            if(nums[i] >= L) right = i;
-            cnt += right-left;
+        for (int i = 0; i < n; i++) {
+            if (A[i] >= L && A[i] <= R)
+                right = i;
+            else if (A[i] > R) {
+                left = right = i;
+            }
+            res += right-left;
         }
-        
-       return cnt;
-        
+    
+        return res;
     }
 };
