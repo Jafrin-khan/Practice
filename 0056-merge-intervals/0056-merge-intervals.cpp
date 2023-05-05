@@ -1,25 +1,26 @@
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& v) {
-        
-        sort(v.begin() , v.end());
+    
+    /*
+    TC = O(NlogN)
+    SC = O(2)
+    */
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
         
         vector<vector<int>> ans;
-        int i = 0;
-        
-        while(i < v.size()){
-           
-            if(!ans.empty()){
-                vector<int> &backV = ans.back();
-                if(backV[1] >= v[i][0]) backV[1] = max(backV[1] , v[i][1]);
-                else ans.push_back(v[i]);  
+        sort(intervals.begin() , intervals.end());
+        for(auto v : intervals){
+            if(ans.empty()) ans.push_back(v);
+            else{
+                vector<int> &vBack = ans.back();
+                if(vBack[1] >= v[0]){
+                    
+                    vBack[1] = max(vBack[1] , v[1]);
+                }
+                else ans.push_back(v);
             }
-            
-            else ans.push_back(v[i]);
-            i++;
         }
         
         return ans;
-        
     }
 };
