@@ -1,9 +1,12 @@
 class Solution {
 public:
     //Approach 1 --> Brute force --> two for loops i is starting
+    //TC = O(N^2) SC = O(1)
     
     /*
     //Approach 2
+    //TC = O(N) + O(N)
+    //SC = O(1)
     int maxProduct(vector<int>& nums) {
         
         int n = nums.size();
@@ -45,10 +48,11 @@ public:
     */
     
     //Approach 3 --> using Kadane's Algo
+    //TC = O(N) SC = O(1)
     
      int maxProduct(vector<int>& nums) {
         
-           int n = nums.size();
+         int n = nums.size();
            
          int prod1 = nums[0] , prod2 = nums[0];
          int maxi = nums[0];
