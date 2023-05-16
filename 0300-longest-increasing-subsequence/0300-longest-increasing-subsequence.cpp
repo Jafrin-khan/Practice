@@ -1,24 +1,23 @@
 class Solution {
 public:
     
-    //recursing , memo , tabulated pichle submission m hai explanation k saath
-    
-    //EASY TRICK FOR LIS WITH O(N) SC
+    int f(int ind , int prev , vector<int>& nums , vector<vector<int>>& dp){
+        
+        if(ind == nums.size()) return 0;
+        
+        if(dp[ind][prev+1] != -1) return dp[ind][prev+1];
+        
+        int take = 0 , notTake = 0;
+        if(prev == -1 || nums[ind] > nums[prev]) take = 1 + f(ind+1 , ind , nums , dp);
+        notTake = 0 + f(ind+1 , prev , nums , dp);
+        
+        return dp[ind][prev+1] = max(take , notTake);
+    }
     
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
-        vector<int> dp(n , 1);
+        vector<vector<int>> dp(n , vector<int>(n+1 , -1));
         
-        int ans = 0;
-        
-        for(int i = 0 ; i < n ; i++){
-            for(int prev = 0 ; prev <= i-1 ; prev++){
-                if(nums[prev] < nums[i]) dp[i] = max(dp[i] , 1 + dp[prev]);
-            }
-        }
-        
-        for(int i = 0 ; i < n ; i++) ans = max(ans , dp[i]);
-        
-        return ans;
+        return f(0 , -1 , nums , dp);
     }
 };
