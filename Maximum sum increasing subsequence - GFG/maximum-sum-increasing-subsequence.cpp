@@ -40,26 +40,25 @@ class Solution{
 	        sum += arr[lastIndex];
 	        
 	    }
-	    
 	    return sum;
 	    */
 	    
 	    //lekin rooh algo ki LIS wala concept hi hai bs twisted hai
 	    
-	    vector<int> dp(n,0);
-	    dp[0] = arr[0];
-	    int maxi = arr[0];
-	    
-	    for(int ind = 1 ; ind < n ; ind++){
-	        dp[ind] = arr[ind];
-	        for(int prev = 0 ; prev <= ind-1 ; prev++){
-	            if(arr[prev] < arr[ind]) dp[ind] = max(dp[ind] , dp[prev] + arr[ind]);
-	        }
-	        
-	        maxi =   max(maxi , dp[ind]);
-	    }
-	    
-	    return maxi;
+	   vector<int> dp(n , 0);
+	   int maxi = arr[0];
+	   
+	   for(int ind = 1 ; ind < n ; ind++){
+	       dp[ind] = arr[ind];
+	       for(int prev = 0 ; prev <= ind-1 ; prev++){
+	           if(arr[prev] < arr[ind]) {
+	               dp[ind] = max(dp[ind] , arr[ind] + dp[prev]);}
+	       }
+	       
+	       maxi = max(maxi , dp[ind]);
+	   }
+	   
+	   return maxi;
 	    
 	    
 	}  
