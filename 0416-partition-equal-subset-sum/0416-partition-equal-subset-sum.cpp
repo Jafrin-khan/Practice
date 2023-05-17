@@ -1,21 +1,6 @@
 class Solution {
 public:
-    
-    int f(int ind , int k , vector<int>& nums , vector<vector<int>>& dp){
-        if(k == 0) return true;
-        if(k < 0) return false;
-        if(ind == 0){
-            if(nums[ind] == k) return true;
-            return false;
-        }
-        
-        if(dp[ind][k] != -1) return dp[ind][k];
-        
-        int take = f(ind-1 , k - nums[ind] , nums , dp);
-        int notTake = f(ind-1 , k , nums , dp);
-        
-        return dp[ind][k] = take || notTake;
-    }
+  
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
         int sum = 0;
@@ -25,8 +10,21 @@ public:
         if(sum%2 != 0) return false;
         sum/=2;
         
-        vector<vector<int>> dp(n+1 , vector<int>(sum+1 , -1));
+        vector<vector<int>> dp(n+1 , vector<int>(sum+1 , 0));
         
-        return f(n-1 , sum , nums , dp);
+        for(int ind = 0 ; ind < n ; ind++) dp[ind][0] = true;
+        if(nums[0] <= sum) dp[0][nums[0]] = true;
+        
+        for(int ind = 1 ; ind < n ; ind++){
+            for(int k = 1 ; k <= sum ; k++){
+                int take = false;
+                if(k - nums[ind] >= 0) take = dp[ind-1][k - nums[ind]];
+                int notTake = dp[ind-1][k];
+
+                dp[ind][k] = take || notTake;
+            }
+        }
+        
+        return dp[n-1][sum];
     }
 };
