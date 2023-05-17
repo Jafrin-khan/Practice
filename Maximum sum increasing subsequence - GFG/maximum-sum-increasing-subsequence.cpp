@@ -48,10 +48,10 @@ class Solution{
 	   vector<int> dp(n , 0);
 	   int maxi = arr[0];
 	   
-	   for(int ind = 1 ; ind < n ; ind++){
+	   for(int ind = 0 ; ind < n ; ind++){
 	       dp[ind] = arr[ind];
 	       for(int prev = 0 ; prev <= ind-1 ; prev++){
-	           if(arr[prev] < arr[ind]) {
+	           if(arr[prev] < arr[ind] ) {
 	               dp[ind] = max(dp[ind] , arr[ind] + dp[prev]);}
 	       }
 	       
