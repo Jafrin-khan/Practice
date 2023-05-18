@@ -13,7 +13,7 @@ public:
         vector<vector<int>> dp(n+1 , vector<int>(sum+1 , 0));
         
         for(int ind = 0 ; ind < n ; ind++) dp[ind][0] = true;
-        if(nums[0] == sum) dp[0][nums[0]] = true;
+        if(nums[0] == sum) dp[0][nums[0]] = true;///////////////////////IMP/////////////////////
         
         for(int ind = 1 ; ind < n ; ind++){
             for(int k = 1 ; k <= sum ; k++){
