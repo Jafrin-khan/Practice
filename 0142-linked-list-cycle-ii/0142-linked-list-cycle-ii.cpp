@@ -8,6 +8,11 @@
  */
 class Solution {
 public:
+    
+    /*
+    TC = O(N)
+    SC = O(1)
+    */
     ListNode *detectCycle(ListNode *head) {
         
         ListNode* slow = head;
