@@ -15,7 +15,7 @@ public:
             if(it == ele) cnt++;
         }
         
-        if(cnt >= (floor)(nums.size()/2)) return ele;
+        if(cnt > (floor)(nums.size()/2)) return ele;
         return -1;
     }
 };
