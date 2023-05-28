@@ -3,7 +3,7 @@ Time Complexity: Exponential in nature, since we are trying out all ways. To be 
 
 (N! * N) nearly.
 
-Space Complexity: O(N^2)
+Space Complexity: O(N)
 */
 
 class Solution {
