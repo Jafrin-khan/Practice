@@ -25,11 +25,11 @@ Space Complexity: O(1), since we are refilling the given board itself, there is 
                 for(char ch = '1' ; ch <= '9' ; ch++){
                     if(isValid(ch , i , j , board)){
                         board[i][j] = ch;
-                        if(f(board)) return true;
+                        if(f(board)) return true;//is character k corresponding hamein ans mil gaya islie true
                         board[i][j] = '.';
                     }
                 }  
-                    return false;
+                    return false;//is character k corresponding hamein ans nahi mila islie hum false return krre taaki backtrack krke dusre character ke character ki recursive call start kr ske
                 }
                 
             }
