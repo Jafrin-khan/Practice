@@ -1,6 +1,7 @@
 class Solution {
 public:
     
+    
     /*
     //Approach 1
     int singleNonDuplicate(vector<int>& nums) {
@@ -17,9 +18,11 @@ public:
      //https://www.youtube.com/watch?v=PzszoiY5XMQ
     
     /*
+    
+    Approach 2
     TC = O(logN)
     SC = O(1)
-    */
+    
     int singleNonDuplicate(vector<int>& nums) {
         
         int low = 0;
@@ -31,6 +34,28 @@ public:
             else high = mid-1;
         }
         
+        return nums[low];
+        }
+    */
+    
+    //Approach 3
+    int singleNonDuplicate(vector<int>& nums) {
+        
+        int low = 0 , high = nums.size()-2;
+        
+        while(low <= high){
+            int mid = (low + high)/2;
+            
+            if(mid%2 == 0){//even
+                if(nums[mid] != nums[mid+1]) high = mid-1;
+                else low = mid+1;
+            }
+            
+            else{//odd
+                if(nums[mid] != nums[mid+1]) low = mid+1;
+                else high = mid-1;
+            }
+        }
         return nums[low];
     }
 };
