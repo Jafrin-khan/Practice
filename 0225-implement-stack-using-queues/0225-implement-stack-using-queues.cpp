@@ -60,37 +60,24 @@ public:
     }
     
     void push(int x) {
-        q.push(x);
+      //sirf issi code se humne apni queue ko stack ki tarah use kr lena hai
+      int s = q.size();
+      q.push(x);
+      for (int i = 0; i < s; i++) {
+
+        q.push(q.front());
+        q.pop();
+      }
     }
     
     int pop() {
-       if(q.size() == 0) return -1;
-       int size = q.size()-1;
-        
-       while(size--){
-           q.push(q.front());q.pop();
-       }
-        
-       int ans = q.front();
+        int n = q.front();
         q.pop();
-        
-        return ans;
+        return n;
     }
     
     int top() {
-       if(q.size() == 0) return -1;
-       int size = q.size()-1;
-        
-       while(size--){
-           q.push(q.front());q.pop();
-       }
-        
-       int ans = q.front();
-        q.pop();
-        
-        q.push(ans);
-        
-        return ans;
+     return q.front();
     }
     
     bool empty() {
