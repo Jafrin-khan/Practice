@@ -1,6 +1,6 @@
 class MyStack {
 public:
-    
+    /*
     queue<int> q1;
     queue<int> q2;
     
@@ -48,6 +48,53 @@ public:
     
     bool empty() {
         return q1.size() == 0;
+    }
+    */
+    
+    
+    //APPROACH 2 IS BY USING A SINGLE QUEUE
+    queue<int> q;
+    
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        q.push(x);
+    }
+    
+    int pop() {
+       if(q.size() == 0) return -1;
+       int size = q.size()-1;
+        
+       while(size--){
+           q.push(q.front());q.pop();
+       }
+        
+       int ans = q.front();
+        q.pop();
+        
+        return ans;
+    }
+    
+    int top() {
+       if(q.size() == 0) return -1;
+       int size = q.size()-1;
+        
+       while(size--){
+           q.push(q.front());q.pop();
+       }
+        
+       int ans = q.front();
+        q.pop();
+        
+        q.push(ans);
+        
+        return ans;
+    }
+    
+    bool empty() {
+        return q.size() == 0;
     }
 };
 
