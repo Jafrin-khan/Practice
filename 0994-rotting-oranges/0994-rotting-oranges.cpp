@@ -1,58 +1,50 @@
 class Solution {
-public: 
-    /*
-    TC = O(N*M) + O(N*M)
-    SC = O(N*M)
-    */
+public:
     int orangesRotting(vector<vector<int>>& grid) {
         
-        queue<pair<int,int>> q;
         int n = grid.size();
         int m = grid[0].size();
         
-        int tot = 0 , rotten = 0;
+        queue<pair<int,int>> rotten;//<i , j>
+        int tot = 0;
+        int rot = 0;
         
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < m ; j++){
-                if(grid[i][j] == 2){
-                    rotten++;
-                    q.push({i,j});
+                if(grid[i][j] == 2) {
+                    rot++;
+                    rotten.push({i,j});
                 }
-                
                 if(grid[i][j] != 0) tot++;
             }
         }
-        //imp condition
-        if(tot == rotten) return 0;
+        
+        if(rot == tot) return 0;/////////////////////
         
         int time = -1;
         int dx[4] = {-1 , 1 , 0 , 0};
         int dy[4] = {0 , 0 , -1 , 1};
         
-        while(!q.empty()){
-            int size = q.size();
-            while(size--){
-                int x = q.front().first;
-                int y = q.front().second;
-                q.pop();
-                for(int i = 0 ; i < 4 ; i++){
-                    int nx = x + dx[i];
-                    int ny = y + dy[i];
-                    
-                    if(nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-                    if(grid[nx][ny] == 1) {
-                        q.push({nx,ny});
-                        grid[nx][ny] = 2;
-                        rotten++;
-                    }
-                }
-                
-            }
+        while(!rotten.empty()){
             
+            int size = rotten.size();//////////////////////////////////////////
             time++;
+            
+            while(size--){////////////////////////////////
+            int x = rotten.front().first;
+            int y = rotten.front().second; rotten.pop();
+            
+            for(int i = 0 ; i < 4 ; i++){
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if(nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 1){
+                    rotten.push({nx,ny});
+                    grid[nx][ny] = 2;/////////////////////////
+                    rot++;
+                }
+            }
         }
-        
-        return tot == rotten ? time : -1;
-        
+        }
+        return rot == tot ? time : -1;
     }
 };
