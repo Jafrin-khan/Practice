@@ -86,7 +86,7 @@ public:
                 
                 else{
                     prev->right = curr;
-                    ans.push_back(curr->val);
+                    ans.push_back(curr->val);////////////////////ba sye change hai inorder sai
                     curr = curr->left;
                 }
             }
