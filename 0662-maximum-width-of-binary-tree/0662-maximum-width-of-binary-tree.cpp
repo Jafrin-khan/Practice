@@ -10,54 +10,36 @@
  * };
  */
 class Solution {
-public:
+public:                                     
     int widthOfBinaryTree(TreeNode* root) {
-        
-        if(root == NULL){
-            return 0;
-        }
-        
-        queue<pair<TreeNode*,long long>> q;
+                                            
+        if(root == NULL) return 0;
+                                                 
+        queue<pair<TreeNode* , long long int>> q;
         q.push({root , 0});
         
-        long long left = 0;
-        long long right = 0;
-        
-        long long maxWidth = 0;
+        long long int width = 0;
         
         while(!q.empty()){
             
-            long long k = q.size();
-            long long line = q.front().second;
+            long long int size = q.size();
+            long long int line = q.front().second;
             
-            for(long long i = 0 ; i < k ; i++){
+            long long int left = 0 , right = 0;
+            
+            for(long long int i = 0 ; i < size ; i++){
+                long long int curr = q.front().second - line;
+                TreeNode* node = q.front().first; q.pop();
                 
-                auto front = q.front();
-                q.pop();
-                TreeNode* node = front.first;
-                long long currLine = front.second - line;
+                if(i == 0) left = curr;
+                if(i == size-1) right = curr;
+                width = max(width , right - left + 1);
                 
-                if(i == 0){
-                    left = currLine;
-                }
-                
-                if(i == k-1){
-                    right = currLine;
-                }
-                
-                if(node->left){
-                    q.push({node->left , 2*currLine+1});
-                }
-                
-                if(node->right){
-                    q.push({node->right , 2*currLine+2});
-                }
-                
-                maxWidth = max(maxWidth , right-left+1);
+                if(node->left) q.push({node->left , 2*curr+1});
+                if(node->right) q.push({node->right , 2*curr+2});
             }
+               
         }
-        
-        return maxWidth;
-        
+        return width;
     }
 };
