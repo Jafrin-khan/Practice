@@ -20,10 +20,11 @@ public:
         
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < m ; j++){
+                if(i != j){
                 if(isConnected[i][j] == 1) {
                     adj[i].push_back(j);
                 }
-            }
+            }}
         }
         vector<int> vis(n,0);
         int cnt = 0;
