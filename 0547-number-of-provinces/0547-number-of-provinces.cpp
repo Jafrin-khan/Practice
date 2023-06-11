@@ -13,22 +13,20 @@ public:
     
     int findCircleNum(vector<vector<int>>& isConnected) {
         
-        int n =  isConnected.size();
-        int m = isConnected[0].size();
+        int v = isConnected.size();
         
-        vector<vector<int>> adj(n);
-        
-        for(int i = 0 ; i < n ; i++){
-            for(int j = 0 ; j < m ; j++){
+        vector<vector<int>> adj(v);/////////////////////////////////////   V DAALNA IS IMP //////////////////////////////////////
+        for(int i = 0 ; i < v ; i++){
+            for(int j = 0 ; j < isConnected[0].size() ; j++){
                 if(i != j){
-                if(isConnected[i][j] == 1) {
+                if(isConnected[i][j] == 1){
                     adj[i].push_back(j);
                 }
-            }}
-        }
-        vector<int> vis(n,0);
+            }
+        }}
+        vector<int> vis(v,0);
         int cnt = 0;
-        for(int i = 0 ; i < n ; i++){
+        for(int i = 0 ; i < v ; i++){
             if(!vis[i]){
                 cnt++;
                 dfs(i , vis , adj);
