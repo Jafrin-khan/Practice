@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    //see previos solution for referring code
+    //see first solution for referring code
     void dfs(int node , vector<int>& vis , vector<vector<int>> adj){
         vis[node] = 1;//////////////////////////////
         for(auto it : adj[node]){
