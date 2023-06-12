@@ -7,7 +7,7 @@ public:
         
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < i ; j++){
-                  swap(grid[i][j] , grid[j][i]);
+                swap(grid[i][j],grid[j][i]);
             }
         }
         
