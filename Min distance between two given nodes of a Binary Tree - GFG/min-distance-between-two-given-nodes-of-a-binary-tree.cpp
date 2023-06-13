@@ -109,14 +109,14 @@ class Solution{
     void findPath(Node* root , int target , vector<int>& p , vector<int> helper){
         if(root == NULL) return;
         
-        helper.push_back(root->data);
+        helper.push_back(root->data);//////////////////////////
         if(root->data == target){
             p = helper;
             return;
         }
         findPath(root->left , target , p , helper);
         findPath(root->right , target , p , helper);
-        helper.pop_back();
+        helper.pop_back();////////////////////////////////////
     
     }
     
@@ -130,7 +130,7 @@ class Solution{
         findPath(common , a , p1 , helper);
         findPath(common , b , p2 , helper);
         
-        return p1.size() + p2.size() - 2;
+        return p1.size() + p2.size() - 2;/////////////////////////////
     }
 };
 
