@@ -16,21 +16,21 @@ public:
     int rob(vector<int>& nums) {
         int n = nums.size();
         
-        if(n == 1) return nums[0];
-        if(n == 2) return max(nums[0] , nums[1]);
+        if(n == 1) return nums[0];///////////////
+        if(n == 2) return max(nums[0] , nums[1]);////////////////
 
         vector<int> dp(n , -1);
         
-        vector<int> v1;
-        vector<int> v2;
+        vector<int> v1;/////////
+        vector<int> v2;/////////////
         
         for(int i = 0 ; i < nums.size() ; i++){
-            if(i != 0) v1.push_back(nums[i]);
-            if(i != n-1) v2.push_back(nums[i]);
+            if(i != 0) v1.push_back(nums[i]);////////
+            if(i != n-1) v2.push_back(nums[i]);////////////
         }
         n--;
-        vector<int> dp1(n , -1);
-        vector<int> dp2(n , -1);
+        vector<int> dp1(n , -1);///////////////////
+        vector<int> dp2(n , -1);//////////////////////
         return max(f(n-1 , v1 , dp1) , f(n-1 , v2 , dp2));
     }
 };
