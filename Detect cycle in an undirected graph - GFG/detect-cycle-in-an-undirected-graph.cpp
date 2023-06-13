@@ -7,37 +7,24 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     
-     //TC = O(V+2E)
-    //SC = O(V)
-    
-    bool isCycle(int node , vector<int>& vis , vector<int> adj[]){
-        queue<pair<int,int>> q;//<node,parent>
-        q.push({node,-1});
+    bool dfs(int node ,int par , vector<int> adj[] , vector<int>& vis){
         vis[node] = 1;
-        
-        while(!q.empty()){
-            int node = q.front().first; 
-            int par = q.front().second; q.pop();
-            for(auto it : adj[node]){
-                if(!vis[it]){
-                    vis[it] = 1;
-                    q.push({it,node});
-                }
-                
-                else if(it != par) return true;
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                if(dfs(it ,node, adj , vis)) return true;
             }
             
+            else if(par != it) return true;///////////////////////////////
         }
-        
         return false;
     }
-   
-    bool isCycle(int n, vector<int> adj[]) {
+    bool isCycle(int v, vector<int> adj[]) {
         
-        vector<int> vis(n,0);
-        for(int i = 0 ; i < n ; i++){
+        vector<int> vis(v , 0);
+        
+        for(int i = 0 ; i < v ; i++){
             if(!vis[i]){
-                if(isCycle(i , vis , adj)) return true;
+                if(dfs(i , -1 , adj , vis)) return true;
             }
         }
         
