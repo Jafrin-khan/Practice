@@ -1,31 +1,46 @@
 class Solution {
 public:
     
-    void dfs(int i , int j , int n , int m , vector<vector<char>>& grid,vector<vector<int>>& vis){
-        if(i < 0 || j < 0 || i >= n || j >= m || grid[i][j] != '1' || vis[i][j] == 1) return;
+    void bfs(int i , int j , vector<vector<char>>& grid , int n , int m){
         
-        vis[i][j] = 1;
-        dfs(i+1,j,n,m,grid,vis);
-        dfs(i,j+1,n,m,grid,vis);
-        dfs(i-1,j,n,m,grid,vis);
-        dfs(i,j-1,n,m,grid,vis);
+        queue<pair<int,int>> q;
+        q.push({i,j});
+        grid[i][j] = '$';
         
+        int dx[4] = {-1 , 1 , 0 , 0};
+        int dy[4] = {0 , 0 , -1 , 1};
+        
+        while(!q.empty()){
+            int x = q.front().first;
+            int y = q.front().second;q.pop();
+            
+            for(int i = 0 ; i < 4 ; i++){
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                
+                if(nx >= 0 && ny >= 0 && nx < n && ny < m && grid[nx][ny] == '1'){
+                    q.push({nx , ny});
+                    grid[nx][ny] = '$';
+                }
+            }
+        }
     }
     int numIslands(vector<vector<char>>& grid) {
         
         int n = grid.size();
         int m = grid[0].size();
-        vector<vector<int>> vis(n , vector<int>(m,0));
+        
         int cnt = 0;
+        
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < m ; j++){
-                if(!vis[i][j] && grid[i][j] == '1'){
-                dfs(i,j,n,m,grid,vis);
-                cnt++;
+                if(grid[i][j] == '1'){
+                    bfs(i , j , grid, n , m);
+                    cnt++;
                 }
             }
         }
         
         return cnt;
     }
-};
+};  
