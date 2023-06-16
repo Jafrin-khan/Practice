@@ -7,22 +7,21 @@ class Solution {
   public:
     // Function to detect cycle in an undirected graph.
     
-    bool bfs(int src , vector<int> adj[] , vector<int>& vis){
-        
+    bool bfs(int src ,int par, vector<int> adj[] , vector<int>& vis){
         queue<pair<int,int>> q;
-        q.push({src,-1});
+        q.push({src,par});
         vis[src] = 1;
         
         while(!q.empty()){
-            int node = q.front().first;
-            int par = q.front().second;q.pop();
+            auto front = q.front(); q.pop();
+            int node = front.first;
+            int par = front.second;
             
             for(auto it : adj[node]){
                 if(!vis[it]){
+                    q.push({it , node});
                     vis[it] = 1;
-                    q.push({it,node});
                 }
-                
                 else if(par != it) return true;
             }
         }
@@ -30,11 +29,12 @@ class Solution {
         return false;
     }
     bool isCycle(int v, vector<int> adj[]) {
-        vector<int> vis(v,0);
-       
+        
+        vector<int> vis(v , 0);
+        
         for(int i = 0 ; i < v ; i++){
             if(!vis[i]){
-                if(bfs(i , adj , vis)) return true;
+                if(bfs(i , -1 , adj , vis)) return true;
             }
         }
         
