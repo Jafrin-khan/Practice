@@ -7,14 +7,14 @@ public:
         
         queue<int> q;
         q.push(src);
-        color[src] = 0;
+        color[src] = 0;/////////COLOR[SRC] TO DEFINE KRO WO HI NAHI KARA THA AUR SUBMIT KRNE CHALE
         
         while(!q.empty()){
             
             int node = q.front();q.pop();
             
             for(auto it : adj[node]){
-                if(color[it] == -1) {color[it] = 1 - color[node];q.push(it);}
+                if(color[it] == -1) {color[it] = 1 - color[node];q.push(it);}////////////PUSH KRNA NAHI BHULNA
                 else if(color[it] == color[node]) return false;
             }
             
