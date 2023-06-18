@@ -1,13 +1,23 @@
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     
-    ListNode* reverseList(ListNode* head) {
+    ListNode* reverse(ListNode* head){
         
         if(head == NULL) return head;
         
         ListNode* curr = head;
         ListNode* prev = NULL;
+        
         while(curr != NULL){
             ListNode* nextNode = curr->next;
             curr->next = prev;
@@ -18,10 +28,8 @@ public:
         return prev;
     }
     
-    ListNode* findMid(ListNode* head){
-        
+    bool isPalindrome(ListNode* head) {
         if(head == NULL || head->next == NULL) return head;
-        
         ListNode* slow = head;
         ListNode* fast = head->next;
         
@@ -30,28 +38,22 @@ public:
             fast = fast->next->next;
         }
         
-        return slow;
-        
-    }
-    
-    bool isPalindrome(ListNode* head) {
-        
-        if(head == NULL || head->next == NULL) return head;
-        
-        ListNode* mid = findMid(head);
-        ListNode* rightList = reverseList(mid->next);
+        ListNode* mid = slow;
+        //cout<<mid->val<<endl;
+        ListNode* l2 = reverse(mid->next);
         mid->next = NULL;
         
-        ListNode* t1 = head;
-        ListNode* t2 = rightList;
         
-        while(t1 != NULL && t2 != NULL){
-            if(t1->val != t2->val) return false;
-            t1 = t1->next;
-            t2 = t2->next;
+        ListNode* l1 = head;
+        
+        while(l1 && l2){
+            
+            if(l1->val != l2->val) return false;
+            
+            l1 = l1->next;
+            l2 = l2->next;
         }
         
         return true;
-          
     }
 };
