@@ -5,47 +5,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to detect cycle in a directed graph.
-    bool isCyclic(int v, vector<int> adj[]) {
-        // code here
+
+    bool dfs(int node , vector<int>& vis , vector<int>& pathVis , vector<int> adj[]){
+        vis[node] = 1;
+        pathVis[node] = 1;
         
-        //using kahn's algo
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                if(dfs(it , vis , pathVis , adj)) return true;
+            }
+            else if(vis[it] && pathVis[it]) return true;
+        }
         
-        vector<int> indegree(v , 0);
+        pathVis[node] = 0;
+        return false;
+    }
+    bool isCyclic(int n , vector<int> adj[]) {
         
-        for(int i = 0 ; i < v ; i++){
-            
-            for(auto it : adj[i]){
-                indegree[it]++;
+        vector<int> vis(n , 0);
+        vector<int> pathVis(n , 0);
+        
+        for(int i = 0  ; i < n ; i++){
+            if(!vis[i]){
+                if(dfs(i , vis , pathVis , adj))return true;
             }
         }
         
-        queue<int> q;
-        
-        for(int i = 0 ; i < v ; i++){
-            if(indegree[i] == 0){
-                q.push(i);
-            }
-        }
-        
-        int cnt = 0;
-        while(!q.empty()){
-            
-            int node = q.front();
-            q.pop();
-            cnt++;
-            
-            for(auto it : adj[node]){
-                indegree[it]--;
-                
-                if(indegree[it] == 0){
-                    q.push(it);
-                }
-            }
-            
-        }
-        
-        return cnt != v;
+        return false;
     }
 };
 
