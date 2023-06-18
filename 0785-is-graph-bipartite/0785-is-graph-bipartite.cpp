@@ -1,32 +1,37 @@
 class Solution {
 public:
-    //TC aur explanation pichle submission mai
-    bool dfs(int node , int color , vector<vector<int>>& adj , vector<int>& col){
-        col[node] = color;
+    
+    //purane submission dekho
+    
+    bool bfs(int src ,vector<int>& color , vector<vector<int>>& adj){
         
-        for(auto it : adj[node]){
-             if(col[it] == -1){
-                if(!dfs(it , 1- color, adj , col)) return false;
+        queue<int> q;
+        q.push(src);
+        color[src] = 0;
+        
+        while(!q.empty()){
+            
+            int node = q.front();q.pop();
+            
+            for(auto it : adj[node]){
+                if(color[it] == -1) {color[it] = 1 - color[node];q.push(it);}
+                else if(color[it] == color[node]) return false;
             }
-            else{
-                if(color == col[it]) return false;
-            }
+            
         }
+        
         return true;
     }
+    
     bool isBipartite(vector<vector<int>>& adj) {
         
         int n = adj.size();
-       
-        vector<int> col(n,-1);
         
+        vector<int> color(n , -1);
         for(int i = 0 ; i < n ; i++){
-            if(col[i] == -1){
-                if(!dfs(i , 0 , adj , col)) return false;
-            }
+            if(color[i] == -1) if(!bfs(i , color , adj)) return false;
         }
         
         return true;
-        
     }
 };
