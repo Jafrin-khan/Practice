@@ -1,72 +1,44 @@
-    
-#include<bits/stdc++.h>
 class Solution {
 public:
-    
-    /* check tc
-    TC = O(NlogN) + O(N^2) ~ O(N^2)
-    SC = O(N^2) + O(3)
-    */
-    
-    //these conditions are used to remove duplicates
-    
     vector<vector<int>> threeSum(vector<int>& nums) {
         
+        
         sort(nums.begin() , nums.end());
+        vector<vector<int>> ans;
         int n = nums.size();
         
-        vector<vector<int>> ans;
-        
-        if(n < 3){
-            return ans;
-        }
-        
-        for(int i = 0 ; i < n-2 ; i++){
+        for(int i = 0 ; i < n ; i++){
             
-            //25-27 conditions
-            if(i > 0 && nums[i] == nums[i-1]){
-                continue;
-            }
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            int target = 0 - nums[i];
             
             int left = i+1;
-            int right = n-1;
-            int toFind = 0 - nums[i];
+            int right = nums.size()-1;
             
             while(left < right){
-               
-                if(nums[left] + nums[right] == toFind){
+                if(nums[left] + nums[right] == target){
                     vector<int> v;
                     v.push_back(nums[i]);
                     v.push_back(nums[left]);
                     v.push_back(nums[right]);
-                 
+                    
                     ans.push_back(v);
-                 
-                //44 to 54 conditions
-                while(left < right && nums[left] == nums[left+1]){
-                    left++;
-                }
-
-                while(left < right && nums[right] == nums[right-1]){
-                    right--;
-                }
+                    
                     left++;
                     right--;
-                      
+                    
+                    while(left < right && nums[left] == nums[left - 1]) left++;
+                    while(left < right && nums[right] == nums[right + 1]) right--;
                 }
                 
-                else if(nums[left] + nums[right] < toFind){
+                else if(nums[left] + nums[right] < target){
                     left++;
                 }
                 
-                else{
-                    right--;
-                }
+                else right--;
             }
-          
         }
         
         return ans;
-        
     }
 };
