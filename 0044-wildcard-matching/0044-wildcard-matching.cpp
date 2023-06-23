@@ -1,20 +1,7 @@
 class Solution {
 public:
-   /*
-MEMOISED
-
-Time Complexity: O(N*M)
-
-Reason: There are N*M states therefore at max ‘N*M’ new problems will be solved.
-
-Space Complexity: O(N*M) + O(N+M)
-
-Reason: We are using a recursion stack space(O(N+M)) and a 2D array ( O(N*M)).
-*/
     
-//i -- pattern
-    //j -- text
-    bool f(int i , int j , string& text, string& pattern ,  vector<vector<int>>& dp){
+      bool f(int i , int j , string& text, string& pattern ,  vector<vector<int>>& dp){
         
         if(i < 0 && j < 0){
             return true;
