@@ -1,5 +1,13 @@
 class Solution {
 public:
+    /*
+    
+    s = "()[]{}"
+                | return true
+    stack ->
+    
+    
+    */
     bool isValid(string s) {
         
         stack<char> st;
