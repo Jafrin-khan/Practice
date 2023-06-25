@@ -1,6 +1,13 @@
 class MyQueue {
 public:
     
+//TUF KI OPTIMISED APPROACH
+    
+//     queue -> 
+        
+//     stack1 -> 2
+//     stack2 -> 
+    
     stack<int> st1;
     stack<int> st2;
     MyQueue() {
