@@ -17,7 +17,7 @@ public:
                 if(r - l + 1 > len){
                 start = l;
                 end = r;
-                len = max(len , end-start+1);
+                len = end-start+1;
                 }
                 l-- ; r++;
             }   
@@ -31,7 +31,7 @@ public:
                 if(r - l + 1 > len){
                 start = l;
                 end = r;
-                len = max(len , end-start+1);
+                len = end-start+1;
                 }
                 l-- ; r++;
             }   
