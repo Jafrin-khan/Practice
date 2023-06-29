@@ -10,26 +10,15 @@
  */
 class Solution {
 public:
-    
-//     1 -> 2 -> 3 -> 4 -> 5
-        
-//     1 5->
-        
+    // TC = O(N)
+    // SC = O(1)
     ListNode* reverseList(ListNode* head) {
-        
-        if(head == NULL || head->next == NULL) return head;
-        
-        ListNode* nextList = head->next;
+        if (head == NULL||head->next==NULL)
+            return head;
+
+        ListNode* nnode = reverseList(head->next);
+        head->next->next = head;
         head->next = NULL;
-        
-        nextList = reverseList(nextList);
-        ListNode* tail = nextList;
-        
-        while(tail->next != NULL) tail = tail->next;
-        
-        tail->next = head;
-        
-        return nextList;
-        
+        return nnode;
     }
 };
