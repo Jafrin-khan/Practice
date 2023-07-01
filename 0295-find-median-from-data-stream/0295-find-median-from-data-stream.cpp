@@ -9,31 +9,21 @@ public:
     }
     
     void addNum(int num) {
-        
         mx.push(num);
-        mn.push(mx.top());
-        mx.pop();
+        mn.push(mx.top());mx.pop();
         
         if(mn.size() > mx.size()){
             mx.push(mn.top());
             mn.pop();
         }
-        
     }
     
     double findMedian() {
         
-        double ans;
-        if((mn.size() + mx.size())%2){
-            ans = mx.top();
-        }
+        int size = (mn.size() + mx.size());
         
-        else{
-            ans = (mx.top() + mn.top());
-            ans/=2;
-        }
-        
-        return ans;
+        if(size%2 == 1) return mx.top();
+        else return  (double)(mn.top() + mx.top())/2.0;
     }
 };
 
