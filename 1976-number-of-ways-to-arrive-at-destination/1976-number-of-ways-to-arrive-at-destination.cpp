@@ -1,12 +1,10 @@
 class Solution {
 public:
-   /*
-   TC = O(ElogV)
-   SC = O(N)
-   */
-    int countPaths(int n, vector<vector<int>>& roads) {
-        
+    
       int mod=1e9+7;
+    
+    int countPaths(int n, vector<vector<int>>& roads) {
+         int mod=1e9+7;
         vector<vector<pair<long long,long long>>>adj(n);
         
         for(auto road : roads){
