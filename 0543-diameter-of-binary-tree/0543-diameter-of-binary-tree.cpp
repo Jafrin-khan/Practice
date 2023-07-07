@@ -15,23 +15,21 @@ public:
     int h(TreeNode* root){
         if(root == NULL) return 0;
         
-        int lh = h(root->left);
-        int rh = h(root->right);
+       int lh =  h(root->left);
+       int rh = h(root->right);
         
-        return max(lh,rh) + 1;
+       return 1 + max(lh,rh);
     }
     
-    int dia(TreeNode* root){
+    int f(TreeNode* root){
         
         if(root == NULL) return 0;
-        
-        int lh = h(root->left);
-        int rh = h(root->right);
-        
-        return max({lh+rh+1 , dia(root->left) , dia(root->right)});  
+        return max({h(root->left) + h(root->right) + 1,f(root->left),f(root->right)});
     }
     
     int diameterOfBinaryTree(TreeNode* root) {
-        return dia(root)-1;////////////////////////////////
+        
+        return f(root)-1;
+        
     }
 };
