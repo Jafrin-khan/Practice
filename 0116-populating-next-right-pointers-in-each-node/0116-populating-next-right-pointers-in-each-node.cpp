@@ -19,20 +19,10 @@ public:
 class Solution {
 public:
     
-    /*
-    TC = O(N)...simple tree traversal
-    SC = O(N) or O(1)?? check from friends
-    */
     void f(Node* root){
+        if(root == NULL || (root->left == NULL && root->right == NULL)) return;
         
-        if(root == NULL || (root->left == NULL && root->right == NULL)){
-            return;
-        }
-        
-        if(root->left){
-            root->left->next = root->right;
-        }
-        
+        root->left->next = root->right;
         if(root->next){
             root->right->next = root->next->left;
         }
@@ -41,8 +31,8 @@ public:
         f(root->right);
     }
     Node* connect(Node* root) {
-        f(root);
         
+        f(root);
         return root;
     }
 };
