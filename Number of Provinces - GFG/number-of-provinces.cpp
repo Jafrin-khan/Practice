@@ -9,34 +9,44 @@ using namespace std;
 class Solution {
   public:
   
-    void dfs(int node , vector<int> adj[], vector<int>& vis){
-        vis[node] = 1;
-        for(auto it : adj[node]){
-            if(!vis[it]){
-                dfs(it , adj , vis);
-            }
-        }
-    }
-    int numProvinces(vector<vector<int>> graph, int v) {
-        // code here
-       
-        vector<int> adj[v+1];
+    void bfs(int src , vector<int>& vis , vector<vector<int>>& adj){
         
-        for(int i = 0 ; i < v ; i++){
-            for(int j = 0 ; j < v ; j++){
-                if(graph[i][j] == 1 && i != j){
-                    adj[i+1].push_back(j+1);
-                    adj[j+1].push_back(i+1);
+        vis[src] = 1;
+        queue<int> q;
+        q.push(src);
+        
+        while(!q.empty()){
+            
+            int node = q.front();q.pop();
+            for(auto it : adj[node]){
+                if(!vis[it]){
+                    vis[it] = 1;
+                    q.push(it);
                 }
             }
         }
         
-        vector<int> vis(v+1,0);
-        int cnt = 0;
+    }
+    int numProvinces(vector<vector<int>> graph, int v) {
         
-        for(int i = 1 ; i <= v ; i++){
+        vector<vector<int>> adj(v);
+        
+        for(int i = 0 ; i < v ; i++){
+            for(int j = 0 ; j < v ; j++){
+                if(graph[i][j] == 1){
+                    int u = i;
+                    int v = j;
+                    adj[u].push_back(v);
+                    adj[v].push_back(u);
+                }
+            }
+        }
+        
+        int cnt = 0;
+        vector<int> vis(v , 0);
+        for(int i = 0 ; i < v ; i++){
             if(!vis[i]){
-                dfs(i , adj , vis);
+                bfs(i ,vis ,  adj);
                 cnt++;
             }
         }
