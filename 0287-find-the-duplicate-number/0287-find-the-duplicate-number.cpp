@@ -10,14 +10,23 @@ public:
         do{
             slow = nums[slow];
             fast = nums[nums[fast]];    
-        }while(slow != fast);
+        }while(slow != fast);//////////
         
-        slow = nums[0];
-        while(slow != fast){
-            slow = nums[slow];
-            fast = nums[fast];
+        slow = nums[0];/////////////
+        while(slow != fast){//////////////
+            slow = nums[slow];/////////
+            fast = nums[fast];//////////
         }
         
-        return slow;
+        return slow;//////////
     }
 };
+
+//  0   1   2   3   4
+// [1 , 3 , 4 , 2 , 2]
+ 
+// slow = 4;
+// fast = 4;
+
+// slow = nums[slow]
+// fast = nums[nums[fast]]
