@@ -5,46 +5,49 @@ public:
         int n = grid.size();
         int m = grid[0].size();
         
-        queue<pair<int,int>> rotten;//<i , j>
+        queue<pair<int,int>> q;
         int tot = 0;
-        int rot = 0;
+        int rotten = 0;
         
         for(int i = 0 ; i < n ; i++){
             for(int j = 0 ; j < m ; j++){
-                if(grid[i][j] == 2) {
-                    rot++;
-                    rotten.push({i,j});
+                if(grid[i][j] == 2){
+                    q.push({i,j});
+                    rotten++;
                 }
-                if(grid[i][j] != 0) tot++;
+                if(grid[i][j] != 0)  tot++;  
             }
         }
         
-        if(rot == tot) return 0;/////////////////////
+        if(tot == 0) return 0;
         
+        if(rotten == 0) return -1;
         int time = -1;
-        int dx[4] = {-1 , 1 , 0 , 0};
-        int dy[4] = {0 , 0 , -1 , 1};
         
-        while(!rotten.empty()){
+        int dx[4] = {-1 , 1 , 0 , 0};
+        int dy[4] = {0 , 0 ,-1 , 1};
+        
+        while(!q.empty()){
             
-            int size = rotten.size();//////////////////////////////////////////
-            time++;
+            int size = q.size();
             
-            while(size--){////////////////////////////////
-            int x = rotten.front().first;
-            int y = rotten.front().second; rotten.pop();
-            
+            while(size--){
+            int x = q.front().first;
+            int y = q.front().second;q.pop();
             for(int i = 0 ; i < 4 ; i++){
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-                if(nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 1){
-                    rotten.push({nx,ny});
-                    grid[nx][ny] = 2;/////////////////////////
-                    rot++;
+                
+                if(nx >= 0 && ny >= 0 && nx < n && ny < m && grid[nx][ny] == 1){
+                    q.push({nx,ny});
+                    grid[nx][ny] = 2;
+                    rotten++;
                 }
             }
+            } 
+            time++;
         }
-        }
-        return rot == tot ? time : -1;
+        
+        return rotten == tot ? time : -1;
     }
 };
