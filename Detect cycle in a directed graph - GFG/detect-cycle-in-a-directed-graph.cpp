@@ -5,34 +5,31 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to detect cycle in a directed graph.
+    
+    bool f(int node , vector<int> adj[] , vector<int>& vis , vector<int>& pathVis){
+        
+        vis[node] = 1;
+        pathVis[node] = 1;
+        
+        for(auto it : adj[node]){
+            if(!vis[it]) {if(f(it , adj , vis , pathVis)) return true;}
+            else if(pathVis[it]) return true;
+        }
+        
+        pathVis[node] = 0;
+        return false;
+    }
+    
     bool isCyclic(int v, vector<int> adj[]) {
         
-        vector<int> indegree(v , 0);
+        vector<int> vis(v , 0);
+        vector<int> pathVis(v , 0);
         
         for(int i = 0 ; i < v ; i++){
-            for(auto it : adj[i]) indegree[it]++;
+            if(!vis[i]) {if(f(i , adj , vis , pathVis)) return true;}
         }
         
-        queue<int> q;
-        
-        for(int i = 0 ; i < v ; i++){
-            if(indegree[i] == 0) q.push(i);
-        }
-        
-        vector<int> topo;
-        
-        while(!q.empty()){
-            int node = q.front();q.pop();
-            topo.push_back(node);
-            
-            for(auto it : adj[node]){
-                indegree[it]--;
-                if(indegree[it] == 0) q.push(it);
-            }
-        }
-        
-        return topo.size() != v;
+        return false;
     }
 };
 
