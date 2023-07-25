@@ -93,51 +93,52 @@ int main(void) {
 // } Driver Code Ends
 
 
-Node* merge(Node* r1 , Node* r2){
+Node* merge(Node* h1 , Node* h2){
     
-    if(r1 == NULL) return r2;
-    if(r2 == NULL) return r1;
+    if(h1 == NULL) return h2;
+    if(h2 == NULL) return h1;
     
-    Node* ans = new Node(0);
-    Node* toReturn = ans;
+    Node* l1 = h1;
+    Node* l2 = h2;
     
-    while(r1 && r2){
-        if(r1->data < r2->data){
-            ans->bottom = r1;
-            r1 = r1->bottom;
+    Node* newHead = new Node(0);
+    Node* ans = newHead;
+    
+    while(l1 && l2){
+        if(l1->data <= l2->data){
+            newHead->bottom = l1;
+            l1 = l1->bottom;
         }
         
         else{
-            ans->bottom = r2;
-            r2 = r2->bottom;
+            newHead->bottom = l2;
+            l2 = l2->bottom;
         }
-        ans = ans->bottom;
+        
+        newHead = newHead->bottom;
     }
     
-    while(r1){
-        ans->bottom = r1;
-        r1 = r1->bottom;
-        ans = ans->bottom;
+    while(l1){
+         newHead->bottom = l1;
+         l1 = l1->bottom;
+         newHead = newHead->bottom;
     }
     
-    while(r2){
-        ans->bottom = r2;
-        r2 = r2->bottom;
-        ans = ans->bottom;
+     while(l2){
+         newHead->bottom = l2;
+         l2 = l2->bottom;
+         newHead = newHead->bottom;
     }
     
-    return toReturn->bottom;
+    return ans->bottom;
 }
-
 Node *flatten(Node *root)
 {
-    if(root == NULL || root->next == NULL) return root;
-   
-   Node* first = root;
-   
-   Node* second = flatten(root->next);
-   
-   Node* res = merge(first, second);
-   return res;
+     if(root == NULL || root->next == NULL) return root;
+     
+      Node* nextList = flatten(root->next);
+      
+      return merge(root , nextList);
+     
 }
 
