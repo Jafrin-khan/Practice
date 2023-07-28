@@ -3,11 +3,11 @@ public:
     
       bool f(int i , int j , string& text, string& pattern ,  vector<vector<int>>& dp){
         
-        if(i < 0 && j < 0){
+        if(i < 0 && j < 0){///////////////////////////////
             return true;
         }
         
-        if(i < 0 && j >= 0){
+        if(i < 0 && j >= 0){///////////////////////////////
             return false;
         }
         
@@ -31,7 +31,8 @@ public:
         }
         
         else if(pattern[i] == '*'){
-            return dp[i][j] = f(i - 1 , j , text , pattern , dp) || f(i , j - 1 , text , pattern , dp);
+            return dp[i][j] = f(i - 1 , j , text , pattern , dp) || f(i , j - 1 , text , pattern , dp);//////////////////   2nd condition //////////////////
+        
         }
         
         else{
