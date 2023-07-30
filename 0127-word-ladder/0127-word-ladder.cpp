@@ -1,58 +1,36 @@
 class Solution {
 public:
-    
-//     find(wordList.begin(),wordList.end(), w) != wordList.end()
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         
-//     ye correct syntax hai find function ka keep that in mind , Vimp but yha use nahi kr skte
-//     kyunki hamein jo word mil chuka usse serase bhi krna hoga wrna pichle word pe dobara aa jayenge
-//     ye repeat hota rahega jisse TLE milega
-    
-    /*
-Time Complexity: O(N * M * 26)
-
-Where N = size of wordList Array and M = word length of words present in the wordList..
-
-Note that, hashing operations in an unordered set takes O(1) time, but if you want to use set here, then the time complexity would increase by a factor of log(N) as hashing operations in a set take O(log(N)) time.
-
-Space Complexity:  O( N ) { for creating an unordered set and copying all values from wordList into it }
-
-Where N = size of wordList Array.
-*/
-    /*
-    TC = O(N*M*26)
-    SC = O(N)
-    */
         
-    int ladderLength(string bW, string eW , vector<string>& wordList) {
+        set<string> st;
+        for(auto it : wordList) st.insert(it);
         
-        queue<pair<string,int>> q;//<word , dis>
-        int ans = -1;
+        queue<pair<string , int>> q;
+        q.push({beginWord , 0});
         
-        unordered_set<string> st(wordList.begin(),wordList.end());
+        int ans = 1e9;
         
-        q.push({bW,1});
         while(!q.empty()){
-            string w = q.front().first;
-            int d = q.front().second;q.pop();
-           
             
-            for(int i = 0 ; i < w.size() ; i++){
-                char c = w[i];
+            string word = q.front().first;
+            int cost = q.front().second;q.pop();
+            
+            if(word == endWord) ans = min(ans , cost);
+            
+            for(int i = 0 ; i < word.size() ; i++){
+                char w = word[i];
                 for(char ch = 'a' ; ch <= 'z' ; ch++){
-                    w[i] = ch;
-                    if(st.find(w) != st.end()){
-                       
-                        if(w == eW) return d + 1;
-                        st.erase(w);///////////////////////
-                        q.push({w , d+1});
-                        
+                    word[i] = ch;
+                    if(st.find(word) != st.end()){
+                        q.push({word , cost+1});
+                        st.erase(word);
                     }
                 }
-                w[i] = c;
-                
+                word[i] = w;
             }
         }
         
-        return 0;
+        return ans == 1e9 ? 0 : ans+1;
     }
 };
