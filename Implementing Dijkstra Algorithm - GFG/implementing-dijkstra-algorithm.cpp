@@ -10,25 +10,22 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int v, vector<vector<int>> adj[], int src)
     {
-        vector<int> ans;
+        priority_queue<pair<int,int>> pq;
+        pq.push({src , 0});
         
-        priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> pq;
         vector<int> dis(v , 1e9);
-        //vector<int> vis(v,0);
-        
-        pq.push({src,0});
         dis[src] = 0;
         
         while(!pq.empty()){
             int node = pq.top().first;
-            int d = pq.top().second;pq.pop();
+            int cost = pq.top().second;pq.pop();
             
             for(auto it : adj[node]){
                 int nextNode = it[0];
                 int wt = it[1];
                 
-                if(dis[nextNode] > wt + d){
-                    dis[nextNode] = wt + d;
+                if(dis[nextNode] > cost + wt){
+                    dis[nextNode] = cost + wt;
                     pq.push({nextNode , dis[nextNode]});
                 }
             }
