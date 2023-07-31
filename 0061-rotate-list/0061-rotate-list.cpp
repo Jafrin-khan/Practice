@@ -23,7 +23,7 @@ public:
         
         temp->next = head;//making circular ring
         
-        k = k%len;//when k > len
+        k = k%len;//when k > len***********
         k = len - k - 1;
         temp = head;
         while(k--){
@@ -36,3 +36,13 @@ public:
         return ans;
     }
 };
+
+//       |
+// 1->2->3->4->5
+// ~  ~  ~  ~  ~
+    
+// k = 2
+    
+// len = 5
+
+//     k = 2
