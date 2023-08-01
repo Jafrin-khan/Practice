@@ -1,40 +1,47 @@
 class Solution {
 public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+    int findCheapestPrice(int v, vector<vector<int>>& flights, int src, int dst, int k) {
         
-        vector<vector<int>> adj[n];
+        vector<vector<pair<int,int>>> adj(v);
         
         for(auto it : flights){
             int u = it[0];
             int v = it[1];
             int wt = it[2];
             
-            adj[u].push_back({v,wt});
+            adj[u].push_back({v , wt});
         }
         
-        queue<pair<int,pair<int,int>>> q;
-        q.push({0,{src,0}});//<stops,<city,dis>>
+        int ans = 1e9;
         
-        vector<int> disArr(n , 1e9);
-        disArr[src] = 0;
-       
-        while(!q.empty()){
-            int stops = q.front().first;
-            int city = q.front().second.first;
-            int wt = q.front().second.second;q.pop();
+        
+        vector<int> dis(v , 1e9);
+        // priority_queue<pair<pair<int,int>,int> , vector<pair<pair<int,int>,int>> , greater<pair<pair<int,int>,int>>> pq;//<{{cost,steps},node}
+        
+        queue<pair<pair<int,int> , int>> pq;
+        
+        pq.push({{0 , 0} , src});
+        dis[src] = 0;
+          
+        while(!pq.empty()){
+            int cost = pq.front().first.first;
+            int steps = pq.front().first.second;
+            int node = pq.front().second; pq.pop();
             
-            if(stops > k) continue;
+            if(steps > k) continue;
             
-            for(auto it : adj[city]){
-                if(it[1] + wt < disArr[it[0]] && stops <= k){
-                    disArr[it[0]] = it[1] + wt;
-                    q.push({stops+1,{it[0] , it[1] + wt}});
+            for(auto it : adj[node]){
+                int adjNode = it.first;
+                int wt = it.second;
+                if(dis[adjNode] > cost + wt){
+                    dis[adjNode] = cost + wt;
+                    pq.push({{dis[adjNode] , steps+1} , adjNode});
                 }
             }
         }
         
-       if(disArr[dst] == 1e9) return -1;
-        return disArr[dst];
-            
+        if(dis[dst] == 1e9) return -1;
+        
+        return dis[dst];
     }
 };
