@@ -18,15 +18,15 @@ public:
         vector<int> dis(v , 1e9);
         // priority_queue<pair<pair<int,int>,int> , vector<pair<pair<int,int>,int>> , greater<pair<pair<int,int>,int>>> pq;//<{{cost,steps},node}
         
-        queue<pair<pair<int,int> , int>> pq;
+        queue<pair<pair<int,int> , int>> q;
         
-        pq.push({{0 , 0} , src});
+        q.push({{0 , 0} , src});
         dis[src] = 0;
           
-        while(!pq.empty()){
-            int cost = pq.front().first.first;
-            int steps = pq.front().first.second;
-            int node = pq.front().second; pq.pop();
+        while(!q.empty()){
+            int cost = q.front().first.first;
+            int steps = q.front().first.second;
+            int node = q.front().second; q.pop();
             
             if(steps > k) continue;
             
@@ -35,7 +35,7 @@ public:
                 int wt = it.second;
                 if(dis[adjNode] > cost + wt){
                     dis[adjNode] = cost + wt;
-                    pq.push({{dis[adjNode] , steps+1} , adjNode});
+                    q.push({{dis[adjNode] , steps+1} , adjNode});
                 }
             }
         }
