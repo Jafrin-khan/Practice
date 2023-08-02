@@ -46,7 +46,7 @@ Reason: We are only using two rows of size n.
             ans.push_back(nums[lastIndex]);
         }
         
-        reverse(ans.begin() , ans.end());
+        reverse(ans.begin() , ans.end());///////////////////////
         return ans;
     }
 };
