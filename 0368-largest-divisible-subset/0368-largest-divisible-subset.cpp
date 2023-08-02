@@ -13,11 +13,14 @@ Reason: We are only using two rows of size n.
     
     vector<int> largestDivisibleSubset(vector<int>& nums) {
         
-        sort(nums.begin() , nums.end());
+        sort(nums.begin() , nums.end());/////////////////////////
         int n = nums.size();
         
         vector<int> dp(n , 1);
         vector<int> hash(n);
+        
+         int lastIndex = 0;
+        int lis = 1;//sirf comparison k lie.. koi kaam ni iska aage..hum use krre taaki hmein lastIndex mil ske
         
        
         for(int ind = 0 ; ind < n ; ind++){
@@ -29,16 +32,20 @@ Reason: We are only using two rows of size n.
                 }
             }
             
-        }
-        int lastIndex = -1;
-        int cmp = -1;//sirf comparison k lie.. koi kaam ni iska aage..hum use krre taaki hmein lastIndex mil ske
-        
-        for(int ind = 0 ; ind < n ; ind++){
-            if(dp[ind] > cmp){
-                 lastIndex = ind;
-                cmp = dp[ind];   
+            if(dp[ind] > lis){
+                lis = dp[ind];
+                lastIndex = ind;
             }
+            
         }
+       
+        
+        // for(int ind = 0 ; ind < n ; ind++){
+        //     if(dp[ind] > cmp){
+        //          lastIndex = ind;
+        //         cmp = dp[ind];   
+        //     }
+        // }
         
         
         vector<int> ans;
