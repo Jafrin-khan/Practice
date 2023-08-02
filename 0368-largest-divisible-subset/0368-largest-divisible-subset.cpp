@@ -38,16 +38,7 @@ Reason: We are only using two rows of size n.
             }
             
         }
-       
-        
-        // for(int ind = 0 ; ind < n ; ind++){
-        //     if(dp[ind] > cmp){
-        //          lastIndex = ind;
-        //         cmp = dp[ind];   
-        //     }
-        // }
-        
-        
+    
         vector<int> ans;
         ans.push_back(nums[lastIndex]);
         while(lastIndex != hash[lastIndex]){
