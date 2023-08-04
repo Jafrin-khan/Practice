@@ -37,9 +37,9 @@ public:
 	int i = 1;
 	while (i < n) {
 		if (pattern[i] == pattern[j]) {
-			j++;
-			lps[i] = j;
+			lps[i] = j+1;
 			i++;
+            j++;
 		}
 		else 
 		{
