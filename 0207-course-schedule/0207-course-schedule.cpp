@@ -1,16 +1,16 @@
 class Solution {
 public:
     
-    bool isCycle(int node , vector<int>& vis , vector<int>& pathVis , vector<vector<int>>& adj){
+    bool dfs(int node , vector<int>& vis , vector<int>& pathVis , vector<vector<int>>& adj){
         
         vis[node] = 1;
-        pathVis[node] = 1;
+        pathVis[node] = 1;  
+        
         for(auto it : adj[node]){
             if(!vis[it]){
-                if(isCycle(it , vis , pathVis , adj)) return true;
+                if(dfs(it , vis , pathVis , adj)) return true;
             }
-            
-            else if(pathVis[it]) return true;
+            else if(pathVis[it])  return true;
         }
         
         pathVis[node] = 0;
@@ -25,16 +25,13 @@ public:
             int u = nums[i][0];
             int v = nums[i][1];
             
-            adj[u].push_back(v);
+            adj[v].push_back(u);
         }
         
         vector<int> vis(n , 0);
         vector<int> pathVis(n , 0);
-        
         for(int i = 0 ; i < n ; i++){
-            if(!vis[i]){
-                if(isCycle(i , vis , pathVis , adj)) return false;
-            }
+            if(!vis[i]) if(dfs(i , vis , pathVis , adj)) return false;
         }
         
         return true;
