@@ -9,14 +9,14 @@ public:
             return;
         }
         
+        //notake
+        f(ind-1 , st , nums , helper);
+        
         //take
         helper.push_back(nums[ind]);
         f(ind-1 , st , nums , helper);
         helper.pop_back();
-        
-        //notake
-        f(ind-1 , st , nums , helper);
-        
+
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         
