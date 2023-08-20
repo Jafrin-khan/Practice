@@ -21,7 +21,7 @@ Reason: if we have x combinations then space will be x*k where k is the average 
             
             if(i > ind && nums[i] == nums[i-1]) continue;
             
-            if(k < nums[i]) break;
+            if(k < nums[i]) break;//***********************************************
             
             helper.push_back(nums[i]);
             f(i+1 , k - nums[i] , ans , helper , nums);
@@ -31,7 +31,7 @@ Reason: if we have x combinations then space will be x*k where k is the average 
     vector<vector<int>> combinationSum2(vector<int>& nums, int target) {
         
         int n = nums.size();
-        sort(nums.begin() , nums.end());
+        sort(nums.begin() , nums.end());//***************************************
         
         vector<vector<int>> ans;
         vector<int> helper;
