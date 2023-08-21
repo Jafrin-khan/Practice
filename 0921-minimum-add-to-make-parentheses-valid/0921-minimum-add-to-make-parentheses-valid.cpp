@@ -1,24 +1,19 @@
 class Solution {
 public:
-    
-    /*
-    TC = O(N) + O(N)
-    SC = O(N)
-    */
     int minAddToMakeValid(string s) {
         
-        stack<int> st;
-        int cnt = 0;
-        
+        stack<char> st;
+        int ans = 0;
         for(int i = 0 ; i < s.size() ; i++){
-            if(s[i] == '(') st.push(s[i]);
+            if(s[i] == '('){
+                st.push(s[i]);
+            }
             else{
-                if(st.empty()) cnt++;
-                else st.pop();
+                if(!st.empty()) st.pop();
+                else ans++;
             }
-            }
-      
-        return st.size() + cnt;
+        }
         
+        return ans + st.size();
     }
 };
