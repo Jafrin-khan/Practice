@@ -11,24 +11,21 @@
  */
 class Solution {
 public:
-    /*
-    TC = O(N)
-    SC = O(N)
-    */
     vector<int> rightSideView(TreeNode* root) {
         
         if(root == NULL) return {};
         vector<int> ans;
         queue<TreeNode*> q;
+        
         q.push(root);
         
         while(!q.empty()){
             int size = q.size();
             for(int i = 0 ; i < size ; i++){
-                TreeNode* front = q.front();q.pop();
-                if(i == size-1) ans.push_back(front->val);
-                if(front->left) q.push(front->left);
-                if(front->right) q.push(front->right);
+                TreeNode* node = q.front();q.pop();
+                if(i == size-1) ans.push_back(node->val);
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
             }
         }
         
