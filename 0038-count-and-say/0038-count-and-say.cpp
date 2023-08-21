@@ -13,11 +13,8 @@ public:
             string str = "";
             int i = 0;
             while(i < s.size()){
-                int cnt = 1 ; char ch = s[i];bool flag = 0;
-                while(i < s.size()-1 && s[i] == s[i+1]){
-                    flag = 1;
-                    cnt++ ; i++;
-                }
+                int cnt = 1 ; char ch = s[i];
+                while(i < s.size()-1 && s[i] == s[i+1]) {cnt++ ; i++;}
                 str = str + to_string(cnt) + s[i];
                 i++;
             }
