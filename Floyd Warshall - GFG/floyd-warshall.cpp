@@ -9,38 +9,31 @@ using namespace std;
 
 class Solution {
   public:
-  /*
-  TC = O(V^3)
-  SC = O(1)
-  */
-	void shortest_distance(vector<vector<int>>&matrix){
-	     
-	     int n = matrix.size();
-	     
-	      for(int i = 0 ; i < n ; i++){
-	             for(int j = 0 ; j < n ; j++){
-	                 if(matrix[i][j] == -1) matrix[i][j] = 1e9;
-	                 if (i == j) matrix[i][j] = 0; //ye waali condition mt bhulna
-	             }
-	             
-	         }
-	     
-	     
-	     
-	     for(int k = 0 ; k < n ; k++){
-	         for(int i = 0 ; i < n ; i++){
-	             for(int j = 0 ; j < n ; j++){
-	                 matrix[i][j] = min(matrix[i][j] , matrix[i][k] + matrix[k][j]);
-	             }
-	         }
-	     }
-	     
-	     for(int i = 0 ; i < n ; i++){
-	             for(int j = 0 ; j < n ; j++){
-	                 if(matrix[i][j] == 1e9) matrix[i][j] = -1;
-	             }
-	         }
-	     
+	void shortest_distance(vector<vector<int>>& cost){
+	    
+	    int n = cost.size();
+	    int m = cost[0].size();
+	    
+	    for(int i = 0 ; i < n ; i++){
+	        for(int j = 0 ; j < m ; j++){
+	            if(cost[i][j] == -1) cost[i][j] = 1e9;
+	        }
+	    }
+	    
+	    for(int via = 0 ; via < n ; via++){
+	        for(int i = 0 ; i < n ; i++){
+	            for(int j = 0 ; j < n ; j++){
+	                cost[i][j] = min(cost[i][j] , cost[i][via] + cost[via][j]);
+	            }
+	        }
+	    }
+	    
+	    for(int i = 0 ; i < n ; i++){
+	        for(int j = 0 ; j < m ; j++){
+	            if(cost[i][j] == 1e9) cost[i][j] = -1;
+	        }
+	    }
+	    
 	}
 };
 
