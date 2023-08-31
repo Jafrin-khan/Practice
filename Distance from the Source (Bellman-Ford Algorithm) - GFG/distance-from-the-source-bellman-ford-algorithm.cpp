@@ -7,32 +7,38 @@ using namespace std;
 
 class Solution {
   public:
-   
+    /*  Function to implement Bellman Ford
+    *   edges: vector of vectors which represents the graph
+    *   S: source vertex to start traversing graph with
+    *   V: number of vertices
+    */
     vector<int> bellman_ford(int v, vector<vector<int>>& edges, int src) {
         
-        vector<int> disArr(v,1e8);
-        disArr[src] = 0;
-        
+        vector<int> dis(v , 1e8);
+        dis[src] = 0;
         v = v-1;
         
-        while(v--){ // relaxing disArr v-1 times
+        while(v--){
             for(auto it : edges){
-                int u = it[0];
-                int v = it[1];
+                int node = it[0];
+                int adjNode = it[1];
                 int wt = it[2];
                 
-                if(disArr[u] != 1e8 && disArr[v] > wt + disArr[u]) disArr[v] = wt + disArr[u];
+                if(dis[node] != 1e8 && dis[adjNode] > dis[node] + wt) dis[adjNode] = dis[node] + wt;
+                
             }
         }
         
-        for(auto it : edges){
-            int u = it[0];
-            int v = it[1];
-            int wt = it[2];
-            if(disArr[u] != 1e8 && disArr[v] > disArr[u] + wt) return {-1};
-        }
-        
-        return disArr;
+         for(auto it : edges){
+                int node = it[0];
+                int adjNode = it[1];
+                int wt = it[2];
+                
+                if(dis[node] != 1e8 && dis[adjNode] > dis[node] + wt) return {-1};
+                
+            }
+            
+        return dis;
     }
 };
 
