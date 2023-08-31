@@ -10,10 +10,12 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int v, vector<vector<int>> adj[], int src)
     {
+        vector<int> ans;
+        
+        priority_queue<pair<int,int>> pq;//<node,wt>
         vector<int> dis(v , 1e9);
         
-        priority_queue<pair<int,int> , vector<pair<int,int>> , greater<pair<int,int>>> pq;//node,dis
-        pq.push({src,0});
+        pq.push({src , 0});
         dis[src] = 0;
         
         while(!pq.empty()){
@@ -24,16 +26,14 @@ class Solution
                 int adjNode = it[0];
                 int wt = it[1];
                 
-                if(cost + wt < dis[adjNode]){
-                    dis[adjNode] = cost + wt;
-                    pq.push({adjNode , cost + wt});
+                if(dis[adjNode] > wt + cost){
+                    dis[adjNode] = wt + cost;
+                    pq.push({adjNode , dis[adjNode]});
                 }
             }
-            
         }
         
         return dis;
-        
     }
 };
 
