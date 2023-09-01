@@ -1,34 +1,49 @@
 class Solution {
 public:
     
-    //BILKUL BHI FOLLOW MT KRNA YE WALA CODE ISSE NICHE WAALE COMMNTED DEKHO
-    int f(int ind , int k , vector<int>& nums , vector<vector<int>>& dp){
-        
-        if(ind == 0){
-            if(k == 0 && nums[0] == 0) return 2;
-            if(k == 0 || k == nums[0]) return 1;
-            return 0;
+int mod = (int)(1e9 + 7);
+
+int f(int target, vector<int> &arr,int idx,vector<vector<int>>& dp){
+    
+    if(idx == 0){
+        if(target == 0 && arr[0] == 0){
+            return 2;
         }
         
+        if(target == 0 || target == arr[0]){
+            return 1;
+        }
         
-        if(dp[ind][k] != -1) return dp[ind][k];
-        
-        int notTake = f(ind - 1 , k , nums , dp);
-        int take = 0;
-        if(k >= nums[ind]) take = f(ind - 1 , k - nums[ind] , nums , dp);
-        
-        return dp[ind][k] = take + notTake;
+        return 0;
     }
     
+    if(dp[idx][target] != -1){
+        return dp[idx][target];
+    }
+    int notPick = f(target,arr,idx-1,dp);
+    int pick = 0;
+    if(target >= arr[idx]){
+        pick = f(target - arr[idx],arr,idx-1,dp);
+    }
+    
+    return dp[idx][target] = (pick+notPick)%mod;
+}
+
+
     int findTargetSumWays(vector<int>& nums, int target) {
         
+        int n = nums.size();
+        
         int totSum = 0;
-        for(auto it : nums) totSum += it;
+        for(int i = 0 ; i < n ; i++){
+            totSum += nums[i];
+        }
         
-        int s2 = (totSum - target)/2;
-        if((totSum - target) < 0  || (totSum - target)%2 == 1) return 0;
+        int k = (totSum - target)/2;
+        if((totSum - target)%2 || (totSum - target) < 0) return 0;
         
-        vector<vector<int>> dp(nums.size() , vector<int>(s2 + 1 , -1)); 
-        return f(nums.size()-1 , s2 , nums , dp);
+        vector<vector<int>> dp(n , vector<int>(k+1 , -1));
+        
+        return f(k , nums ,n-1, dp);
     }
 };
