@@ -1,33 +1,22 @@
 class Solution {
 public:
-    /*
     
-    TC = O(n)
-    SC = O(n)
-    
-    */
-     int f(int ind , vector<int>& nums , vector<int>& dp){
-         
-        if(ind < 0){
-            return 0;
-        }
+    int f(int ind , vector<int>& nums ,  vector<int>& dp){
         
-        if(dp[ind] != -1){
-            return dp[ind];
-        }
+        if(ind < 0) return 0;
         
-        int notTaken = 0 + f(ind - 1 , nums , dp);
-        int taken = nums[ind] + f(ind - 2 , nums , dp);
+        if(dp[ind] != -1) return dp[ind];
         
-        return dp[ind] = max(taken,notTaken);
+        int notTake = f(ind-1 , nums , dp);
+        int take = nums[ind] + f(ind-2 , nums , dp);
+        
+        return dp[ind] = max(take , notTake);
     }
     
     int rob(vector<int>& nums) {
-        
         int n = nums.size();
         vector<int> dp(n , -1);
         
         return f(n-1 , nums , dp);
-        
     }
 };
