@@ -19,11 +19,11 @@ public:
     }
     
     double findMedian() {
+        int n = mx.size();
+        int m = mn.size();
         
-        int size = (mn.size() + mx.size());
-        
-        if(size%2 == 1) return mx.top();
-        else return  (double)(mn.top() + mx.top())/2.0;
+        if((n+m)%2) return mx.top();
+        else return (double)(mn.top() + mx.top())/2.0;
     }
 };
 
