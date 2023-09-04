@@ -3,15 +3,17 @@ class Solution {
 public:
     
     int f(TreeNode* root , int& maxSum){
+        
         if(root == NULL) return 0;
         
-        int sumL = max({0 , f(root->left , maxSum)});
-        int sumR = max({0 , f(root->right , maxSum)});
+        int ls = max(0 , f(root->left , maxSum));
+        int rs = max(0 , f(root->right , maxSum));
         
-        maxSum = max(maxSum , sumL + sumR + root->val);
+        maxSum = max(maxSum , ls + rs + root->val);
         
-        return max(sumL , sumR) + root->val;
+        return max(ls , rs) + root->val;
     }
+    
     int maxPathSum(TreeNode* root) {
         
         int maxSum = -1e9;
