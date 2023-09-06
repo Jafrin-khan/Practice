@@ -21,20 +21,18 @@ public:
         return max(lh , rh) + 1;
     }
     
-    bool isBalanced(TreeNode* root) {
+    bool f(TreeNode* root){
         
-        if(root == NULL || (root->left == NULL && root->right == NULL)) return true;
-        
-        if(!isBalanced(root->left) || !isBalanced(root->right)) return false;
+        if(root == NULL) return true;
         
         int lh = h(root->left);
         int rh = h(root->right);
         
-         cout<<lh<<" "<<rh<<endl;
         if(abs(lh - rh) > 1) return false;
         
-       
-        
-        return true;
+        return f(root->left) && f(root->right);
+    }
+    bool isBalanced(TreeNode* root) {
+        return f(root);
     }
 };
