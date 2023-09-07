@@ -1,35 +1,31 @@
 class MinStack {
 public:
     
-    /*
-    TC = O(1)*O(N)...for all the elements
-    SC = O(N)
-    */
-    
-    map<int,int> mp;
-    stack<int> st;
+    stack<pair<int,int>> st;
     MinStack() {
+            
+    }
+    
+    void push(int val) {
+        if(st.empty()) st.push({val,val});
+        else{
+            int mini = min(val , st.top().second);
+            st.push({val,mini});
+        }
         
     }
-    //O(1)
-    void push(int val) {
-        st.push(val);
-        mp[val]++;
+    
+    void pop() {
+        st.pop();
+                                    
+    }
+                                                                                                  
+    int top() {
+        return st.top().first;
     }
     
-    //O(1)
-    void pop() {
-        int val = st.top();
-        st.pop();
-        if(--mp[val] == 0)mp.erase(val);
-    }
-    //O(1)
-    int top() {
-        return st.top();
-    }
-    //O(1)
     int getMin() {
-          return mp.begin()->first ;////////////
+        return st.top().second;
     }
 };
 
