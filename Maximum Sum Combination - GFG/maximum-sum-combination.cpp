@@ -8,44 +8,47 @@ class Solution {
   public:
     vector<int> maxCombinations(int n, int k, vector<int> &a, vector<int> &b) {
         
-       sort(a.begin() , a.end());
-    sort(b.begin() , b.end());
-    
-    vector<int> ans;
-
-   priority_queue<pair<int,pair<int,int>>> pq;//<sum , <i,j>>
-
-    set<pair<int,int>> st;
-
-    pq.push({a[n-1] + b[n-1] , {n-1 , n-1}});
-    st.insert({n-1 , n-1});
-
-    while(!pq.empty()){
-        if(ans.size() == k) break;
-
-        int sum = pq.top().first;
-        int i = pq.top().second.first;
-        int j = pq.top().second.second;pq.pop();
-
-        ans.push_back(sum);
-
-        if(i-1 >= 0){
-            if(st.find({i-1 , j}) == st.end()){
-                pq.push({a[i-1] + b[j] , {i-1 , j}});
-                st.insert({i-1 , j});
+        set<pair<int,int>> st;
+        priority_queue<pair<int , pair<int,int>>> pq; //<sum , <i , j>>
+        
+        sort(a.begin() , a.end());
+        sort(b.begin() , b.end());
+        
+        int i = n-1 , j = n-1;
+        pq.push({{a[i] + b[i]} , {i , j}});
+        st.insert({i , j});
+        
+        vector<int> ans;
+        
+        while(!pq.empty()){
+            
+            
+            if(ans.size() == k) break;
+            
+            auto front = pq.top();
+            int sum = front.first;
+            
+            int x = front.second.first;
+            int y = front.second.second;pq.pop();
+            
+            ans.push_back(sum);
+            
+            if(x-1 >= 0){
+                if(st.find({x-1 , y}) == st.end()){
+                    st.insert({x-1 , y});
+                    pq.push({a[x-1] + b[y] , {x-1 , y}});
+                }
+            }
+            
+            if(y-1 >= 0){
+                if(st.find({x , y-1}) == st.end()){
+                    st.insert({x , y-1});
+                    pq.push({a[x] + b[y-1] , {x , y-1}});
+                }
             }
         }
-
-        if(j-1 >= 0){
-            if(st.find({i , j-1}) == st.end()){
-                pq.push({a[i]+b[j-1] , {i , j-1}});
-                st.insert({i , j-1});
-            }
-        } 
-    }
-
-    
-    return ans;
+        
+        return ans;
     }
 };
 
