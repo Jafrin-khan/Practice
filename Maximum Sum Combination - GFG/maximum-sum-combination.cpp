@@ -22,9 +22,7 @@ class Solution {
         
         while(!pq.empty()){
             
-            
             if(ans.size() == k) break;
-            
             auto front = pq.top();
             int sum = front.first;
             
