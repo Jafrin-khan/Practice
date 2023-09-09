@@ -13,9 +13,11 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
         ListNode* ans = new ListNode(0);
-        ListNode* newHead = ans;
+        ListNode* toReturn = ans;
         int carry = 0;
+        
         while(l1 || l2 || carry){
+            
             int sum = 0;
             if(l1){
                 sum += l1->val;
@@ -27,10 +29,7 @@ public:
                 l2 = l2->next;
             }
             
-            if(carry){
-                sum += carry;
-            }
-            
+            if(carry) sum += carry;
             carry = sum/10;
             sum%=10;
             
@@ -38,6 +37,7 @@ public:
             ans = ans->next;
         }
         
-        return newHead->next;
+        return toReturn->next;
+        
     }
 };
