@@ -10,13 +10,7 @@
  */
 class Solution {
 public:
-    /*
-    TC = O(N)
-    SC = O(1)
-    */
     ListNode* middleNode(ListNode* head) {
-        
-        if(head == NULL) return head;
         
         ListNode* slow = head;
         ListNode* fast = head;
@@ -27,6 +21,5 @@ public:
         }
         
         return slow;
-        
     }
 };
