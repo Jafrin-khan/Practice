@@ -10,40 +10,33 @@ using namespace std;
 class Solution {
 public:
 
-    bool isPossible(int minDis , int cows , vector<int>& stalls){
+    bool isPossible(int miniDis , int cows , int n , vector<int>& stalls){
         
-        int cnt = 1;
-        int currPos = stalls[0];
+        int c = 1;
+        int lastPlaced = stalls[0];
         
-        for(int i = 1 ; i < stalls.size() ; i++){
-            if(stalls[i] - currPos >= minDis){
-                currPos = stalls[i];
-                cnt++;
-                
-                if(cnt == cows) return true;
+        for(int i = 1 ; i < n ; i++){
+            if(stalls[i] - lastPlaced >= miniDis){
+                c++;
+                lastPlaced = stalls[i];
             }
         }
         
-        return false;
+        return c >= cows;
     }
 
     int solve(int n, int cows, vector<int> &stalls) {
-    
+        
         sort(stalls.begin() , stalls.end());
         
-        int low = stalls[1] - stalls[0];
-        int high = stalls[n-1] -stalls[0];
-        
-        for(int i = 1 ; i < n ; i++){
-            low = min(low , stalls[i] - stalls[i-1]);
-        }
+        int low = 1;
+        int high = stalls[n-1] - stalls[0];
         
         int ans = -1;
         
         while(low <= high){
             int mid = (low + high)/2;
-            
-            if(isPossible(mid , cows , stalls)){
+            if(isPossible(mid , cows , n , stalls)){
                 ans = mid;
                 low = mid+1;
             }
@@ -51,17 +44,7 @@ public:
         }
         
         return ans;
-        
     }
-    //  0 1 2 3 4
-    // [1 2 4 8 9]
-    //  c1  c2 c3  
-    
-    // low = 4
-    // high = 3
-    
-    // mid = 3
-    // ans = 2
 };
 
 //{ Driver Code Starts.
