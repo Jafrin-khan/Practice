@@ -4,59 +4,58 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution
-{
+{   
 	public:
-	//Function to find number of strongly connected components in the graph.
-    void dfsStore(int node, vector<vector<int>>& adj, stack<int>& st, vector<int>& vis) {
-    vis[node] = 1;
-    for (auto it : adj[node]) {
-        if (!vis[it]) {
-            dfsStore(it, adj, st, vis);
+	
+	void dfsStore(int node , stack<int>& st , vector<int>& vis , vector<vector<int>>& adj){
+	    vis[node] = 1;
+	    for(auto it : adj[node]){
+	        if(!vis[it]) dfsStore(it , st , vis , adj);
+	    }
+	    st.push(node);
+	}
+	                                                                                    
+	void dfs(int node , vector<int>& vis , vector<vector<int>>& adj){
+	    vis[node] = 1;
+	    for(auto it : adj[node]){
+	        if(!vis[it]) dfs(it , vis , adj);
+	    }
+	}
+	                            
+    int kosaraju(int v, vector<vector<int>>& adj)
+    {   
+        stack<int> st;
+        vector<int> vis(v,0);
+        
+        for(int i = 0 ; i < v ; i++){
+            if(!vis[i]) dfsStore(i , st , vis , adj);
         }
-    }
-    st.push(node);
-}
-
-void dfs(int node, vector<vector<int>>& adjRev, vector<int>& vis) {
-    vis[node] = 1;
-    for (auto it : adjRev[node]) {
-        if (!vis[it]) {
-            dfs(it, adjRev, vis);
+        
+        vector<vector<int>> adjRev(v);
+        
+        for(int i = 0 ; i < v ; i++){
+            vis[i] = 0;
+            for(int j = 0 ; j < adj[i].size() ; j++){
+                int u = i;
+                int v = adj[i][j];
+                
+                adjRev[v].push_back(u);
+            }
         }
-    }
-}
-
-int kosaraju(int v, vector<vector<int>>& adj) {
-    stack<int> st;
-    vector<int> vis(v, 0);
-
-    for (int i = 0; i < v; i++) {
-        if (!vis[i]) {
-            dfsStore(i, adj, st, vis);
+        
+        int cnt = 0;
+        
+        while(!st.empty()){
+            int node = st.top();
+            st.pop();
+            if(!vis[node]){
+                cnt++;
+                dfs(node , vis , adjRev);
+            }
         }
+        
+        return cnt;
     }
-
-    vector<vector<int>> adjRev(v);
-    for (int i = 0; i < v; i++) {
-        vis[i] = 0;
-        for (auto it : adj[i]) {
-            adjRev[it].push_back(i);
-        }
-    }
-
-    int cnt = 0;
-    while (!st.empty()) {
-        int node = st.top();
-        st.pop();
-        if (!vis[node]) {
-            cnt++;
-            dfs(node, adjRev, vis);
-        }
-    }
-
-    return cnt;
-}
-  
 };
 
 //{ Driver Code Starts.
