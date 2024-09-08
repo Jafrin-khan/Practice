@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-        
         vector<int> v1;
         vector<int> v2;
         
@@ -20,6 +19,5 @@ public:
         }
         
         return nums;
-        
     }
 };
