@@ -1,31 +1,32 @@
 class Solution {
 public:
-    /*
-    TC = O(N)
-    SC = O(1)
-    */
-    int trap(vector<int>& height) {
+    int trap(vector<int>& h) {
         
+        vector<int> leftMax;
+        vector<int> rightMax;
+        
+        int maxi = 0;
+        
+        for(int i = 0 ; i < h.size() ; i++){
+            maxi = max(maxi , h[i]);
+            leftMax.push_back(maxi);
+        }
+        
+        maxi = 0;
         int ans = 0;
         
-        int maxLeft = 0;
-        int maxRight = 0;
-        int left = 0;
-        int right = height.size()-1;
-        
-        while(left < right){
-            
-            if(height[left] <= height[right]){
-                if(height[left] > maxLeft) maxLeft = height[left];
-                else ans += (maxLeft - height[left]);
-                left++;
-            }
-            else{
-                if(height[right] > maxRight) maxRight = height[right];
-                else ans += (maxRight - height[right]);
-                right--;
-            }
+        for(int i = h.size()-1 ; i >= 0 ; i--){
+            maxi = max(maxi , h[i]);
+            rightMax.push_back(maxi);
         }
+        
+        reverse(rightMax.begin() , rightMax.end());
+        
+        for(int i = 0 ; i < h.size() ; i++){
+            ans += min(leftMax[i],rightMax[i]) - h[i];
+        }
+        
         return ans;
+
     }
 };
