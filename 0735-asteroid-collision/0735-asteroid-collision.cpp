@@ -1,53 +1,49 @@
 class Solution {
 public:
-    /*
-    TC = O(N^2)
-    */
     vector<int> asteroidCollision(vector<int>& asteroids) {
         
         stack<int> st;
-        int flag = 0;
+        
         for(int i = 0 ; i < asteroids.size() ; i++){
-            int stone = asteroids[i];
-            if(st.empty() || stone>0){
-                st.push(stone);
-                continue;
+            
+            if(!st.empty() && ((st.top() < 0 && asteroids[i] < 0) || (st.top() > 0 && asteroids[i] > 0) || (st.top() < 0 && asteroids[i] > 0))){
+                st.push(asteroids[i]);continue;
             }
             
-            else{
-            while(!st.empty() && stone < 0){
-                if(st.top() < 0){
-                    break;
-                }
-                if(abs(stone) == st.top()){
-                    flag = 1;
-                    st.pop();
-                    break;
-                }
-                
-                int top = st.top();
+            int elem = abs(asteroids[i]);
+            
+            if(!st.empty() && elem == st.top() && elem != asteroids[i]){st.pop(); continue;}
+            int flag = 0;
+            int notPush = 1;
+            
+            while(!st.empty() && ((st.top() < 0 && asteroids[i] > 0) || (st.top() > 0 && asteroids[i] < 0)) && st.top() < elem){
+                flag = 1;
                 st.pop();
-                if(abs(stone) < abs(top)){
-                    stone = top;
-                }
-               
+                
+                 if(!st.empty() && elem == st.top() && elem != asteroids[i]){st.pop();notPush = 0; break;}
+                
+                 if(!st.empty() && ((st.top() < 0 && asteroids[i] < 0) || (st.top() > 0 && asteroids[i] > 0) || (st.top() < 0 && asteroids[i] > 0))){
+                 st.push(asteroids[i]);
+                 break;
             }
             
-            if(!flag){
-            st.push(stone);
+            
             }
-                
-            flag = 0;
-            }
+            
+            if(!st.empty() && st.top() > elem) continue;
+            if(notPush && (!flag || st.empty())) st.push(asteroids[i]);
+            
+            
         }
         
         vector<int> ans;
-        while(!st.empty()){
+        
+        while(!st.empty()) {
             ans.push_back(st.top());
             st.pop();
         }
         
-        reverse(ans.begin(),ans.end());
+        reverse(ans.begin() , ans.end());
         
         return ans;
     }
